@@ -109,6 +109,10 @@ footer .footer-copyright ul li  {
   margin: 25px 0;
 }
 
+ol:not(.browser-default) li {
+  list-style-type: decimal;
+}
+
 .staff-row .card-content  {
   height: 240px;
   overflow-y: hidden;
