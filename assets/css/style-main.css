@@ -49,3 +49,53 @@ footer .footer-copyright ul li  {
 .parallax-container {
   height: 440px;
 }
+
+.sponsor  {
+  display: block;
+  height: 180px;
+  width: 180px;
+  border-radius: 90px;
+  margin: 0 auto 25px;
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sponsor:link, .sponsor:visited {
+  background-color: white;
+}
+
+.sponsor:hover, .sponsor:active {
+  background-color: #f5f5f5;
+}
+
+.sponsor-2s {
+  background-image: url('../img/2s-tran.png');
+  background-size: 86%;
+}
+
+.sponsor-js {
+  background-image: url('../img/Jane_Street_Logo.png');
+  background-size: 80%;
+}
+
+.sponsor-xp {
+  background-image: url('../img/expii-logo-black-trans.png');
+  background-size: 72%;
+}
+
+.sponsor-wa {
+  background-image: url('../img/wolfram.png');
+  background-size: 82%;
+}
+
+.contest-pdf {
+  display: block;
+  width: 280px;
+  margin: 0 auto;
+}
+
+table {
+  width: 60%;
+  margin: 24px 20% 36px;
+}
