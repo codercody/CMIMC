@@ -95,7 +95,21 @@ footer .footer-copyright ul li  {
   margin: 0 auto;
 }
 
-table {
+.info-table {
   width: 60%;
   margin: 24px 20% 36px;
+}
+
+.archive-header {
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.archive-row  {
+  margin: 25px 0;
+}
+
+.staff-row .card-content  {
+  height: 240px;
+  overflow-y: hidden;
 }
