@@ -105,12 +105,22 @@ footer .footer-copyright ul li  {
   font-size: 1.25em;
 }
 
-.archive-row  {
-  margin: 25px 0;
+.problems-link  {
+  margin-right: 12px;
 }
 
 ol:not(.browser-default) li {
   list-style-type: decimal;
+}
+
+.photos-list li  {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.clear-float  {
+  clear: both;
 }
 
 .staff-row .card-content  {
