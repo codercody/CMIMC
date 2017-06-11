@@ -10,83 +10,132 @@
 </head>
 
 <body>
-  <div class="navbar-fixed">
-    <nav class="z-depth-0">
-      <div class="nav-wrapper container">
-        <a href="#" class="brand-logo"><img src="assets/img/cmimc-logo-huge.png" height="28px"></a>
-        <ul class="right hide-on-med-and-down">
-          <li class="active"><a href="#" class="grey-text text-darken-3">Home</a></li>
-          <li><a href="information.html" class="grey-text text-darken-3">Information</a></li>
-          <li><a href="archive.html" class="grey-text text-darken-3">Archive</a></li>
-          <li><a href="staff.html" class="grey-text text-darken-3">Staff</a></li>
-          <li><a href="#" class="waves-effect waves-light btn red darken-2">Log In</a></li>
-        </ul>
+  <header>
+    <div class="navbar-fixed">
+      <nav class="z-depth-0">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo"><img src="assets/img/cmimc-logo-huge.png" height="28px"></a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active"><a href="#" class="grey-text text-darken-3">Home</a></li>
+            <li><a href="information.html" class="grey-text text-darken-3">Information</a></li>
+            <li><a href="archive.html" class="grey-text text-darken-3">Archive</a></li>
+            <li><a href="staff.html" class="grey-text text-darken-3">Staff</a></li>
+            <li><a href="#login" class="waves-effect waves-light btn red darken-2">Log In</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div id="login" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col s12">
+            <h4>Log In</h4>
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="account_login_email" type="email" class="validate">
+                <label for="account_login_email">Email</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="account_login_password" type="password" class="validate">
+                <label for="account_login_password">Password</label>
+              </div>
+              <div class="input-field col s12">
+                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Log In</button>
+              </div>
+            </div>
+          </div>
+          <div class="col s12">
+            <h4>Sign Up</h4>
+            <div class="row">
+              <div class="input-field col s4">
+                <input id="account_signup_email" type="email" class="validate">
+                <label for="account_signup_email">Email</label>
+              </div>
+              <div class="input-field col s4">
+                <input id="account_signup_password" type="password" class="validate">
+                <label for="account_signup_password">Password</label>
+              </div>
+              <div class="input-field col s4">
+                <input id="account_signup_password_confirm" type="password" class="validate">
+                <label for="account_signup_password_confirm">Password (confirm)</label>
+              </div>
+              <div class="input-field col s12">
+                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Sign Up</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </nav>
-  </div>
-
-  <div class="section white">
-    <div class="row container">
-      <div class="col l6 s12">
-        <h4 class="header">Welcome, mathletes!</h4>
-        <p>The Carnegie Mellon Informatics and Mathematics Competition (CMIMC) is an annual math and computer science competition held at <a href="#" class="red-text text-darken-2">Carnegie Mellon University</a> by CMU students. The CMIMC 2018 will be held on ??.</p>
-      </div>
-      <div class="col l5 offset-l1 s12">
-        <ul class="collection with-header news-feed">
-          <li class="collection-header red darken-2 grey-text text-lighten-4"><h5>News</h5></li>
-          <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-          <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-          <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-          <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-          <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-          <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-        </ul>
+      <div class="modal-footer">
+        <a href="#" class="modal-action modal-close waves-effect btn-flat">Close</a>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="parallax-container">
-    <div class="parallax">
-      <img src="assets/img/cmimc-2016-wide.JPG">
-    </div>
-  </div>
-
-  <div class="section blue-grey lighten-4">
-    <div class="row container center-align">
-      <h4>How to Participate</h4>
-      <div class="col l4 s12">
-        <img src="assets/img/users.png" height="150px">
-        <h5>Form a Team</h5>
-        <p>Form a team of 4-6 students. Make sure you have a diverse set of skills to cover the team and power round.</p>
-      </div>
-      <div class="col l4 s12">
-        <img src="assets/img/computer.png" height="150px">
-        <h5>Register Online</h5>
-        <p>Register your team by <a href="#" class="red-text text-darken-2">logging in</a>. Be sure to keep track of all important deadlines and dates.</p>
-      </div>
-      <div class="col l4 s12">
-        <img src="assets/img/plane.png" height="150px">
-        <h5>Travel to CMU</h5>
-        <p>After receiving the confirmation email for your registration, book travel to Carnegie Mellon University.</p>
+  <main>
+    <div class="section white">
+      <div class="row container">
+        <div class="col l6 s12">
+          <h4 class="header">Welcome, mathletes!</h4>
+          <p>The Carnegie Mellon Informatics and Mathematics Competition (CMIMC) is an annual math and computer science competition held at <a href="#" class="red-text text-darken-2">Carnegie Mellon University</a> by CMU students. The CMIMC 2018 will be held on ??.</p>
+        </div>
+        <div class="col l5 offset-l1 s12">
+          <ul class="collection with-header news-feed">
+            <li class="collection-header red darken-2 grey-text text-lighten-4"><h5>News</h5></li>
+            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
+            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
+            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
+            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
+            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
+            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="parallax-container">
-    <div class="parallax">
-      <img src="assets/img/team-wide.jpg">
+    <div class="parallax-container">
+      <div class="parallax">
+        <img src="assets/img/cmimc-2016-wide.JPG">
+      </div>
     </div>
-  </div>
 
-  <div class="section blue-grey lighten-4">
-    <div class="row container center-align">
-      <h4>Sponsors</h4>
-      <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-2s"></a></div>
-      <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-js"></a></div>
-      <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-xp"></a></div>
-      <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-wa"></a></div>
+    <div class="section blue-grey lighten-4">
+      <div class="row container center-align">
+        <h4>How to Participate</h4>
+        <div class="col l4 s12">
+          <img src="assets/img/users.png" height="150px">
+          <h5>Form a Team</h5>
+          <p>Form a team of 4-6 students. Make sure you have a diverse set of skills to cover the team and power round.</p>
+        </div>
+        <div class="col l4 s12">
+          <img src="assets/img/computer.png" height="150px">
+          <h5>Register Online</h5>
+          <p>Register your team by <a href="#" class="red-text text-darken-2">logging in</a>. Be sure to keep track of all important deadlines and dates.</p>
+        </div>
+        <div class="col l4 s12">
+          <img src="assets/img/plane.png" height="150px">
+          <h5>Travel to CMU</h5>
+          <p>After receiving the confirmation email for your registration, book travel to Carnegie Mellon University.</p>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="parallax-container">
+      <div class="parallax">
+        <img src="assets/img/team-wide.jpg">
+      </div>
+    </div>
+
+    <div class="section blue-grey lighten-4">
+      <div class="row container center-align">
+        <h4>Sponsors</h4>
+        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-2s"></a></div>
+        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-js"></a></div>
+        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-xp"></a></div>
+        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-wa"></a></div>
+      </div>
+    </div>
+  </main>
 
   <footer class="page-footer blue-grey lighten-2">
     <div class="container">
@@ -98,14 +147,14 @@
           <h5 class="grey-text text-lighten-4">Information</h5>
           <ul>
             <li><a href="#" class="grey-text text-lighten-3">Rules</a></li>
-            <li><a href="#" class="grey-text text-lighten-3">FAQ</a></li>
+            <li><a href="faq.html" class="grey-text text-lighten-3">FAQ</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
           <h5 class="grey-text text-lighten-4">Contact</h5>
           <ul>
             <li><a href="#" class="grey-text text-lighten-3">Email</a></li>
-            <li><a href="#" class="grey-text text-lighten-3">Facebook</a></li>
+            <li><a href="https://www.facebook.com/CMIMC" target="_blank"" class="grey-text text-lighten-3">Facebook</a></li>
           </ul>
         </div>
       </div>
@@ -114,8 +163,8 @@
       <div class="container">
         <ul class="grey-text text-lighten-3">
           <li>&copy; 2017 CMIMC</li>
-          <li><a href="#" class="grey-text text-lighten-3">Terms</a></li>
-          <li><a href="#" class="grey-text text-lighten-3">Privacy</a></li>
+          <li><a href="terms.html" class="grey-text text-lighten-3">Terms</a></li>
+          <li><a href="privacy.html" class="grey-text text-lighten-3">Privacy</a></li>
           <li><a href="#" class="grey-text text-lighten-3">ctj@math.cmu.edu</a></li>
         </ul>
       </div>
