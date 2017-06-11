@@ -1,0 +1,253 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[top=2cm, left = 2cm, right = 2cm, bottom = 3cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{asymptote}
+\usepackage{fancyhdr}
+\newcommand{\N}{\mathbb{N}}
+\pagestyle{fancy}
+\rhead{}
+\chead{\includegraphics[scale=0.17]{CMIMC-header-2017.png}}
+\lhead{}
+\setlength{\headheight}{43pt}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+\newcommand{\proposed}[1]
+{
+\vspace{5pt}
+\noindent\textit{Proposed by #1}
+}
+\newcommand{\solution}
+{
+\vspace{5pt}
+\noindent\textit{Solution.}\qquad
+}
+\begin{document}
+
+\begin{center}
+\huge\textbf{Geometry Solutions Packet}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item Let $ABC$ be a triangle with $\angle BAC=117^\circ$.  The angle bisector of $\angle ABC$ intersects side $AC$ at $D$.  Suppose $\triangle ABD\sim\triangle ACB$.  Compute the measure of $\angle ABC$, in degrees.
+
+\proposed{David Altizio}
+
+\solution Note that $\angle ABD=\angle ACB$ by this similarity, so $\angle ABC=2\angle ACB$.  Letting the measure of $\angle ACB$ in degrees be $\theta$, we have \[\theta+2\theta+117 = 180\quad\implies\quad\theta = 21\] and so $\angle ABC = \boxed{42^\circ}$.
+
+\item Triangle $ABC$ has an obtuse angle at $\angle A$.  Points $D$ and $E$ are placed on $\overline{BC}$ in the order $B$, $D$, $E$, $C$ such that $\angle BAD=\angle BCA$ and $\angle CAE=\angle CBA$.  If $AB=10$, $AC=11$, and $DE=4$, compute $BC$.
+
+\proposed{David Altizio}
+
+\solution For simplicity let $BC=a$, $CA=b$, and $AB=c$.  Note that $\triangle ABD\sim\triangle CBA$, so $BD=\tfrac{c^2}a$.  Similarly, $CE=\tfrac{b^2}a$, so \[DE = a - \dfrac{c^2}a - \dfrac{b^2}a = a - \dfrac{b^2+c^2}a = a - \dfrac{221}a = 4.\] Solving this quadratic yields $a=\boxed{17}$.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	import olympiad;
+	size(200);
+	defaultpen(linewidth(0.8));
+	pair A = (0,2.5), B = (-3,0), C = (5,0);
+	real a = abs(B-C), b = abs(C-A), c = abs(A-B), d = c*c/a, e = b*b/a;
+	pair D = B + (d,0), E = C - (e,0);
+	draw(D--A--B--C--A--E);
+	label("$A$",A,N);
+	label("$B$",B,W);
+	label("$C$",C,E);
+	label("$D$",D,S);
+	label("$E$",E,S);
+	draw(anglemark(C,B,A,17)^^anglemark(B,A,D,16,19)^^anglemark(A,C,B,16,19)^^anglemark(E,A,C,17));
+\end{asy}
+\end{figure}
+
+\par \textbf{Remark: } The obtuse condition is necessary in order for the points $B$, $D$, $E$, and $C$ to actually be in that order; this is because $\angle BAD+\angle CAE < 90^\circ < \angle BAC$.  Indeed, a triangle with side lengths $10$, $11$, and $17$ has an obtuse angle with degree measure $\approx 108^\circ$.
+
+\item In acute triangle $ABC$, points $D$ and $E$ are the feet of the angle bisector and altitude from $A$ respectively.  Suppose that $AC - AB = 36$ and $DC - DB = 24$.  Compute $EC - EB$.
+
+\proposed{David Altizio}
+
+\solution Let $AC=x$ and $BC=y$.  Note that by Angle Bisector Theorem, \[\dfrac{DC}{AC} = \dfrac{DB}{AB} = \dfrac{DC-DB}{AC-AB} = \dfrac23.\] Thus $DC=\tfrac23x$ and $DB=\tfrac23y$.  Now note that by Pythagorean Theorem, $EC^2-EB^2=AC^2-AB^2$.  This means that \[(EC-EB)(EC+EB) = (AC-AB)(AC+AB)\quad\implies\quad (EC-EB)\cdot\dfrac23(x+y) = 36(x+y).\] Simplification yields $EC-EB=36\cdot\frac32 = \boxed{54}$.
+
+\par\textbf{Remark: }This generalizes to the intersting identity $(DC-DB)(EC-EB)=(AC-AB)^2$.
+
+%\solution Let $AB = x$ and $BD = y$, so that $AC = x+36$ and $DC = y+24$.  By the Angle Bisector Theorem, \[\dfrac{AC}{AB} = \dfrac{DC}{DB}\qquad\implies\qquad 1+\dfrac{36}x = 1+\dfrac{24}y\qquad\implies\qquad \dfrac{x}{y} = \dfrac{36}{24}.\] Now let $x=36t$ and $y=24t$ for some positive $t$, so that $AC = 36(t+1)$ and $DC = 24(t+1)$.  Pythagorean Theorem gives $AC^2-AB^2 = EC^2 - EB^2$.  Difference of squares yields \[(AC-AB)(AC+AB) = (EC-EB)(EC+EB)\qquad\implies\qquad 36\cdot 36(2t+1) = (EC - EB)\cdot 24(2t+1),\] so the $2t+1$ terms cancel and hence $EC - EB = \tfrac{36^2}{24} = \boxed{54}$.  The maximize clause is not necessary.
+
+\item Let $\mathcal S$ be the sphere with center $(0,0,1)$ and radius $1$ in $\mathbb R^3$.  A plane $\mathcal P$ is tangent to $\mathcal S$ at the point $(x_0,y_0,z_0)$, where $x_0$, $y_0$, and $z_0$ are all positive.  Suppose the intersection of plane $\mathcal P$ with the $xy$-plane is the line $\ell$ with equation $2x+y=10$ in $xy$-space.  What is $z_0$?
+
+\proposed{David Altizio}
+
+\solution Let $O$ be the origin, $C$ the center of $\mathcal S$, and $T$ the point of tangency of $\mathcal S$ with $\mathcal P$.  Denote by $P$ the projection of $O$ onto $\ell$, and consider the cross-section of this figure passing through $P$ perpendicular to $\ell$.  Then $\mathcal S$ becomes a circle $\omega$ with radius $1$, and $OP$ is tangent to $\omega$.  It is intuitively clear that $PT$ is the other tangent to $\omega$ in this cross section; we continue with the computation and then prove this fact afterwards.
+
+\par Note that the line $\ell$ cuts a right triangle with side lengths $5$ and $10$ in the $xy$-plane.  Thus, the length of the altitude from $O$ to $\ell$ is $\tfrac{5\cdot 10}{\sqrt{5^2+10^2}} = 2\sqrt 5$, i.e. $OP = 2\sqrt 5$.  Thus Pythagorean Theorem gives $CP=\sqrt{1^2+(2\sqrt 5)^2} = \sqrt{21}$.  Now let $\angle OPC = \theta$.  Compute \[\sin 2\theta = 2\sin\theta\cos\theta = 2\left(\dfrac{1}{\sqrt{21}}\right)\left(\dfrac{2\sqrt 5}{\sqrt {21}}\right) = \dfrac{4\sqrt 5}{21}.\] Thus \[\sin 2\theta = \dfrac{z_0}{PT} \quad\implies\quad z_0 = PT\sin 2\theta = 2\sqrt 5\cdot\dfrac{4\sqrt 5}{21} = \boxed{\dfrac{40}{21}}.\]
+
+\par It remains to prove the assertion at the end of the first paragraph.  To do this, we use the formal definition of a plane.  Recall that for any point $A$ and vector $\vec n$, the set of all points $B$ such that $\overrightarrow{AB}$ is perpendicular to $\vec{n}$ forms a plane.  Thus any plane can be specified by a point in said plane a vector normal to the plane.  (Of course, this normal vector is not unique!)
+
+\par With this, we can formally prove the above statement.  Let $\mathcal Q$ denote the plane which forms the cross-section defined above; it suffices to show that $T$ lies in $\mathcal Q$.  Note that since $\mathcal P$ is tangent to $\mathcal S$ at $T$, we know that $\overrightarrow{TC}$ is normal to $\mathcal P$.  Since $\ell\in\mathcal P$, we deduce that $\ell\perp \overrightarrow{TC}$.  But remark that $\overrightarrow{OC}$ is normal to the $xy$-plane, which $\ell$ lies in, so $\overrightarrow{OC}\perp\ell$.  Combining this with the fact that $OP\perp\ell$ by the definition of projection gives that $\ell$ is normal to the entire plane $\mathcal Q$.  Thus $T\in\mathcal Q$ as desired.
+
+\item Two circles $\omega_1$ and $\omega_2$ are said to be $\textit{orthogonal}$ if they intersect each other at right angles.  In other words, for any point $P$ lying on both $\omega_1$ and $\omega_2$, if $\ell_1$ is the line tangent to $\omega_1$ at $P$ and $\ell_2$ is the line tangent to $\omega_2$ at $P$, then $\ell_1\perp \ell_2$.  (Two circles which do not intersect are not orthogonal.)
+
+\par Let $\triangle ABC$ be a triangle with area $20$.  Orthogonal circles $\omega_B$ and $\omega_C$ are drawn with $\omega_B$ centered at $B$ and $\omega_C$ centered at $C$.  Points $T_B$ and $T_C$ are placed on $\omega_B$ and $\omega_C$ respectively such that $AT_B$ is tangent to $\omega_B$ and $AT_C$ is tangent to $\omega_C$.  If $AT_B = 7$ and $AT_C = 11$, what is $\tan\angle BAC$?
+
+\proposed{David Altizio}
+
+\solution We first proceed with a lemma.
+
+\par $\textbf{LEMMA: }$ If $\omega_1$ and $\omega_2$ are orthogonal circles with radii $r_1$ and $r_2$ respectively, and $d$ is the distance between the centers of these two circles, then \[r_1^2+r_2^2=d^2.\]
+
+\par $\textit{Proof.}$ Let $P$ be a point of intersection of $\omega_1$ and $\omega_2$, and let $O_1$ and $O_2$ denote the centers of $\omega_1$ and $\omega_2$ respectively.  Note that by the definition of tangency, $PO_1$ is perpendicular to the line tangent to $\omega_1$ at $P$.  But recall that by the definition of orthogonal circles, the tangents to $\omega_1$ and $\omega_2$ passing through $P$ are perpendicular.  Hence $PO_1\perp PO_2$, and the desired follows from Pythagorean Theorem.  $\blacksquare$
+
+\par Let $r_B$ and $r_C$ denote the radii of $\omega_B$ and $\omega_C$ respectively.  Note that by Pythagorean Theorem, \[AT_B^2 = AB^2 - r_B^2\qquad\text{and}\qquad AT_C^2 = AC^2-r_C^2.\] Adding these together yields \begin{align*} AT_B^2+AT_C^2 &= AB^2 + AC^2 - (r_B^2 + r_C^2) \\&= AB^2 + AC^2 - BC^2 = 2(AB)(AC)\cos\angle BAC,\end{align*} where the last step follows from Law of Cosines.  Combined with $\tfrac12(AB)(AC)\sin\angle BAC = [ABC]$, it follows that \[\tan\angle BAC = \dfrac{\sin\angle BAC}{\cos\angle BAC} = \dfrac{(AB)(AC)\sin\angle BAC}{(AB)(AC)\cos\angle BAC} = \dfrac{4[ABC]}{AT_B^2+AT_C^2} = \dfrac{4\cdot 20}{7^2+11^2} = \boxed{\dfrac{8}{17}}.\]
+
+\item Cyclic quadrilateral $ABCD$ satisfies $\angle ABD = 70^\circ$, $\angle ADB=50^\circ$, and $BC=CD$.  Suppose $AB$ intersects $CD$ at point $P$, while $AD$ intersects $BC$ at point $Q$.  Compute $\angle APQ-\angle AQP$ in degrees.
+
+\proposed{David Altizio}
+
+\solution Note that \[\angle BAD = 180^\circ-\angle ABD-\angle ADB = 60^\circ,\] and thus $\angle PCQ=\angle BCD=120^\circ$.  Furthermore, since $BC=CD$, $AC$ bisects $\angle BAD$.  Now let $I$ denote the incenter of $\triangle APQ$.  It is well-known that \[\angle PIQ = 90^\circ+\dfrac{\angle PAQ}2 = 90^\circ+\dfrac{60^\circ}2 = 120^\circ,\] whence $P$, $C$, $I$, and $Q$ are concyclic.  But $A$, $I$, and $C$ are collinear, and so in fact $I\equiv C$, i.e. $C$ is the incenter of $\triangle APQ$.  From \[\angle APD = \angle ABD-\angle BDC = 70^\circ-30^\circ = 40^\circ\qquad\text{and}\qquad \angle AQB = \angle ADB-\angle DBC = 50^\circ-30^\circ=20^\circ,\] we thus find that \[\angle APQ-\angle AQP = 2(\angle APC-\angle AQC) = 2(40^\circ-20^\circ)=\boxed{40^\circ}.\]
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	import olympiad;
+	size(230);
+	defaultpen(linewidth(0.8));
+	pair A = dir(110), B = dir(210), C = dir(270), D = dir(330);
+	pair P = extension(A,B,C,D), Q = extension(A,D,C,B);
+	draw(unitcircle^^P--A--Q^^B--Q--P--D--cycle);
+	label("$A$",A,dir(origin--A));
+	label("$B$",B,W);
+	label("$C$",C,dir(origin--C));
+	label("$D$",D,E);
+	label("$P$",P,dir(origin--P));
+	label("$Q$",Q,dir(origin--Q));
+	pair P = foot(C,A,D);
+	draw(circle(C,abs(C-P)),linetype("4 4"));
+\end{asy}
+\end{figure}
+
+\item Two non-intersecting circles, $\omega$ and $\Omega$, have centers $C_\omega$ and $C_\Omega$ respectively.  It is given that the radius of $\Omega$ is strictly larger than the radius of $\omega$.  The two common external tangents of $\Omega$ and $\omega$ intersect at a point $P$, and an internal tangent of the two circles intersects the common external tangents at $X$ and $Y$.  Suppose that the radius of $\omega$ is $4$, the circumradius of $\triangle PXY$ is $9$, and $XY$ bisects $\overline{PC_\Omega}$.  Compute $XY$.
+
+\proposed{David Altizio}
+
+\solution The problem statement is equivalent to finding $BC$, where $ABC$ is a triangle with inradius $4$, circumradius $9$, and height from $A$ equal to the $A$-exradius.  The following is one such way to do this.  Denote by $K$ the area of $\triangle ABC$, $s$ its semiperimeter, $r$ its inradius, $R$ its circumradius, and $r_a$ its $A$-exradius.  Write \[K = \dfrac12ar_a = r_a(s-a)\quad\implies\quad a = 2(s-a) = b+c-a.\] (The first two equalities are well-known formulas for the area of a triangle, where in the first one we substitute $r_a$ for the height from $A$.) This means that $b+c=2a$, or $s=\tfrac32a$.  Thus, we have $K=rs=6a$.  As a result, \[6a = \dfrac{abc}{4R} = \dfrac{abc}{36}\quad\implies\quad bc = 216.\] Now recall that by Heron's Formula, \begin{align*}6a &= \sqrt{s(s-a)(s-b)(s-c)} = \sqrt{\left(\dfrac32a\right)\left(\dfrac12a\right)(s-b)(s-c)}\\\implies 48 &= (s-b)(s-c)=s^2-s(b+c)+bc\\&=\left(\dfrac32a\right)^2 - \left(\dfrac32a\right)\left(\dfrac12a\right) + bc= 216-\dfrac34a^2.\end{align*} Hence $a = \sqrt{224} = \boxed{4\sqrt{14}}$.
+
+\item In triangle $ABC$ with $AB=23$, $AC=27$, and $BC=20$, let $D$ be the foot of the $A$ altitude.  Suppose $\mathcal{P}$ is the parabola with focus $A$ passing through $B$ and $C$, and denote by $T$ the intersection point of $AD$ with the directrix of $\mathcal P$.  Determine the value of $DT^2-DA^2$.  (Recall that a parabola $\mathcal P$ is the set of points which are equidistant from a point, called the \textit{focus} of $\mathcal P$, and a line, called the \textit{directrix} of $\mathcal P$.)
+
+\proposed{David Altizio and Evan Chen}
+
+\solution Let $\ell$ denote the directrix of $\mathcal P$, and let $X$ and $Y$ be the projections of $B$ and $C$ respectively onto $\ell$.  Recall that by definition of a parabola, $AB=BX$ and $AC=CY$.  It follows that $X$ is the tangency point of $\ell$ with the circle $\omega_B$ centered at $B$ with radius $AB$.  Similarly, $Y$ is the tangency point of $\ell$ with the circle $\omega_C$ centered at $C$ with radius $AC$.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	import olympiad;
+	size(300);
+defaultpen(linewidth(0.8));
+real p = 3;
+pair F = (0,p);
+real f(real x) { return 1/(4*p)*x * x;}
+draw(graph(f,-7,7));
+dot(F);
+real x1 = -1, x2 = 3;
+pair P1 = (x1, f(x1)), P2 = (x2,f(x2));
+path circ1 = circle(P1,abs(P1-F)), circ2 = circle(P2,abs(P2-F));
+draw(circ1^^circ2,linetype("4 4"));
+dot(P1^^P2);
+label("$A$",F,N);
+label("$B$",P1,SW);
+label("$C$",P2,SE);
+draw(F--P1--P2--cycle);
+draw((-7,-p)--(7,-p));
+pair X = (P1.x,-p),Y = (P2.x,-p);
+pair T = (X+Y)/2, D = intersectionpoint(P1--P2,F--T);
+draw(F--T);
+label("$T$",T,S);
+dot(T^^D^^X^^Y);
+label("$D$",D,NE);
+label("$X$",X,S);
+label("$Y$",Y,S);
+draw(rightanglemark(F,D,P1,7));
+\end{asy}
+\end{figure}
+
+\par Now denote by $A'$ the second intersection point of $\omega_B$ and $\omega_C$.  Note that $AB=A'B$ and $AC=A'C$, so $\triangle ABC\cong\triangle A'BC$.  Thus $A'$ is the reflection of $A$ across $BC$.  Thus $A$, $D$, and $A'$ are collinear.  It follows that $AD$ is the radical axis of $\omega_B$ and $\omega_C$.  In particular, $T$ is the midpoint of $\overline{XY}$.
+
+\par Finally, remark that by Power of a Point, \[TX^2=TA'\cdot TA = (TD+AD)(TD-AD) = TD^2-AD^2.\]  Thus, it suffices to compute $TX$.  This is one half the length of the common external tangent of $\omega_B$ and $\omega_C$, which can be easily computed to be \[\sqrt{BC^2 - (AC-AB)^2} = \sqrt{20^2 - (27-23)^2} = 8\sqrt 6.\] Thus $TX=4\sqrt{6}$ and the requested answer is $\boxed{96}$.
+
+\item Let $\triangle ABC$ be an acute triangle with circumcenter $O$, and let $Q\neq A$ denote the point on $\odot (ABC)$ for which $AQ\perp BC$. The circumcircle of $\triangle BOC$ intersects lines $AC$ and $AB$ for the second time at $D$ and $E$ respectively. Suppose that $AQ$, $BC$, and $DE$ are concurrent. If $OD=3$ and $OE=7$, compute $AQ$.
+
+\proposed{David Altizio}
+
+\solution First remark that $DE$ is antiparallel to $BC$, so $\triangle ADE\sim\triangle ABC$.
+
+\begin{figure}[ht]
+\centering
+\begin{asy}
+import olympiad;
+size(250);
+defaultpen(linewidth(0.8));
+pair A = dir(119.5), B = dir(215), C = dir(325), Q = (A.x,-1*A.y), P = intersectionpoint(A--Q,B--C), X = 2*B - A, O = origin, Y = circumcenter(B,O,C);
+path cir = circumcircle(B,O,C);
+pair[] Dp = intersectionpoints(A--C, cir), Ep = intersectionpoints(A--X,cir);
+pair D = Dp[0], E = Ep[1];
+draw(B--C--A--E--D^^circumcircle(A,B,C)^^A--Q);
+draw(arc(Y,circumradius(B,O,C),-5,185));
+draw(rightanglemark(A,P,B,1.5)^^E--O--D);
+dot(O);
+draw(circumcircle(A,D,E),linetype("4 4"));
+label("$A$",A,dir(A));
+label("$B$",B,dir(190));
+label("$C$",C,dir(350));
+label("$Q$",Q,dir(Q));
+label("$D$",D,dir(40));
+label("$E$",E,dir(220));
+label("$O$",O,N);
+label("$P$",P,SE);
+\end{asy}
+\end{figure}
+
+\par Let $P$ be the foot of the perpendicular from $A$ to $BC$.  Note that $BC$ is the radical axis of $\odot(ABC)$ and $\odot(BOC)$ and that $DE$ is the radical axis of $\odot(BOC)$ and $\odot(ADE)$.  Hence $P$ is the radical center of all three circles, meaning that $AP$ is the radical axis of $\odot(ABC)$ and $\odot(ADE)$.  Since $AQ$ is a chord of $\odot(ABC)$, we may deduce that $ADQE$ is cyclic. 
+
+\par Furthermore, a simple angle chase reveals that \[\angle ADO = \angle OBC = 90^\circ-\angle A,\] which implies $DO\perp AB$.  Similarly $EO\perp AC$, so $O$ is the orthocenter of $\triangle ADE$.  This means that $AO$ and $AP$ are isogonal with respect to $\angle A$.  As a result, $AQ$ is a diameter of $\odot(ADE)$, which implies that $ODQE$ is a parallelogram.  This means that \[2(OD^2+OE^2) = OQ^2+DE^2 = OA^2+DE^2.\] But note that if $R'$ is the circumradius of $\triangle ADE$, then \[OA^2+DE^2 = (2R'\cos A)^2 + (2R'\sin A)^2 = 4R'^2,\] which we know is equal to $AQ^2$ since $AQ$ is a diameter of $\odot(ADE)$.  Thus \[AQ = \sqrt{2(OD^2+OE^2)} = \sqrt{2(3^2+7^2)} = \boxed{2\sqrt{29}}.\]
+
+\item Suppose $\triangle ABC$ is such that $AB=13$, $AC=15$, and $BC=14$.  It is given that there exists a unique point $D$ on side $\overline{BC}$ such that the Euler lines of $\triangle ABD$ and $\triangle ACD$ are parallel.  Determine the value of $\tfrac{BD}{CD}$.  (The \textit{Euler} line of a triangle $ABC$ is the line connecting the centroid, circumcenter, and orthocenter of $ABC$.)
+
+\proposed{David Altizio}
+
+\solution We solve this problem with the configuration shown below; it's not hard to see that this is the only possible one.  Here, $O_b$ and $O_c$ are the circumcenters of $\triangle ABD$ and $\triangle ACD$ respectively, while $H_b$ and $H_c$ are the orthocenters of $\triangle ABD$ and $\triangle ACD$ respectively.
+
+\begin{figure}[ht]
+\centering
+\begin{asy}
+import olympiad;
+size(190);
+defaultpen(linewidth(0.8)+fontsize(10pt));
+pair B = origin, C = (12,0), A = (1.8,7), D = (A.x + A.y/(sqrt(3)), 0);
+draw(A--B--C--A--D);
+pair Ob = circumcenter(A,B,D), Oc = circumcenter(A,C,D), Hb = orthocenter(A,B,D), Hc = orthocenter(A,C,D);
+dot(Ob^^Oc^^Hb^^Hc);
+draw(Ob--Hb^^Oc--Hc);
+label("$A$",A,N);
+label("$B$",B,SW);
+label("$C$",C,SE);
+label("$D$",D,SE);
+label("$O_b$",Ob,SE);
+label("$O_c$",Oc,N);
+label("$H_b$",Hb,W);
+label("$H_c$",Hc,W);
+draw(A--Hc--D--Hb^^A--Ob--Oc--cycle,linetype("4 4"));
+\end{asy}
+\end{figure}
+
+We first claim that $\triangle AO_bO_c\sim\triangle ABC\sim\triangle DH_bH_c$.  Indeed, these claims are not hard to prove: the first comes from the fact that $\angle AO_bB=\angle AO_cC\implies\triangle AO_bB\sim\triangle AO_cC$, while the second comes from the fact that $DH_b\perp AB$ and $DH_c\perp AC$.  Details are left to the interested reader.  Furthermore, these triangles are directly similar to each other.  Thus, there exists a spiral similarity $\mathcal{S}$ sending $\triangle DH_bH_c\mapsto\triangle AO_bO_c$.
+
+\par Let $P = H_bH_c\cap O_bO_c$.  Then since $H_bO_b\parallel H_cO_c$, we have $PH_b/H_bH_c = PO_b/O_bO_c$.  Hence $P$ is the center of spiral similarity sending $\overline{H_aH_b}\mapsto\overline{O_bO_c}$, and thus it must be the center of $\mathcal{S}$.  But from the fact that $O_bO_c$ is a perpendicular bisector of $\overline{AD}$, we obtain that \[\dfrac{DH_b}{AO_b} = \dfrac{PD}{PA} = 1,\] so in fact $\triangle AO_bO_c\cong\triangle DH_bH_c$.  Furthermore, if $R$ is the circumradius of $\triangle ABD$, then $R = 2R\cos\angle ABD$, so $\cos\angle ABD = \frac12$ and thus $\angle ADB = 60^\circ$.
+
+\par Now let $X$ be the foot of the altitude from $A$ to $BC$.  Compute $BX=5$, $CX=9$, and $AX=12$.  It follows that $DX=4\sqrt 3$, and so \[\dfrac{BD}{CD} = \boxed{\dfrac{5+4\sqrt 3}{9-4\sqrt 3} = \dfrac{93+56\sqrt 3}{33}}.\]
+
+\end{enumerate}
+
+\end{document}

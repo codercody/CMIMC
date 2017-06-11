@@ -1,0 +1,118 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[top=2cm, left = 2cm, right = 2cm, bottom = 3cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{asymptote}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rhead{}
+\chead{\includegraphics[scale=0.2]{CMIMC-header.png}}
+\lhead{}
+\setlength{\headheight}{43pt}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+\addtolength\footskip{-1cm}
+\begin{document}
+
+\vspace*{0.13in}
+\begin{center}
+\huge\textbf{Algebra Tiebreaker}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item Let \[f(x)=\dfrac{1}{1-\dfrac{1}{1-x}}\,.\] Compute $f^{2016}(2016)$, where $f$ is composed upon itself $2016$ times.
+
+\item Determine the value of the sum \[\left|\sum_{1\leq i<j\leq 50}ij(-1)^{i+j}\right|.\]
+
+\item Suppose $x$ and $y$ are real numbers which satisfy the system of equations \[x^2-3y^2=\frac{17}x\qquad\text{and}\qquad 3x^2-y^2=\frac{23}y.\] Then $x^2+y^2$ can be written in the form $\sqrt[m]{n}$, where $m$ and $n$ are positive integers and $m$ is as small as possible.  Find $m+n$.
+
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+\huge\textbf{Combinatorics Tiebreaker}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item For a set $S \subseteq \mathbb{N}$, define $f(S) = \{\left\lceil \sqrt{s} \right\rceil \mid s \in S\}$. Find the number of sets $T$ such that $\vert f(T) \vert = 2$ and $f(f(T)) = \{2\}$. %ID: 65; patrick
+
+\item Let $S = \{1,2,3,4,5,6,7\}$. Compute the number of sets of subsets $T = \{A, B, C\}$ with $A, B, C \in S$ such that $A \cup B \cup C = S$, $(A \cap C) \cup (B \cap C) = \emptyset$, and no subset contains two consecutive integers. %ID: 17; patrick
+
+\item Let $S$ be the set containing all positive integers whose decimal representations contain only 3’s and 7’s, have at most 1998 digits, and have at least one digit appear exactly 999 times. If $N$ denotes the number of elements in $S$, find the remainder when $N$ is divided by 1000. %ID: 40; patrick
+
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+\huge\textbf{Computer Science Tiebreaker}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item A \emph{planar} graph is a connected graph that can be drawn on a sphere without edge crossings. Such a drawing will divide the sphere into a number of faces. Let $G$ be a planar graph with $11$ vertices of degree $2$, $5$ vertices of degree $3$, and $1$ vertex of degree $7$. Find the number of faces into which $G$ divides the sphere.
+
+\item The \emph{Stooge sort} is a particularly inefficient recursive sorting algorithm defined as follows: given an array $A$ of size $n$, we swap the first and last elements if they are out of order; we then (if $n\ge3$) Stooge sort the first $\lceil\frac{2n}3\rceil$ elements, then the last $\lceil\frac{2n}3\rceil$, then the first $\lceil\frac{2n}3\rceil$ elements again. Given that this runs in $O(n^\alpha)$, where $\alpha$ is minimal, find the value of $(243/32)^\alpha$.
+
+\item Let $\varepsilon$ denote the empty string. Given a pair of strings $(A,B)\in\{0,1,2\}^*\times\{0,1\}^*$, we are allowed the following operations:
+
+\[\begin{cases}
+(A,1)\to(A0,\varepsilon)\\
+(A,10)\to(A00,\varepsilon)\\
+(A,0B)\to(A0,B)\\
+(A,11B)\to(A01,B)\\
+(A,100B)\to(A0012,1B)\\
+(A,101B)\to(A00122,10B)
+\end{cases}\]
+
+We perform these operations on $(A,B)$ until we can no longer perform any of them. We then iteratively delete any instance of $20$ in $A$ and replace any instance of $21$ with $1$ until there are no such substrings remaining. Among all binary strings $X$ of size $9$, how many different possible outcomes are there for this process performed on $(\varepsilon,X)$?
+
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+\huge\textbf{Geometry Tiebreaker}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item Point $A$ lies on the circumference of a circle $\Omega$ with radius $78$.  Point $B$ is placed such that $AB$ is tangent to the circle and $AB=65$, while point $C$ is located on $\Omega$ such that $BC=25$.  Compute the length of $\overline{AC}$. %David Altizio
+
+\item Identical spherical tennis balls of radius 1 are placed inside a cylindrical container of radius 2 and height 19. Compute the maximum number of tennis balls that can fit entirely inside this container.
+
+\item Triangle $ABC$ satisfies $AB=28$, $BC=32$, and $CA=36$, and $M$ and $N$ are the midpoints of $\overline{AB}$ and $\overline{AC}$ respectively.  Let point $P$ be the unique point in the plane $ABC$ such that $\triangle PBM\sim\triangle PNC$.  What is $AP$? %David Altizio
+
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+\huge\textbf{Number Theory Tiebreaker}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item For all integers $n\geq 2$, let $f(n)$ denote the largest positive integer $m$ such that $\sqrt[m]{n}$ is an integer.  Evaluate \[f(2)+f(3)+\cdots+f(100).\] %Cody Johnson
+
+\item For each integer $n\geq 1$, let $S_n$ be the set of integers $k > n$ such that $k$ divides $30n-1$.  How many elements of the set \[\mathcal{S} = \bigcup_{i\geq 1}S_i = S_1\cup S_2\cup S_3\cup\ldots\] are less than $2016$?
+
+\item Let $\{x\}$ denote the fractional part of $x$.  For example, $\{5.5\}=0.5$.  Find the smallest prime $p$ such that the inequality \[\sum_{n=1}^{p^2}\left\{\dfrac{n^p}{p^2}\right\}>2016\] holds.
+
+\end{enumerate}
+
+\end{document}

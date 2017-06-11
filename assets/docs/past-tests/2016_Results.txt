@@ -1,0 +1,281 @@
+----------------------------------
+| CMIMC 2016 Official Statistics |
+----------------------------------
+
+----------------------
+| Individual Results |
+----------------------
+
+ALGEBRA:
+--------------------
+| MEAN: 3.2535     |
+| VARIANCE: 3.7104 |
+| MAXIMUM: 7       |
+--------------------
+
+SCORE DISTRIBUTION:
+
+Score | Number of Students
+--------------------------
+  0   |        4
+  1   |        11
+  2   |        11
+  3   |        17
+  4   |        7
+  5   |        9
+  6   |        6
+  7   |        5
+  8   |        0
+  9   |        0
+  10  |        0
+
+HIGHEST SCORERS:
+
+Place |       Name       |          Team           | Score
+-----------------------------------------------------------
+  1   | Saaketh Vedantam | Florida A               |   7
+  2   | Steven Qu        | Montgomery Blair Team 1 |   7
+  3   | Jacob Stavrianos | Montgomery Blair Team 2 |   7
+  4   | Alex Chung       | Fairfax Math Wizards    |   7
+  5   | Jackson Blitz    | Florida A               |   7
+
+
+COMBINATORICS:
+--------------------
+| MEAN: 3.3666     |
+| VARIANCE: 2.9655 |
+| MAXIMUM: 7       |
+--------------------
+
+SCORE DISTRIBUTION:
+
+Score | Number of Students
+--------------------------
+  0   |        1
+  1   |        2
+  2   |        7
+  3   |        9
+  4   |        1
+  5   |        4
+  6   |        4
+  7   |        1
+  8   |        0
+  9   |        0
+  10  |        0
+
+HIGHEST SCORERS:
+
+Place |      Name      |          Team           | Score
+---------------------------------------------------------
+  1   | Erik Metz      | Nicolas Bourbaki        |   7
+  2   | Joshua Lee     | pangzi                  |   6
+  3   | Eric Lu        | Montgomery Blair Team 1 |   6
+  4   | Guang Cui      | Montgomery Blair Team 2 |   6
+  5   | Brian Reinhart | Florida A               |   6
+
+
+COMPUTER SCIENCE:
+--------------------
+| MEAN: 3.5000     |
+| VARIANCE: 3.8100 |
+| MAXIMUM: 8       |
+--------------------
+
+SCORE DISTRIBUTION:
+
+Score | Number of Students
+--------------------------
+  0   |        2
+  1   |        2
+  2   |        17
+  3   |        7
+  4   |        7
+  5   |        8
+  6   |        0
+  7   |        6
+  8   |        1
+  9   |        0
+  10  |        0
+
+HIGHEST SCORERS:
+
+Place |      Name      |          Team           | Score
+---------------------------------------------------------     
+  1   | Eric Lu        | Montgomery Blair Team 1 |   8
+  2   | Erik Metz      | Nicolas Bourbaki        |   7
+  3   | Samuel Hsiang  | pangzi                  |   7
+  4   | Brian Reinhart | Florida A               |   7
+  5   | Guang Cui      | Montgomery Blair Team 2 |   7
+  HM  | James McGaa    | Team Talonflame         |   7
+  HM  | Richard Liu    | Florida A               |   7
+
+
+
+GEOMETRY:
+--------------------
+| MEAN: 3.4878     |
+| VARIANCE: 3.7133 |
+| MAXIMUM: 7       |
+--------------------
+
+SCORE DISTRIBUTION:
+
+Score | Number of Students
+--------------------------
+  0   |        2
+  1   |        6
+  2   |        6
+  3   |        5
+  4   |        10
+  5   |        5
+  6   |        4
+  7   |        3
+  8   |        0
+  9   |        0
+  10  |        0
+
+HIGHEST SCORERS:
+
+Place |        Name       |           Team          | Score
+------------------------------------------------------------
+  1   | Joshua Lee        | pangzi                  |   7
+  2   | Aaditya Singh     | The First Order         |   7
+  3   | Robin Park        | pangzi                  |   7
+  4   | Graham O'Donnell  | Florida A               |   6
+  5   | David Chen        | Farifax Math Wizards    |   6
+  HM  | Steven Qu         | Montgomery Blair Team 1 |   6
+  HM  | Rithvik Pasumarty | Sexy Primes             |   6
+
+
+NUMBER THEORY:
+--------------------
+| MEAN: 3.0000     |
+| VARIANCE: 2.9048 |
+| MAXIMUM: 7       |
+--------------------
+
+SCORE DISTRIBUTION:
+
+Score | Number of Students
+--------------------------
+  0   |        0
+  1   |        9
+  2   |        11
+  3   |        8
+  4   |        5
+  5   |        5
+  6   |        2
+  7   |        2
+  8   |        0
+  9   |        0
+  10  |        0
+
+HIGHEST SCORERS:
+
+Place |       Name      |           Team          | Score
+----------------------------------------------------------
+  1   | Franklyn Wang   | pangzi                  |   7
+  2   | Jeffery Yu      | The First Order         |   7
+  3   | Andrew Gu       | Team Talonflame         |   6
+  4   | Akshaj Kadaveru | pangzi                  |   6
+  5   | Ryan Broder     | Florida A               |   5
+  HM  | Thomas Luo      | Nicolas Bourbaki        |   5
+  HM  | William Xu      | Gumby's Pizza           |   5
+  HM  | David Wu        | Montgomery Blair Team 1 |   5
+  HM  | Jackson Blitz   | Florida A               |   5
+
+
+----------------
+| Team Results |
+----------------
+
+TEAM ROUND:
+--------------------
+| MEAN: 2.5138     |
+| VARIANCE: 0.9619 |
+| MAXIMUM: 5       |
+--------------------
+
+Place |               Team                  | Score
+----------------------------------------------------
+  1   | Florida A                           |   5
+  2   | Montgomery Blair Team 1             |   4
+  2   | Tom & Jerry Store Leak C- Water     |   4
+  4   | Farifax Math Wizards                |   3
+  4   | The First Order                     |   3
+  4   | pangzi                              |   3
+  4   | Montgomery Blair Team 2             |   3
+  4   | Nicolas Bourbaki                    |   3
+  4   | Florida C                           |   3
+  10  | Wootton                             |   2
+  10  | The Schuyler Sisters (and Brothers) |   2
+  10  | Sinosaurus                          |   2
+  10  | Cosinosaurus                        |   2
+  10  | Chesapeake A                        |   2
+  10  | Chesapeake B                        |   2
+  10  | Star League A-Star                  |   2
+  10  | The Sexy Primes                     |   2
+  10  | Team Talonflame                     |   2
+  10  | Florida B                           |   2
+  20  | Gumby's Pizza                       |   1
+  20  | Peter Township High School          |   1
+
+
+
+POWER ROUND:
+Note: Scores out of 119 points.
+
+Place |             Team Name               | Score
+----------------------------------------------------
+  1   | Montgomery Blair Team 2             |  58.5
+  2   | Nicolas Bourbaki                    |  52.5
+  3   | Florida A                           |  43
+  4   | pangzi                              |  42
+  5   | Florida B                           |  40
+  6   | Montgomery Blair Team 1             |  32
+  6   | The Sexy Primes                     |  32
+  8   | The First Order                     |  31.5
+  9   | Team Talonflame                     |  30
+  10  | The Schuyler Sisters (and Brothers) |  29.5
+  11  | Gumby's Pizza                       |  27
+  12  | Sinosaurus                          |  26
+  13  | Farifax Math Wizards                |  25.5
+  14  | Star League A-Star                  |  25
+  15  | Chesapeake A                        |  23
+  16  | Wootton                             |  21
+  17  | Tom & Jerry Store Leak C- Water     |  20
+  18  | Peter Township High School          |  16
+  19  | Cosinosaurus                        |  13
+  19  | Chesapeake B                        |  13
+  21  | Florida C                           |  11
+
+
+OVERALL RESULTS:
+Note: Team scores were computed as a weighted average of 
+Individual, Team, and Power results, and then scaled upward.
+
+Place |             Team Name               | Score
+----------------------------------------------------
+  1   | Florida A                           |  934
+  2   | Montgomery Blair Team 2             |  869
+  3   | pangzi                              |  841
+  4   | Montgomery Blair Team 1             |  832
+  5   | Nicolas Bourbaki                    |  827
+  6   | The First Order                     |  753
+  7   | Farifax Math Wizards                |  699
+  8   | Florida B                           |  688
+  9   | Tom & Jerry Store Leak C- Water     |  674
+  10  | The Sexy Primes                     |  665
+  11  | Team Talonflame                     |  628
+  12  | Star League A-Star                  |  622
+  13  | Sinosaurus                          |  620
+  14  | Gumby's Pizza                       |  601
+  15  | Florida C                           |  580
+  16  | The Schuyler Sisters (and Brothers) |  571
+  17  | Wootton                             |  552
+  17  | Chesapeake A                        |  552
+  19  | Cosinosaurus                        |  493
+  20  | Chesapeake B                        |  486
+  21  | Peter Township High School          |  454
+
+

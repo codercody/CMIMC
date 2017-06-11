@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="description" content="The Carnegie Mellon Informatics and Mathematics Competition (CMIMC) is a math and computer science competition to be held at Carnegie Mellon University on ??. Contestants come in teams of 4-6 to participate in individual and team events." />
+  <meta http-equiv="keywords" content="CMIMC, Carnegie Mellon, math, computer science, informatics, competition, contest" />
+  <meta http-equiv="reply-to" content="ctj@math.cmu.edu" />
   <link rel="stylesheet" href="assets/css/materialize.min.css">
   <link rel="stylesheet" href="assets/css/style-main.css">
-  <script src="https://use.fontawesome.com/1d5e86b9f8.js"></script>
   <script src="assets/js/jquery-3.2.1.min.js"></script>
   <script src="assets/js/materialize.min.js"></script>
   <script src="assets/js/script-main.js"></script>
+  <title>CMIMC | Home</title>
 </head>
 
 <body>
@@ -14,7 +18,7 @@
     <div class="navbar-fixed">
       <nav class="z-depth-0">
         <div class="nav-wrapper container">
-          <a href="#" class="brand-logo"><img src="assets/img/cmimc-logo-huge.png" height="28px"></a>
+          <a href="index.html" class="brand-logo"><img src="assets/img/cmimc-logo-huge.png" height="28px"></a>
           <ul class="right hide-on-med-and-down">
             <li class="active"><a href="#" class="grey-text text-darken-3">Home</a></li>
             <li><a href="information.html" class="grey-text text-darken-3">Information</a></li>
@@ -29,40 +33,44 @@
       <div class="modal-content">
         <div class="row">
           <div class="col s12">
-            <h4>Log In</h4>
-            <div class="row">
-              <div class="input-field col s6">
-                <input id="account_login_email" type="email" class="validate">
-                <label for="account_login_email">Email</label>
+            <form>
+              <h4>Log In</h4>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="account_login_email" type="email" class="validate">
+                  <label for="account_login_email">Email</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="account_login_password" type="password" class="validate">
+                  <label for="account_login_password">Password</label>
+                </div>
+                <div class="input-field col s12">
+                  <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Log In</button>
+                </div>
               </div>
-              <div class="input-field col s6">
-                <input id="account_login_password" type="password" class="validate">
-                <label for="account_login_password">Password</label>
-              </div>
-              <div class="input-field col s12">
-                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Log In</button>
-              </div>
-            </div>
+            </form>
           </div>
           <div class="col s12">
-            <h4>Sign Up</h4>
-            <div class="row">
-              <div class="input-field col s4">
-                <input id="account_signup_email" type="email" class="validate">
-                <label for="account_signup_email">Email</label>
+            <form>
+              <h4>Sign Up</h4>
+              <div class="row">
+                <div class="input-field col s4">
+                  <input id="account_signup_email" type="email" class="validate">
+                  <label for="account_signup_email">Email</label>
+                </div>
+                <div class="input-field col s4">
+                  <input id="account_signup_password" type="password" class="validate">
+                  <label for="account_signup_password">Password</label>
+                </div>
+                <div class="input-field col s4">
+                  <input id="account_signup_password_confirm" type="password" class="validate">
+                  <label for="account_signup_password_confirm">Password (confirm)</label>
+                </div>
+                <div class="input-field col s12">
+                  <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Sign Up</button>
+                </div>
               </div>
-              <div class="input-field col s4">
-                <input id="account_signup_password" type="password" class="validate">
-                <label for="account_signup_password">Password</label>
-              </div>
-              <div class="input-field col s4">
-                <input id="account_signup_password_confirm" type="password" class="validate">
-                <label for="account_signup_password_confirm">Password (confirm)</label>
-              </div>
-              <div class="input-field col s12">
-                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Sign Up</button>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -82,12 +90,7 @@
         <div class="col l5 offset-l1 s12">
           <ul class="collection with-header news-feed">
             <li class="collection-header red darken-2 grey-text text-lighten-4"><h5>News</h5></li>
-            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
-            <li class="collection-item"><b>October 3rd, 2016</b><p>Blah blah blah!</p></li>
+            <li class="collection-item"><b>??</b><p>We released our new website!</p></li>
           </ul>
         </div>
       </div>
@@ -129,10 +132,10 @@
     <div class="section blue-grey lighten-4">
       <div class="row container center-align">
         <h4>Sponsors</h4>
-        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-2s"></a></div>
-        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-js"></a></div>
-        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-xp"></a></div>
-        <div class="col l3 m6 s12"><a href="#" class="sponsor sponsor-wa"></a></div>
+        <div class="col l3 m6 s12"><a href="https://www.twosigma.com/" target="_blank" class="sponsor sponsor-2s"></a></div>
+        <div class="col l3 m6 s12"><a href="https://www.janestreet.com/" target="_blank" class="sponsor sponsor-js"></a></div>
+        <div class="col l3 m6 s12"><a href="https://www.expii.com/" target="_blank" class="sponsor sponsor-xp"></a></div>
+        <div class="col l3 m6 s12"><a href="https://www.wolfram.com/" target="_blank" class="sponsor sponsor-wa"></a></div>
       </div>
     </div>
   </main>

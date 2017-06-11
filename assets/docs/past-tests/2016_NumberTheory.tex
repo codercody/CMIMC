@@ -1,0 +1,113 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[top=2cm, left = 2cm, right = 2cm, bottom = 3cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{asymptote}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rhead{}
+\chead{\includegraphics[scale=0.12]{CMIMC-header.png}}
+\lhead{}
+\setlength{\headheight}{43pt}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+\addtolength\footskip{-1cm}
+\begin{document}\thispagestyle{empty}
+\begin{center}
+
+\vspace*{90pt}
+
+\includegraphics[scale=0.23]{CMIMC-header.png}
+
+\includegraphics[scale=0.35]{nt-header.png}
+
+\vspace{1.6in}
+
+\includegraphics[scale=0.20]{instruction-header.png}
+\noindent\rule{17.7cm}{2pt}
+\end{center}
+
+\vspace{10pt}
+
+\begin{enumerate}
+\large
+\item Do not look at the test before the proctor starts the round.
+
+\item This test consists of 10 short-answer problems to be solved in 60 minutes.
+	Each question is worth one point.
+
+\item Write your name, team name, and team ID on your answer sheet. Circle the
+	subject of the test you are currently taking.
+
+\item Write your answers in the corresponding boxes on the answer sheets.
+
+\item No computational aids other than pencil/pen are permitted.
+
+\item All answers are integers.
+
+\item If you believe that the test contains an error, submit your protest in writing to Porter 100.
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+\huge\textbf{Number Theory}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+\setlength{\itemsep}{3pt}
+
+\item David, when submitting a problem for CMIMC, wrote his answer 
+	as $100\tfrac xy$, where $x$ and $y$ are two positive integers
+	with $x<y$. Andrew interpreted the expression as a product of two
+	rational numbers, while Patrick interpreted the answer as a mixed
+	fraction. In this case, Patrick's number was exactly double Andrew's!  
+	What is the smallest possible value of $x+y$? %David Altizio
+
+\item Let $a_1$, $a_2$, $\ldots$ be an infinite sequence of integers such that
+	$k$ divides $\gcd(a_{k-1},a_k)$ for all $k\geq 2$.  Compute the smallest possible value of $a_1+a_2+\cdots+a_{10}$. %David Altizio
+
+\item How many pairs of integers $(a,b)$ are there such that $0\leq a < b \leq 100$ and such that $\tfrac{2^b-2^a}{2016}$ is an integer? %Cody Johnson
+
+\item For some positive integer $n$, consider the usual prime factorization \[n =
+	\displaystyle \prod_{i=1}^{k} p_{i}^{e_{i}}=p_1^{e_1}p_2^{e_2}\ldots p_k^{e_k},\] where $k$ is the number of
+	primes factors of $n$ and $p_{i}$ are the prime factors of $n$. Define
+	$Q(n), R(n)$ by
+	\[
+		Q(n) = \prod_{i=1}^{k} p_{i}^{p_{i}} \text{ and } R(n) =
+		\prod_{i=1}^{k} e_{i}^{e_{i}}.
+	\]
+	For how many $1 \leq n \leq 70$ does $R(n)$ divide $Q(n)$?
+
+\item Determine the sum of the positive integers $n$ such that there exist primes
+	$p,q,r$ satisfying $p^{n} + q^{2} = r^{2}$. %Andrew Kwon
+
+\item Define a \textit{tasty residue} of $n$ to be an integer $1<a<n$ such that there exists an integer $m>1$ satisfying \[a^m\equiv a\pmod n.\] Find the number of tasty residues of $2016$. %Andrew Kwon
+
+\item Determine the smallest positive prime $p$ which satisfies the congruence \[p+p^{-1}\equiv 25\pmod{143}.\] Here, $p^{-1}$ as usual denotes multiplicative inverse. %David Altizio
+
+\item Given that
+	\[
+		\sum_{x=1}^{70}  \sum_{y=1}^{70} \frac{x^{y}}{y} =
+		\frac{m}{67!}
+	\]
+	for some positive integer $m$, find $m \pmod{71}$.
+
+
+\item Compute the number of positive integers $n \leq 50$ such that there exist
+	distinct positive integers $a,b$ satisfying 
+	\[
+		\frac{a}{b} +\frac{b}{a} = n \left(\frac{1}{a} + \frac{1}{b}\right).
+	\]
+	%David Altizio
+
+\item Let $f:\mathbb{N}\mapsto\mathbb{R}$ be the function
+	\[f(n)=\sum_{k=1}^\infty\dfrac{1}{\operatorname{lcm}(k,n)^2}.\] It is
+	well-known that $f(1)=\tfrac{\pi^2}6$.  What is the smallest positive
+	integer $m$ such that $m\cdot f(10)$ is the square of a rational multiple of $\pi$? %Cody Johnson
+
+\end{enumerate}
+\end{document}

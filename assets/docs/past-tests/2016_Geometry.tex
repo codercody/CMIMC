@@ -1,0 +1,111 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=2cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{asymptote}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rhead{}
+\chead{\includegraphics[scale=0.12]{CMIMC-header.png}}
+\lhead{}
+\setlength{\headheight}{43pt}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+\addtolength\footskip{-1cm}
+\newcounter{enum}
+\setcounter{enum}{0}
+\begin{document}\thispagestyle{empty}
+\begin{center}
+
+\vspace*{90pt}
+
+\includegraphics[scale=0.23]{CMIMC-header.png}
+
+\includegraphics[scale=0.35]{geometry-header.png}
+
+\vspace{1.6in}
+
+\includegraphics[scale=0.20]{instruction-header.png}
+\noindent\rule{17.7cm}{2pt}
+\end{center}
+
+\vspace{10pt}
+
+\begin{enumerate}
+\large
+\item Do not look at the test before the proctor starts the round.
+
+\item This test consists of 10 short-answer problems to be solved in 60 minutes.
+	Each question is worth one point.
+
+\item Write your name, team name, and team ID on your answer sheet. Circle the
+	subject of the test you are currently taking.
+
+\item Write your answers in the corresponding boxes on the answer sheets.
+
+\item No computational aids other than pencil/pen are permitted.
+
+\item All answers are integers.
+
+\item If you believe that the test contains an error, submit your protest in writing to Porter 100.
+\end{enumerate}
+\newpage
+
+\begin{center}
+\huge\textbf{Geometry}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+\setlength{\itemsep}{5pt}
+
+\item Let $\triangle ABC$ be an equilateral triangle and $P$ a point on $\overline{BC}$.  If $PB=50$ and $PC=30$, compute $PA$. %David Altizio
+
+\item Let $ABCD$ be an isosceles trapezoid with $AD=BC=15$ such that the distance between its bases $AB$ and $CD$ is $7$.  Suppose further that the circles with diameters $\overline{AD}$ and $\overline{BC}$ are tangent to each other.  What is the area of the trapezoid? %David Altizio 
+
+\item Let $ABC$ be a triangle.  The angle bisector of $\angle B$ intersects $AC$ at point $P$, while the angle bisector of $\angle C$ intersects $AB$ at a point $Q$.  Suppose the area of $\triangle ABP$ is 27, the area of $\triangle ACQ$ is 32, and the area of $\triangle ABC$ is $72$.  The length of $\overline{BC}$ can be written in the form $m\sqrt n$ where $m$ and $n$ are positive integers with $n$ as small as possible.  What is $m+n$?
+
+\setcounter{enum}{\theenumi}
+\end{enumerate}
+
+\hspace*{-\parindent}%
+\begin{minipage}{0.85\textwidth}
+\begin{enumerate}
+\setcounter{enumi}{\theenum}
+\item Andrew the Antelope canters along the surface of a regular icosahedron, which has twenty equilateral triangle faces and edge length 4. (An image of an icosahedron is shown to the right.) If he wants to move from one vertex to the opposite vertex, the minimum distance he must travel can be expressed as $\sqrt{n}$ for some integer $n$.  Compute $n$. %Patrick Lin
+\setcounter{enum}{\theenumi}
+\end{enumerate}
+
+\end{minipage} \hfill
+\begin{minipage}{0.12\textwidth}
+
+\includegraphics[scale=0.20]{icosahedron.jpg}
+\end{minipage}
+
+\begin{enumerate}
+\setcounter{enumi}{\theenum}
+
+\item Let $\mathcal{P}$ be a parallelepiped with side lengths $x$, $y$, and $z$.  Suppose that the four space diagonals of $\mathcal{P}$ have lengths $15$, $17$, $21$, and $23$.  Compute $x^2+y^2+z^2$. %David Altizio and Joshua Siktar
+
+\item In parallelogram $ABCD$, angles $B$ and $D$ are acute while angles $A$ and $C$ are obtuse.  The perpendicular from $C$ to $AB$ and the perpendicular from $A$ to $BC$ intersect at a point $P$ inside the parallelogram.  If $PB=700$ and $PD=821$, what is $AC$? %David Altizio
+
+\item Let $ABC$ be a triangle with incenter $I$ and incircle $\omega$.  It is given that there exist points $X$ and $Y$ on the circumference of $\omega$ such that $\angle BXC=\angle BYC=90^\circ$.  Suppose further that $X$, $I$, and $Y$ are collinear.  If $AB=80$ and $AC=97$, compute the length of $BC$.  %David Altizio
+
+%\item Let $ABCD$ be a convex cyclic quadrilateral inscribed in a circle of radius $30$ satisfying $DA=DC=28$ and $DB=49$.  if $P$ is the intersection of lines $AC$ and $BD$, compute \[AB\cdot BC - AP\cdot PC.\]
+
+\item Suppose $ABCD$ is a convex quadrilateral satisfying $AB=BC$, $AC=BD$, $\angle ABD = 80^\circ$, and $\angle CBD = 20^\circ$.  What is $\angle BCD$ in degrees? %David Altizio
+
+\item Let $\triangle ABC$ be a triangle with $AB=65$, $BC=70$, and $CA=75$.  A semicircle $\Gamma$ with diameter $\overline{BC}$ is constructed outside the triangle.  Suppose there exists a circle $\omega$ tangent to $AB$ and $AC$ and furthermore internally tangent to $\Gamma$ at a point $X$.  The length $AX$ can be written in the form $m\sqrt{n}$ where $m$ and $n$ are positive integers with $n$ not divisible by the square of any prime.  Find $m+n$. %David Altizio
+
+\item Let $\triangle ABC$ be a triangle with circumcircle $\Omega$ and let $N$
+be the midpoint of the major arc $\overset{\frown}{BC}$.  The incircle $\omega$
+of $\triangle ABC$ is tangent to $AC$ and $AB$ at points $E$ and $F$
+respectively.  Suppose point $X$ is placed on the same side of $EF$ as $A$ such
+that $\triangle XEF\sim\triangle ABC$.  Let $NX$ intersect $BC$ at a point $P$.
+Given that $AB=15$, $BC=16$, and $CA=17$, compute $\tfrac{PX}{XN}$. %David
+
+
+\end{enumerate}
+\end{document}

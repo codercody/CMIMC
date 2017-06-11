@@ -1,0 +1,243 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb, amsthm, mathtools, enumerate}
+\usepackage[top=2cm, left = 2cm, right = 2cm, bottom = 3cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{asymptote}
+\usepackage{fancyhdr}
+\newcommand{\N}{\mathbb{N}}
+\newcounter{enum}
+\setcounter{enum}{0}
+\pagestyle{fancy}
+\rhead{}
+\chead{\includegraphics[scale=0.17]{CMIMC-header-2017.png}}
+\lhead{}
+\setlength{\headheight}{43pt}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+\newcommand{\proposed}[1]
+{
+\vspace{5pt}
+\noindent\textit{Proposed by #1}
+}
+\newcommand{\solution}
+{
+\vspace{5pt}
+\noindent\textit{Solution.}\qquad
+}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\begin{document}
+
+\begin{center}
+\huge\textbf{Algebra Tiebreaker Solutions}
+\end{center}
+
+\begin{enumerate}
+
+\item Find all real numbers $x$ such that the expression
+\[\log_2 \abs{1 + \log_2 \abs{2 + \log_2 \abs{x}}}\]
+does not have a defined value.
+
+\proposed{Patrick Lin}
+
+\solution Note that $\log\abs{x}$ is undefined if and only if $x = 0$. If the inside logarithm is undefined, then $x = 0$. If the middle logarithm is undefined, then $\log_2\abs{x} = -2 \implies x = \pm \frac14$. If the outside logarithm is undefined, then it follows that $2 + \log_2\abs{x} = \pm \frac12 \implies x = \pm 2^{-5/2}, \pm 2^{-3/2}$. These are all seven solutions, and so the answer is $\boxed{\{0, \pm \tfrac14, \pm 2^{-3/2}, \pm 2^{-5/2}\}}$.
+
+\item Let $x$ be a real number between $0$ and $\tfrac{\pi}2$ such that \[\dfrac{\sin^4(x)}{42}+\dfrac{\cos^4(x)}{75} = \dfrac{1}{117}.\] Find $\tan(x)$.
+
+\proposed{Varun Kambhampati}
+
+\solution Note that by Cauchy-Schwarz, we have \[\dfrac{\sin^4(x)}{42}+\dfrac{\cos^4(x)}{75}\geq\dfrac{(\sin^2(x)+\cos^2(x))^2}{42+75} = \dfrac{1}{117}.\] Thus in fact we have equality, which holds when \[\dfrac{\sin^2(x)}{42} = \dfrac{\cos^2(x)}{75}\quad\implies\quad\tan^2(x) = \frac{14}{25}.\] Hence $\tan(x) = \boxed{\tfrac{\sqrt{14}}5}$.
+
+\item The parabola $\mathcal P$ given by equation $y=x^2$ is rotated some acute angle $\theta$ clockwise about the origin such that it hits both the $x$ and $y$ axes at two distinct points.  Suppose the length of the segment $\mathcal P$ cuts the $x$-axis is $1$.  What is the length of the segment $\mathcal P$ cuts the $y$-axis?
+
+\proposed{David Altizio}
+
+\solution Instead of rotating the parabola, consider rotating the axes.  That is, suppose we have two perpendicular lines $\ell_1$ and $\ell_2$ intersecting at the origin such that $\mathcal P$ cuts off a segment from $\ell_1$ of length $1$; it suffices to find the length of the segment $\mathcal P$ cuts from $\ell_2$.
+
+\par Suppose $\ell_1$ intersects $\mathcal P$ at a point $(x_0,x_0^2)$.  Then the Pythagorean Theorem dictates that $x_0^2+x_0^4 = 1$.  Furthermore, note that the slope of $\ell_1$ is $\tfrac{x_0^2}{x_0}=x_0$.  As a result, the slope of $\ell_2$ must be $-\tfrac{1}{x_0}$.  Hence the equation of line $\ell_2$ is $y = -\tfrac{1}{x_0}t$.  It is easy to see from here that this intersects $\mathcal P$ for the second time at the point $(-\tfrac{1}{x_0},\tfrac 1{x_0^2})$.  Thus, letting $L$ be the length of the segment from $\ell_2$, we have \[L^2 = \dfrac{1}{x_0^2}+\dfrac{1}{x_0^4} = \dfrac{x_0^2+1}{x_0^4} = \dfrac{1}{x_0^6}.\] It suffices to find $x_0^6$ and then take the positive square root.
+
+\par Let $t=x_0^2$, so that $t+t^2 = 1$.  Then \[t^3 = t(t^2) = t(1-t) = t-t^2 = t-(1-t) = 2t-1.\] But solving for $t$ gives $t = \tfrac{-1+\sqrt 5}2$, so \[2t - 1 = 2\left(\dfrac{-1+\sqrt 5}2\right) - 1 =\sqrt 5 - 2.\] Thus \[\dfrac{1}{x_0^6} = \dfrac{1}{t^3} = \dfrac{1}{\sqrt{5}-2}=\sqrt 5 + 2\] and so the requested answer is $\boxed{\sqrt{\sqrt5+2}}$.  For reference, this is approximately equal to $2.06$.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\begin{center}
+\huge\textbf{Combinatorics Tiebreaker Solutions}
+\end{center}
+
+\begin{enumerate}
+
+\item Jesse has ten squares, which are labeled $1, 2, \dots, 10$. In how many ways can he color each square either red, green, yellow, or blue such that for all $1 \le i < j \le 10$, if $i$ divides $j$, then the $i$-th and $j$-th squares have different colors?
+
+\proposed{Patrick Lin}
+
+\solution Observe that $\{1,2,4,8\}$ must all be colored differently, which give $4! = 24$ combinations. If 2 and 3 are colored the same, there are two choices for 6, and otherwise there is 1, for a total of $2+1+1 = 4$ choices; similarly, there are 4 choices for coloring 5 and 10. Independently, there are 2 choices for 9 and 3 choices for 7, which give a total of $24\cdot4\cdot4\cdot2\cdot3 = \boxed{2304}$ choices.
+
+
+
+
+
+\item Kevin likes drawing. He takes a large piece of paper and draws on it every rectangle with positive integer side lengths and perimeter at most 2017, with no two rectangles overlapping. Compute the total area of the paper that is covered by a rectangle.
+
+\proposed{Patrick Lin}
+
+\solution If the rectangle has side lengths $a$ and $b$, then the perimeter condition gives us $a + b \le 1008$, and we are given $a,b \ge 1$. Note that for a specific $a + b = k$, we have that the sum of all rectangles satisfying that is
+\[\sum_{a=1}^{k-1} a(k-a) = \binom{k+1}{3},\]
+since we can think of choosing three objects out of $(k+1)$ by choosing the middle object at some index $1 \le i \le k-1$, which gives $i$ choices for the first object and $(k-i)$ for the third. Then we have
+\[\sum_{a+b\le1008} ab = \sum_{k=2}^{1008} \sum_{a+b=k} ab = \sum_{k=2}^{1008} \binom{k+1}{3} = \boxed{\binom{1010}{4}}.\]
+
+
+
+
+
+\item In a certain game, the set $\{1, 2, \dots, 10\}$ is partitioned into equally-sized sets $A$ and $B$. In each of five consecutive rounds, Alice and Bob simultaneously choose an element from $A$ or $B$, respectively, that they have not yet chosen; whoever chooses the larger number receives a point, and whoever obtains three points wins the game. Determine the probability that Alice is guaranteed to win immediately after the set is initially partitioned.
+
+\proposed{Patrick Lin}
+
+\solution First, we prove that Alice is guaranteed to win if and only if one of the following are met:
+\begin{enumerate}[(a)]
+\item $\{8,9,10\} \subset A$,
+\item $A$ contains four of $\{6,7,8,9,10\}$,
+\item $A \subset \{4,5,6,7,8,9,10\}$.
+\end{enumerate}
+In the forwards direction, it is obvious that any one of these three conditions immediately implies that Alice wins, since it is impossible for Bob to win three points. In the backwards direction, if none of these conditions are met then $B$ has at least one element in $\{8,9,10\}$, two elements in $\{6,7,8,9,10\}$, and three elements in $\{4,5,6,7,8,9,10\}$, so it is possible for Bob to get three points.
+
+\par Now we use inclusion-exclusion to find the number of sets $A$ that satisfy one of these three conditions:
+\begin{align*}
+& \abs{a} + \abs{b} + \abs{c} - \abs{a \cap b} - \abs{a \cap c} - \abs{b \cap c} + \abs{a \cap b \cap c} \\
+& \qquad = \binom33\binom72 + \binom54\binom51 + \binom75 - \binom33\binom21\binom51 - \binom33\binom42 - \binom54\binom21 + \binom33\binom21\binom21 \\
+& \qquad = 45.
+\end{align*}
+The probability is hence $\frac{45}{\binom{10}{5}} = \text{\fbox{$\frac{5}{28}$}}$.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+\huge\textbf{Computer Science Tiebreaker Solutions}
+\end{center}
+
+\begin{enumerate}
+
+\item Cody has an unfair coin that flips heads with probability either $\tfrac13$ or $\tfrac23$, but he doesn't know which one it is. Using this coin, what is the fewest number of independent flips needed to simulate a coin that he knows will flip heads with probability $\tfrac13$?
+
+\proposed{Patrick Lin}
+
+\solution We claim the answer is $\boxed{3}$. Clearly we cannot accomplish this
+with 1 flip, and with two flips we have outcomes $HH$, $TT$, $HT$, and $TH$.
+We can't distinguish the probabilities of $HH$ and $TT$, however, and know
+only that the probability of the two flips being the same is $\tfrac59$, and
+that the probability of them being different is $\tfrac49$. No combination
+of these gives $\tfrac13$ or $\tfrac23$, so we cannot simulate a coin that
+flips heads with probability $\tfrac13$. Hence 2 flips does not suffice.
+
+\par Now notice that the probability of getting three identical flips is
+$\tfrac1{27} + \tfrac8{27} = \tfrac13$, and hence \boxed{3} flips is sufficient,
+as desired.
+
+\item Define
+\[f(h,t) =
+\begin{cases}
+8h & h = t \\
+(h-t)^2 & h \neq t.
+\end{cases}\]
+Cody plays a game with a fair coin, where he begins by flipping it once. At each turn in the game, if he has flipped $h$ heads and $t$ tails and $h + t < 6$, he can choose either to stop and receive $f(h,t)$ dollars or he can flip the coin again; if $h + t = 6$ then the game ends and he receives $f(h,t)$ dollars. If Cody plays to maximize expectancy, how much money, in dollars, can he expect to win from this game? 
+
+\proposed{Patrick Lin}
+
+\solution Let $E_{ht}$ be the expected amount of money Cody can get after flipping $h$ heads and $t$ tails. Clearly, for any $h + t = 6$, we have $E_{ht} = f(h,t),$ and for $h + t < 6$ we have
+\[E_{ht} = \max(f(h,t),\frac12(f(h+1,t)+f(h,t+1))).\]
+Computing $E_{ht}$ for $h + t = 5, 4, \dots, 1$ gives $E_{01} = E_{10} = \frac{57}{4}$, and hence $E_{00} =$ \fbox{$\tfrac{57}{4}$}. 
+
+
+
+\item Let $n=2017$ and $x_1,\dots,x_n$ be boolean variables. An \emph{$7$-CNF clause} is an expression of the form $\phi_1(x_{i_1})+\dots+\phi_7(x_{i_7})$, where $\phi_1,\dots,\phi_7$ are each either the function $f(x)=x$ or $f(x)=1-x$, and $i_1,i_2,\dots,i_7\in\{1,2,\dots,n\}$. For example, $x_1+(1-x_1)+(1-x_3)+x_2+x_4+(1-x_3)+x_{12}$ is a $7$-CNF clause. What's the smallest number $k$ for which there exist $7$-CNF clauses $f_1,\dots,f_k$ such that \[f(x_1,\dots,x_n):=f_1(x_1,\dots,x_n)\cdots f_k(x_1,\dots,x_n)\] is $0$ for all values of $(x_1,\dots,x_n)\in\{0,1\}^n$?
+
+\proposed{Cody Johnson}
+
+\solution The answer is \boxed{128}. If $k=128$, then denoting by $\phi_0$ the map $x\mapsto x$ and $\phi_1$ the map $x\mapsto1-x$, consider \[f(x_1,\dots,x_n):=\prod_{(y_1,\dots,y_7)\in\{0,1\}^7}(\phi_{y_1}(x_1)+\dots+\phi_{y_7}(x_7))\] For each $i$, either $\phi_{y_i}(x_i)=0$ or $\phi_{1-y_i}(x_i)=0$, so some term in $f(x_1,\dots,x_n)$ makes this product $0$. On the other hand, if $k<128$, then a random assignment of $x_1,\dots,x_n$ satisfies an expected $k\cdot\left(1-(1/2)^m\right)>k-1$ of the clauses by linearity of expectation. Therefore, some assignment satisfies $k$ of the clauses.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\begin{center}
+\huge\textbf{Geometry Tiebreaker Solutions}
+\end{center}
+
+\begin{enumerate}
+
+\item Let $ABCD$ be an isosceles trapezoid with $AD\parallel BC$.  Points $P$ and $Q$ are placed on segments $\overline{CD}$ and $\overline{DA}$ respectively such that $AP\perp CD$ and $BQ\perp DA$, and point $X$ is the intersection of these two altitudes.  Suppose that $BX=3$ and $XQ=1$.  Compute the largest possible area of $ABCD$.
+
+\proposed{David Altizio}
+
+\solution Note that $\angle PAD = 90^\circ-\angle PDA = 90^\circ - \angle BAQ = \angle ABQ$, so $\triangle XAQ\sim\triangle ABQ$.  As a result, we have $QA^2 = QX\cdot QB = 4\implies QA = 2$.  This means that over all trapezoids $ABCD$, the angles that $AB$ and $CD$ make with line $AD$ are constant.  Thus, the only factor determining the area of trapezoid $ABCD$ is the length of the line segment $\overline{BC}$.  Note that as $BC$ increases in length, the point $P$ moves up closer and closer to $C$.  This means that the maximum possible length of $BC$ comes when $P\equiv C$.  In other words, $\angle ACD=90^\circ\implies \angle ABD=90^\circ$.  Now by Altitude to Hypotenuse $BQ^2 = AQ\cdot QD$, so $QD=8$.  Hence the length of base $\overline{BC}$ is $6$, and the area of the trapezoid is $\tfrac12\cdot 4\cdot (10+6) = \boxed{32}$.
+
+\item Points $A$, $B$, and $C$ lie on a circle $\Omega$ such that $A$ and $C$ are diametrically opposite each other.  A line $\ell$ tangent to the incircle of $\triangle ABC$ at $T$ intersects $\Omega$ at points $X$ and $Y$.  Suppose that $AB=30$, $BC=40$, and $XY=48$.  Compute $TX\cdot TY$.
+
+\proposed{David Altizio}
+
+\solution Denote by $O$ and $I$ the centers of $\Omega$ and the incircle respectively, and let $M$ denote the projection of $O$ onto $XY$.  Note that the radius of $\Omega$ is $\tfrac12\sqrt{30^2+40^2} = 25$ and $MX=MY=24$, we have $OM = \sqrt{25^2-24^2} = 7$.  Now $IT=10$, and it is easy to compute $OI=5\sqrt 5$, so \[MT^2 = OI^2 - (TI-MO)^2 = 125 - 3^2 = 116.\] Hence \[TX\cdot TY = XM^2 - MT^2 = 24^2 - 116 = \boxed{460}.\]
+
+\item Triangle $ABC$ satisfies $AB=104$, $BC=112$, and $CA=120$.  Let $\omega$ and $\omega_A$ denote the incircle and $A$-excircle of $\triangle ABC$, respectively.  There exists a unique circle $\Omega$ passing through $A$ which is internally tangent to $\omega$ and externally tangent to $\omega_A$.  Compute the radius of $\Omega$.
+
+\proposed{David Altizio}
+
+\solution Scale down to a $13-14-15$ triangle.  Let $\gamma$ denote the circle with center $A$ and radius $\sqrt{s(s-a)}$, where here $s$ is the semiperimeter of $\triangle ABC$.  Note that an inversion $\Phi$ about $\gamma$ sends $\omega$ to $\omega_A$ and vice versa.  As a result, $\Omega$ is sent under $\Phi$ to a line which is tangent to both $\omega$ and $\omega_A$; it's not hard to see that this must be line $BC$.
+
+\par Now let $\Omega$ intersect $AB$ and $AC$ at $X$ and $Y$ respectively.  Note that by the above analysis, $\Phi$ sends $X$ to $B$ and $Y$ to $C$.  Thus, by the inversion distance formula, \[XY = \dfrac{\left(\sqrt{s(s-a)}\right)^2}{AB\cdot AC}\cdot BC =\dfrac{sa(s-a)}{bc},\] from which \[R_{\Omega} = \dfrac{sa(s-a)}{2bc\sin A} = \dfrac{as(s-a)}{4K} = \dfrac{a(s-a)}{4r}.\]  Computation and remembering to scale back up gives a final answer of $\boxed{49}$.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\begin{center}
+\huge\textbf{Number Theory Tiebreaker Solutions}
+\end{center}
+
+\newpage
+
+\begin{enumerate}
+	\item Let $\tau(n)$ denote the number of positive integer divisors of $n$. For example, $\tau(4) = 3$. Find the sum of all positive integers $n$ such that $2 \tau(n) = n$.
+
+	\proposed{Patrick Lin}
+
+	\solution Each factor of $n$ comes in a pair of factors where one is at most $\sqrt{n}$. Thus, $\tau(n) \leq 2 \sqrt{n}$ and we have the inequality $n \leq 4 \sqrt{n} \Rightarrow n \leq 16$. Checking $n = 1, 2, \ldots, 16$ yields $n = 8, 12$ as the only possible solutions, and so the answer is $8 + 12 = 20$.
+	
+	\item Find the smallest three-digit divisor of the number \[1\underbrace{00\ldots 0}_{100\text{ zeroes}}1\underbrace{00\ldots 0}_{100\text{ zeroes}}1.\]
+	
+	\proposed{Cody Johnson}
+	
+	\solution Let $N=10^{202}+10^{101}+1$, and let $\omega$ be a root of $x^2+x+1$.  Then since $\omega^n = \omega^{n\bmod 3}$, we have \[\omega^{202}+\omega^{101}+1=\omega+\omega^2+1=0\quad\text{and}\quad \omega^{2\cdot 202}+\omega^{2\cdot 101}+1 = \omega^2+\omega+1 = 0,\] so $x^2+x+1\mid x^{202}+x^{101}+1$.  As a result, $111 \mid N$.  Furthermore, if $100\leq n\leq 110$ and $n\mid N$, then $n\not\in\{100,102,\ldots, 110\}$ since $N$ is odd, and $n\neq 105$ since $5\nmid N$.  The remaining numbers $101,103,107,109$ are all prime, so we can check that they are indeed non-divisors.
+	
+	\par Rewriting $N$ as $\tfrac{10^{303}-1}{10^{101}-1}$, it suffices to show that $10^{303}-1\not\equiv 0\pmod p$ for each of these $p$.  We will use the fact that if $\gcd(a,p) = 1$ and $a^k\equiv 1\pmod p$, then $a^{\gcd(k,p-1)}\equiv 1\pmod p$.  Since $303 = 3\cdot 101$, we have $\gcd(303,p-1)\leq 3$ for each of these $p$.  Thus, it suffices to show that $10^3\not\equiv 1\pmod p$ for any of these $p$; but this is already obvious since $10^3 - 1 = 3^3\cdot 37$.  Thus the requested answer is $\boxed{111}$.
+	
+	\item Say an integer polynomial is \textit{primitive} if the greatest common divisor of its coefficients is $1$.  For example, $2x^2+3x+6$ is primitive because $\gcd(2,3,6)=1$.  Let $f(x)=a_2x^2+a_1x+a_0$ and $g(x) = b_2x^2+b_1x+b_0$, with $a_i,b_i\in\{1,2,3,4,5\}$ for $i=0,1,2$.  If $N$ is the number of pairs of polynomials $(f(x),g(x))$ such that $h(x) = f(x)g(x)$ is primitive, find the last three digits of $N$.\\
+
+		\proposed{Andrew Kwon}
+
+		\solution We claim that $h(x) = f(x) g(x)$ is primitive if and only if $f(x),g(x)$ are primitive. We prove both directions via contrapositive. If either $f(x)$ or $g(x)$ is not primitive, then some prime $p$ divides all of its coefficients, and this $p$ will also divide all of the coefficients of $h(x)$. Thus, $h(x)$ primitive $\Rightarrow f(x), g(x)$ primitive.\\
+
+		Now, if $h$ is not primitive, then some prime $p$ divides all of its coefficients. Suppose for the sake of contradiction that some coefficients of $f,g$ are not divisible by $p$, and say $a_{i}, b_{j}$ are those with minimal index. Then, $a_{0}, \ldots, a_{i-1}, b_{0}, \ldots b_{j-1}$ are all divisible by $p$. In $h$, the coefficient of the $x^{i+j}$ term is divisible by $p$ and consists of terms of the form $a_{i-k}, b_{j=k}, a_{i+k} b_{j-k}$ for appropriately chosen values of $k$. However, these are all divisible by $p$ except $a_{i}, b_{j}$, and so the coefficient of $x^{i+j}$ is not divisible by $p$, a contradiction. Therefore, $f(x),g(x)$ are also not primitive, and $f(x), g(x)$ primitive $\Rightarrow h(x)$ primitive.\\
+
+		Now, $f$ and $g$ are determined by their coefficients, so it suffices to determine the number of triples of integers $(a,b,c) \in \{1, 2, 3, 4, 5\}^{3}$ satisfying $\gcd(a,b,c) = 1$, as this determines the number of possible choices for $f,g$. Noting that $\gcd(a,b,c) = \gcd(\gcd(a,b), c)$, we calculate
+		\begin{align*}
+			\sum_{\substack{1 \leq a,b,c \leq 5 \\ \gcd(a,b,c) = 1}}^{} 1 &= \sum_{1 \leq a,b,c \leq 5}^{} \sum_{d | \gcd( \gcd(a,b), c)}^{} \mu(d)\\
+			&= \sum_{1 \leq a,b,c \leq 5}^{}  \sum_{\substack{d | \gcd(a,b) \\ d | c}}^{} \mu(d)\\
+			&= \sum_{1 \leq a, b \leq 5}^{} \sum_{d | \gcd(a,b)}^{} \mu(d) \left\lfloor \tfrac{5}{d} \right\rfloor\\
+			&= \sum_{1\leq  d \leq 5}^{} \mu(d) \left\lfloor \tfrac{5}{d} \right\rfloor^{3}.
+		\end{align*}
+		A simple calculation verifies that therefore the number of triples satisfying the desired conditions is $125 - 8 - 1 - 0 - 1 = 115$. Therefore, the number of desired pairs of polynomials is $115^{2} \equiv \boxed{225} \pmod{1000}$.\\
+
+		\textbf{Remark}. The fact that $f(x),g(x)$ primitive $\Leftrightarrow f(x)g(x)$ primitive is known as Gauss' Lemma and has numerous applications. For example, it is used to prove that an integer polynomial which is irreducible over the rationals must be irreducible over the integers as well.
+\end{enumerate}
+
+\end{document}
