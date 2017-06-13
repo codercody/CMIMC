@@ -4,6 +4,23 @@ $( document ).ready(function() {
 })
 </script>
 
+<p>Tai is a super hot {{cody}}</p>
+<input type="text" ng-model="cody" />
+<h1>{{gaelics}}</h1>
+
+<ul>
+  <li ng-repeat="gaelic in gaelics">{{gaelic}} is the {{3-$index}}th best gaelic</li>
+</ul>
+
+
+<h1 ng-show="cody === 'retard'">If you can see this, ur smart</h1>
+
+<a ng-click="worry()">Click me!</a>
+
+<form ng-submit="worry()">
+  <input type="submit" class="btn btn-primary">
+</form>
+
 <div class="section white">
   <div class="row container">
     <div class="col l6 s12">

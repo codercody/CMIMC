@@ -1,98 +1,98 @@
-var problems = [
+[
   {
-    year : "2017",
-    tests : {
-      individual : [
+    "year" : "2017",
+    "tests" : {
+      "individual" : [
         {
-          name : "Algebra",
-          problems : "2017_Algebra.pdf",
-          solutions : "2017_Algebra_S.pdf"
+          "name" : "Algebra",
+          "problems" : "2017_Algebra.pdf",
+          "solutions" : "2017_Algebra_S.pdf"
         },
         {
-          name : "Combinatorics",
-          problems : "2017_Combinatorics.pdf",
-          solutions : "2017_Combinatorics_S.pdf"
+          "name" : "Combinatorics",
+          "problems" : "2017_Combinatorics.pdf",
+          "solutions" : "2017_Combinatorics_S.pdf"
         },
         {
-          name : "Computer Science",
-          problems : "2017_ComputerScience.pdf",
-          solutions : "2017_ComputerScience_S.pdf"
+          "name" : "Computer Science",
+          "problems" : "2017_ComputerScience.pdf",
+          "solutions" : "2017_ComputerScience_S.pdf"
         },
         {
-          name : "Geometry",
-          problems : "2017_Geometry.pdf",
-          solutions : "2017_Geometry_S.pdf"
+          "name" : "Geometry",
+          "problems" : "2017_Geometry.pdf",
+          "solutions" : "2017_Geometry_S.pdf"
         },
         {
-          name : "Number Theory",
-          problems : "2017_NumberTheory.pdf",
-          solutions : "2017_NumberTheory_S.pdf"
+          "name" : "Number Theory",
+          "problems" : "2017_NumberTheory.pdf",
+          "solutions" : "2017_NumberTheory_S.pdf"
         }
       ],
-      other : [
+      "other" : [
         {
-          name : "Individual Finals",
-          problems : "2017_Finals.pdf",
-          solutions : "2017_Finals_S.pdf"
+          "name" : "Individual Finals",
+          "problems" : "2017_Finals.pdf",
+          "solutions" : "2017_Finals_S.pdf"
         },
         {
-          name : "Team Round",
-          problems : "2017_Team.pdf",
-          solutions : "2017_Team_S.pdf"
+          "name" : "Team Round",
+          "problems" : "2017_Team.pdf",
+          "solutions" : "2017_Team_S.pdf"
         },
         {
-          name : "Power Round",
-          problems : "2017_Power.pdf",
-          solutions : "2017_Power_S.pdf"
+          "name" : "Power Round",
+          "problems" : "2017_Power.pdf",
+          "solutions" : "2017_Power_S.pdf"
         }
       ]
     }
   },
   {
-    year : "2016",
-    tests : {
-      individual : [
+    "year" : "2016",
+    "tests" : {
+      "individual" : [
         {
-          name : "Algebra",
-          problems : "2016_Algebra.pdf",
-          solutions : "2016_Algebra_S.pdf"
+          "name" : "Algebra",
+          "problems" : "2016_Algebra.pdf",
+          "solutions" : "2016_Algebra_S.pdf"
         },
         {
-          name : "Combinatorics",
-          problems : "2016_Combinatorics.pdf",
-          solutions : "2016_Combinatorics_S.pdf"
+          "name" : "Combinatorics",
+          "problems" : "2016_Combinatorics.pdf",
+          "solutions" : "2016_Combinatorics_S.pdf"
         },
         {
-          name : "Computer Science",
-          problems : "2016_ComputerScience.pdf",
-          solutions : "2016_ComputerScience_S.pdf"
+          "name" : "Computer Science",
+          "problems" : "2016_ComputerScience.pdf",
+          "solutions" : "2016_ComputerScience_S.pdf"
         },
         {
-          name : "Geometry",
-          problems : "2016_Geometry.pdf",
-          solutions : "2016_Geometry_S.pdf"
+          "name" : "Geometry",
+          "problems" : "2016_Geometry.pdf",
+          "solutions" : "2016_Geometry_S.pdf"
         },
         {
-          name : "Number Theory",
-          problems : "2016_NumberTheory.pdf",
-          solutions : "2016_NumberTheory_S.pdf"
+          "name" : "Number Theory",
+          "problems" : "2016_NumberTheory.pdf",
+          "solutions" : "2016_NumberTheory_S.pdf"
         }
       ],
-      other : [
+      "other" : [
         {
-          name : "Individual Finals",
-          problems : "2016_Finals.pdf",
-          solutions : "2016_Finals_S.pdf"
+          "name" : "Individual Finals",
+          "problems" : "2016_Finals.pdf",
+          "solutions" : "2016_Finals_S.pdf"
         },
         {
-          name : "Team Round",
-          problems : "2016_Team.pdf",
-          solutions : "2016_Team_S.pdf"
+          "name" : "Team Round",
+          "problems" : "2016_Team.pdf",
+          "solutions" : "2016_Team_S.pdf"
         },
         {
-          name : "Power Round",
-          problems : "2016_Power.pdf",
-          solutions : "2016_Power_S.pdf"
+          "name" : "Power Round",
+          "problems" : "2016_Power.pdf",
+          "solutions" : "2016_Power_S.pdf"
         }
       ]
     }
