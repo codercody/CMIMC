@@ -1,47 +1,49 @@
 <div class="section white">
   <div class="container">
-    <div class="row staff-row">
-      <div class="col s12 m6 l3">
-        <div class="card">
-          <div class="card-image">
-            <img src="assets/img/staff/cody-johnson.jpg">
-          </div>
-          <div class="card-content center-align">
-            <span class="card-title">Cody Johnson</span>
-            <p>I do my work using a DFS: start a task, get distracted for a while, then come back and do the task at hand.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s12 m6 l3">
-        <div class="card">
-          <div class="card-image">
-            <img src="assets/img/staff/andrew-kwon.jpg">
-          </div>
-          <div class="card-content center-align">
-            <span class="card-title">Andrew Kwon</span>
-            <p>A Korean.</p>
+    <div ng-repeat="member in staff_list">
+      <div class="row staff-row" ng-if="$index % 4 == 0">
+        <div class="col s12 m6 l3">
+          <div class="card">
+            <div class="card-image">
+              <img ng-src="assets/img/staff/{{staff_list[$index].photo}}">
+            </div>
+            <div class="card-content center-align">
+              <span class="card-title">{{staff_list[$index].name}}</span>
+              <p>{{staff_list[$index].description}}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col s12 m6 l3">
-        <div class="card">
-          <div class="card-image">
-            <img src="assets/img/staff/david-altizio.jpg">
-          </div>
-          <div class="card-content center-align">
-            <span class="card-title">David Altizio</span>
-            <p>My motto is that no geometry problem should be solved using coordinates.</p>
+        <div class="col s12 m6 l3">
+          <div class="card">
+            <div class="card-image">
+              <img ng-src="assets/img/staff/{{staff_list[$index+1].photo}}">
+            </div>
+            <div class="card-content center-align">
+              <span class="card-title">{{staff_list[$index+1].name}}</span>
+              <p>{{staff_list[$index+1].description}}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col s12 m6 l3">
-        <div class="card">
-          <div class="card-image">
-            <img src="assets/img/staff/patrick-lin.jpg">
+        <div class="col s12 m6 l3">
+          <div class="card">
+            <div class="card-image">
+              <img ng-src="assets/img/staff/{{staff_list[$index+2].photo}}">
+            </div>
+            <div class="card-content center-align">
+              <span class="card-title">{{staff_list[$index+2].name}}</span>
+              <p>{{staff_list[$index+2].description}}</p>
+            </div>
           </div>
-          <div class="card-content center-align">
-            <span class="card-title">Patrick Lin</span>
-            <p>Wood VI.</p>
+        </div>
+        <div class="col s12 m6 l3">
+          <div class="card">
+            <div class="card-image">
+              <img ng-src="assets/img/staff/{{staff_list[$index+3].photo}}">
+            </div>
+            <div class="card-content center-align">
+              <span class="card-title">{{staff_list[$index+3].name}}</span>
+              <p>{{staff_list[$index+3].description}}</p>
+            </div>
           </div>
         </div>
       </div>

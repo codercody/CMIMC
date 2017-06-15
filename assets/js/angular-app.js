@@ -9,7 +9,7 @@ app.config([
       .state('main', {
         url: '/',
         templateUrl: '/views/index.html',
-        controller: 'MainCtrl'
+        controller: 'IndexCtrl'
       })
       .state('information', {
         url: '/information',
@@ -17,11 +17,13 @@ app.config([
       })
       .state('archive', {
         url: '/archive',
-        templateUrl: '/views/archive.html'
+        templateUrl: '/views/archive.html',
+        controller: 'ArchiveCtrl'
       })
       .state('staff', {
         url: '/staff',
-        templateUrl: '/views/staff.html'
+        templateUrl: '/views/staff.html',
+        controller: 'StaffCtrl'
       })
       .state('account', {
         url: '/account',

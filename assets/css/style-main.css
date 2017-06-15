@@ -119,8 +119,8 @@ footer .footer-copyright ul li  {
   margin-right: 12px;
 }
 
-ol:not(.browser-default) li {
-  list-style-type: decimal;
+.results-list {
+  margin: 15px 25px;
 }
 
 .photos-list li  {

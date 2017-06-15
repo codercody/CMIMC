@@ -15,362 +15,69 @@ $(document).ready(function(){
 
   <div class="row">
     <div id="problems" class="col s12 white">
-
-      <h5>2017 Problems</h5>
-      <div class="row">
-        <div class="col l6 s12">
-          <span class="archive-header">Individuals</span>
-          <ul class="collection">
-            <li class="collection-item"><div>Algebra <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Combinatorics <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Computer Science <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Geometry <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Numbery Theory <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-          </ul>
-        </div>
-        <div class="col l6 s12">
-          <span class="archive-header">Teams</span>
-          <ul class="collection">
-            <li class="collection-item"><div>Individual Finals <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Team Round <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Power Round <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-          </ul>
-        </div>
-      </div>
-      <h5>2016 Problems</h5>
-      <div class="row">
-        <div class="col l6 s12">
-          <span class="archive-header">Individuals</span>
-          <ul class="collection">
-            <li class="collection-item"><div>Algebra <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Combinatorics <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Computer Science <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Geometry <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Numbery Theory <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-          </ul>
-        </div>
-        <div class="col l6 s12">
-          <span class="archive-header">Teams</span>
-          <ul class="collection">
-            <li class="collection-item"><div>Individual Finals <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Team Round <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-            <li class="collection-item"><div>Power Round <a href="#" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a href="#" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
-          </ul>
+      <div ng-repeat="contest in contest_problems">
+        <h5>{{contest.year}} Problems</h5>
+        <div class="row">
+          <div class="col l6 s12">
+            <span class="archive-header">Individuals</span>
+            <ul class="collection">
+              <li class="collection-item" ng-repeat="subject in contest.individuals"><div>{{subject.name}} <a ng-href="/assets/docs/past-tests/{{subject.solutions}}" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a ng-href="/assets/docs/past-tests/{{subject.problems}}" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
+            </ul>
+          </div>
+          <div class="col l6 s12">
+            <span class="archive-header">Others</span>
+            <ul class="collection">
+              <li class="collection-item" ng-repeat="subject in contest.others"><div>{{subject.name}} <a ng-href="/assets/docs/past-tests/{{subject.solutions}}" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a ng-href="/assets/docs/past-tests/{{subject.problems}}" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
 
     <div id="results" class="col s12 white">
-      <h5>2017 Results</h5>
-      <div class="row">
-        <div class="col l6 s12">
-          <span class="archive-header">Individuals</span>
-          <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Algebra</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Combinatorics</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Computer Science</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Geometry</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Number Theory</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-          </ul>
+      <div ng-repeat="contest in contest_results">
+        <h5>{{contest.year}} Results</h5>
+        <div class="row">
+          <div class="col l6 s12">
+            <span class="archive-header">Individuals</span>
+            <ul class="collapsible" data-collapsible="expandable">
+              <li ng-repeat="subject in contest.individuals">
+                <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>{{subject.name}}</div>
+                <div class="collapsible-body"><ul class="results-list">
+                  <li ng-repeat="(rank, winners) in subject.results">{{rank}}. {{do_something(winners)}}</li>
+                </ul></div>
+              </li>
+            </ul>
+          </div>
+          <div class="col l6 s12">
+            <span class="archive-header">Teams</span>
+            <ul class="collapsible" data-collapsible="expandable">
+              <li ng-repeat="subject in contest.teams">
+                <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>{{subject.name}}</div>
+                <div class="collapsible-body"><ul class="results-list">
+                  <li ng-repeat="(rank, winners) in subject.results">{{rank}}. {{do_something(winners)}}</li>
+                </ul></div>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="col l6 s12">
-          <span class="archive-header">Teams</span>
-          <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Overall</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Power</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Team</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <h5>2016 Results</h5>
-      <div class="row">
-            <div class="col l6 s12">
-          <span class="archive-header">Individuals</span>
-          <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Algebra</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Combinatorics</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Computer Science</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Geometry</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Number Theory</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-          </ul>
-        </div>
-            <div class="col l6 s12">
-          <span class="archive-header">Teams</span>
-          <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Overall</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Power</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="fa fa-angle-down" aria-hidden="true"></i>Team</div>
-              <div class="collapsible-body"><ol class="results-list">
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-                <li>Swapnil Garg</li>
-              </ol></div>
-            </li>
-          </ul>
-        </div>
+        <script>$(document).ready(function() {
+          $('.collapsible').collapsible({expandable: true})
+        })</script>
       </div>
     </div>
 
     <div id="photos" class="col s12 white">
-      <h5>2017 Photos</h5>
-      <ul class="photos-list" style="vertical-align: middle">
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/team-wide.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-      </ul>
-      <br class="clear-float">
-      <h5>2016 Photos</h5>
-      <ul class="photos-list">
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-        <li><img class="materialboxed" width="80px" src="assets/img/staff/cody-johnson.jpg"></li>
-      </ul>
-      <br class="clear-float">
+      <div ng-repeat="album in contest_photos">
+        <h5>{{album.year}} Photos</h5>
+        <ul class="photos-list" style="vertical-align: middle">
+          <li ng-repeat="photo in album.photos"><img class="materialboxed" width="80px" ng-src="assets/img/gallery/{{photo}}"></li>
+        </ul>
+        <br class="clear-float">
+        <script>$(document).ready(function() {
+          $('.materialboxed').materialbox()
+        })</script>
+      </div>
     </div>
   </div>
 </div>
