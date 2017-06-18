@@ -1,0 +1,292 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[top=2cm, left = 2cm, right = 2cm, bottom = 3cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{fancyhdr}
+\newcommand{\N}{\mathbb{N}}
+\pagestyle{fancy}
+\rhead{}
+\chead{\includegraphics[scale=0.17]{CMIMC-header-2017.png}}
+\lhead{}
+\setlength{\headheight}{43pt}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+\newcommand{\proposed}[1]
+{
+\vspace{5pt}
+\noindent\textit{Proposed by #1}
+}
+\newcommand{\solution}
+{
+\vspace{5pt}
+\noindent\textit{Solution.}\qquad
+}
+\newcommand{\solcite}[1]
+{
+\vspace{5pt}
+\noindent\textit{Solution (#1).}\qquad
+}
+\tikzstyle{box} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\begin{document}
+
+\begin{center}
+\huge\textbf{Team Solutions Packet}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item Find the integer $n$ such that
+\[n + \left\lfloor\sqrt{n}\right\rfloor + \left\lfloor\sqrt{\sqrt{n}}\right\rfloor = 2017.\] Here, as usual, $\lfloor\cdot\rfloor$ denotes the floor function.
+
+\proposed{Patrick Lin}
+
+\solution Noting that $44 < \sqrt{2017} < 45$ and $6 < \sqrt{\sqrt{2017}} < 7$ gives us a lower bound on $n$ of $2017 - 45 - 7 = 1965$.  Now remark that since $\lfloor\sqrt{1965}\rfloor = \lfloor\sqrt{1968}\rfloor = 44$, $n=1967$ is achievable but $n=1968$ is not, for an answer of $\boxed{1967}$.
+
+\item Suppose $x$, $y$, and $z$ are nonzero complex numbers such that $(x+y+z)(x^2+y^2+z^2)=x^3+y^3+z^3$.  Compute \[(x+y+z)\left(\dfrac1x+\dfrac1y+\dfrac1z\right).\]
+
+\proposed{David Altizio}
+
+\solution Let $S_1 = x+y+z$, $S_2 = xy+yz+zx$, and $S_3 = xyz$.  Note that $x^2+y^2+z^2 = S_1^2-2S_2$ and \[x^3+y^3+z^3 = (x+y+z)(x^2+y^2+z^2-xy-yz-zx) + 3xyz = S_1^3-3S_1S_2 + 3S_3.\] Thus the condition becomes \[S_1(S_1^2-2S_2) = S_1^3 - 3S_1S_2 + 3S_3\quad\implies\quad S_1S_2 = 3S_3.\] Hence $(x+y+z)(xy+yz+zx) = 3xyz$, and so dividing both sides by $xyz$ gives the desired answer of $\boxed 3$.
+
+\item Suppose Pat and Rick are playing a game in which they take turns writing numbers from $\{1, 2, \dots, 97\}$ on a blackboard. In each round, Pat writes a number, then Rick writes a number; Rick wins if the sum of all the numbers written on the blackboard after $n$ rounds is divisible by 100. Find the minimum positive value of $n$ for which Rick has a winning strategy.
+
+\proposed{Andrew Kwon}
+
+\solution Suppose that Rick has a winning strategy for some value of $n$ and let $S_i$ denote the sum of the numbers on the board modulo $100$ after round $i$. At the end of the $n^\text{th}$ round, the sum of all the numbers written on the board must be $0\pmod{100}$. Now, consider the state of the game at the end of the $(n-1)^\text{th}$ round. We claim that $S_{n?1} \equiv 2\pmod{100}$ in order for Rick to be guaranteed to achieve $S_n?0 \pmod{100}$. If $S_{n?1}\equiv 2 \pmod{100}$, then no matter what value $k$ Pat chooses, Rick can write $98?k$ and win the game. On the other hand, if $S_{n?1}\equiv \ell \pmod{100}$ where $\ell \neq 2$ then Pat can choose
+\[
+k = \begin{cases}
+1 & \text{if } \ell = 0,1\\
+100 - \ell & \text{otherwise,}
+\end{cases}
+\]
+and in these cases Rick cannot guarantee a win. Proceeding inductively, we find that $S_{n-i} \equiv 2 i \pmod{100}$ is necessary in order for Rick to win. Evidently $S_0 \equiv 0 \pmod{100}$, and so $S_0 \equiv 2n \equiv 0 \pmod{100}$. The minimal $n$ satisfying this is $n=\boxed{50}$.
+
+\item Say a positive integer $n > 1$ is \textit{twinning} if $p - 2 \mid n$ for every prime $p \mid n$. Find the number of twinning integers less than 250.
+
+\proposed{Andrew Kwon}
+
+\solution We case on the largest prime factor $q$ of $n$, noting that $n$ cannot be divisible by $2$. We must have $q < 17$, as $17 \cdot 15 = 255$, while $q = 13$ is also impossible because this implies that $n$ is divisible by $13 \cdot 11 \cdot 9$. 
+\begin{itemize}
+\item $q = 11$: We have $11 \cdot 9 \mid n$, while no other prime factors are possible, so $n=99$ is one possibility in this case.
+\item $q = 7$: Again, $7 \cdot 5 \cdot 3 \mid n$, and again no other prime factors are possible, so $n = 105$ is one possibility in this case.
+\item $q = 5$: We must have $5 \cdot 3 \mid n$, while $n$ can only contain factors of 5 and 3. We find $5 \cdot 3, 5^{2} \cdot 3, 5 \cdot 3^{2}, 5^{2} \cdot 3^{2}, 5 \cdot 3^{3}$ are all twinning, so there are 5 possibilities in this case.
+\item $q = 3$: The powers of 3, namely $3, 9, 27, 81, 243$ are all twinning.
+\end{itemize}
+We conclude there are \fbox{12} twinning numbers less than 250. 
+
+\item We have four registers, $R_1,R_2,R_3,R_4$, such that $R_i$ initially contains the number $i$ for $1\le i\le4$. We are allowed two operations:
+
+\begin{itemize}
+\item Simultaneously swap the contents of $R_1$ and $R_3$ as well as $R_2$ and $R_4$.
+
+\item Simultaneously transfer the contents of $R_2$ to $R_3$, the contents of $R_3$ to $R_4$, and the contents of $R_4$ to $R_2$. (For example if we do this once then $(R_1,R_2,R_3,R_4)=(1,4,2,3)$.)
+\end{itemize}
+
+Using these two operations as many times as desired and in whatever order, what is the total number of possible outcomes?
+
+\proposed{Cody Johnson}
+
+\solution We're looking for the number of distinct permutations generated by the two permutations $\pi_1:=(1\mapsto3,2\mapsto4,3\mapsto1,4\mapsto2)$ and $\pi_2:=(1\mapsto1,2\mapsto4,3\mapsto2,4\mapsto3)$. Note that each of these two permutations are even, so we can only generate even permutations from them. Therefore, we can generate at most $4!/2=12$ permutations. Furthermore, we can generate the following $12$ permutations, so the answer is $\boxed{12}$:
+
+\begin{center}
+\begin{tabular}{cccc}
+$(1,2,3,4)$ & $(1,4,2,3)$ & $(1,3,4,2)$ & $(4,2,1,3)$ \\
+$(4,3,2,1)$ & $(4,1,3,2)$ & $(3,2,4,1)$ & $(3,1,2,4)$ \\
+$(3,4,1,2)$ & $(2,4,3,1)$ & $(2,1,4,3)$ & $(2,3,1,4)$
+\end{tabular}
+\end{center}
+
+\item George is taking a ten-question true-false exam, where the answer key has been selected uniformly at random; however, he doesn't know any of the answers! Luckily, a friend has helpfully hinted that no two consecutive questions have true as the correct answer. If George takes the exam and maximizes the expected number of questions he gets correct, how many of his answers are expected to be right?
+
+\proposed{Patrick Lin}
+
+\solution We claim George's strategy is to answer false on every question; by linearity of expectation it suffices to show that the answer to each question will be false with probability greater than 1/2. Let $D$ be any assignment of answers satisfying the problem conditions, i.e. no two consecutive answers are $T$ (here, $T$ is true and $F$ is false), and consider the $k$-th answer, for some $k$. If it is $T$, then we can always change it to $F$ and still have a valid assignment; if it is $F$, however, there exist assignments where we cannot change it to $T$, which is when an adjacent answer is already $T$. Hence there are more assignments where the $k$-th answer is $F$ than $T$, and so the probability that some answer is $F$ is greater than 1/2.
+
+\par Now it remains to determine the expected number of $F$'s that appear in a randomly chosen assignment of answers with no consecutive $T$'s. Note that if an assignment begins with a $T$ the next answer must be an $F$ and otherwise if it begins with $F$ the next answer is unrestricted, and so by straightforward recursion there are $F_{n+2}$ possible assignments to $n$ questions, where $F$ is the Fibonacci sequence. Let $t_n$ be the total number of $T$'s over all assignments to $n$ questions, so $t_0 = 0$ and $t_1 = 1$. By a similar argument, we have the recursion
+\[t_n = t_{n-1} + (t_{n-2} + F_n),\]
+since there are $t_{n-1}$ total $T$'s that appear among all assignments to $n$ questions that begin with $F$, and $t_{n-2} + F_n$ total that appear among those that begin with a $T$, as there are $t_{n-2}$ total $T$'s in the $n-2$ questions at the end and $F_n$ at the front, one per assignment. This yields $t_{10} = 420$ and $F_{12} = 144$, so the expected number of $T$'s is $\frac{420}{144} = \frac{35}{12}$.
+
+\par The answer is hence $10 - \frac{35}{12} = \boxed{\tfrac{85}{12}}$.
+
+\item Define $\{p_n\}_{n=0}^\infty\subset\N$ and $\{q_n\}_{n=0}^\infty\subset\N$ to be sequences of natural numbers as follows:
+
+\begin{itemize}
+
+\item $p_0=q_0=1$;
+
+\item For all $n\in\N$, $q_n$ is the smallest natural number such that there exists a natural number $p_n$ with $\gcd(p_n,q_n)=1$ satisfying \[\dfrac{p_{n-1}}{q_{n-1}} < \dfrac{p_n}{q_n} < \sqrt 2.\]
+
+\end{itemize}
+
+Find $q_3$.
+
+\proposed{David Altizio}
+
+\solution Shift the sequence down by $1$, so that $p_0=0$ and the upper bound in question is $\sqrt 2 - 1$; this makes the arithmetic a little bit easier. It is not hard to see that $p_1/q_1=1/3$ and $p_2/q_2 = 2/5$ are the first two terms of this sequence; the difficult part lies in extending this further.
+
+\par Write $p_3 = (2q_3+r_3)/5$, where $0<q_3<5$.  The condition that $p_3/q_3<\sqrt 2-1$ is equivalent to \[\left(\dfrac{p_3+q_3}{q_3}\right)^2 < 2\quad\implies\quad q_3^2>p_3^2+2p_3q_3.\] Making the substitution yields \begin{align*}q_3^2 &> \left(\dfrac{2q_3+r_3}5\right)^2 + 2\left(\dfrac{2q_3+r_3}5\right)q_3\\&=\dfrac{24}{25}q_3^2+\dfrac{14}{25}q_3r_3+\dfrac1{25}r_3^2\\\implies q_3^2 &> 14q_3r_3+r_3^2.\end{align*} Note that we necessarily need $q_3>14$, since otherwise the RHS will be strictly bigger.  In addition, in order to minimize $q_3$, we need $r_3=1$.  The smallest integer such that this is the case is $q_3=17$.  Indeed, we find that this works with $p_3=7$, so our answer is $\boxed{17}$.
+
+\item Alice and Bob have a fair coin with sides labeled $C$ and $M$, and they flip the coin repeatedly while recording the outcomes; for example, if they flip two $C$'s then an $M$, they have $CCM$ recorded. They play the following game: Alice chooses a four-character string $\calA$, then Bob chooses two distinct three-character strings $\calB_1$ and $\calB_2$ such that neither is a substring of $\calA$. Bob wins if $\calA$ shows up in the running record before either $\calB_1$ or $\calB_2$ do, and otherwise Alice wins. Given that Alice chooses $\calA = CMMC$ and Bob plays optimally, compute the probability that Bob wins.
+
+\proposed{Patrick Lin}
+
+
+
+\solution (Sketch) Bob chooses $B_1, B_2 = CCC, MMM$, which gives him a winning probability of \fbox{$\frac{21}{80}$}.
+
+\solution First we give an intuitive explanation that $\calB_1, \calB_2 = CCC, MMM$. Observe that an ideal pair $(\calB_1, \calB_2)$ satisfies the qualities that
+\begin{itemize}
+\item almost satisfying one string before ``falling off'' leads to a suffix that is still fairly far from completing the other string,
+\item ``falling off'' from completing $\calA = CMMC$ will, in most cases, lead to a suffix that is also fairly far from $\calB_1$ or $\calB_2$.
+\end{itemize}
+Considering these two criteria makes $CCC$ and $MMM$ a clear guess, especially since it is difficult to ``confuse'' one string for another as the coins are flipped (as an aside, the second-best pair is to choose $CCC$ and $MCC$). Once we have $\calB_1$ and $\calB_2$, we can construct a Markov chain as shown below, where each arrow is taken with probability $\tfrac12$. 
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (11.8,-26.5) circle (3);
+\draw (11.8,-26.5) node {$\epsilon$};
+\draw [black] (20.7,-20.1) circle (3);
+\draw (20.7,-20.1) node {$c$};
+\draw [black] (20.7,-31.3) circle (3);
+\draw (20.7,-31.3) node {$m$};
+\draw [black] (31,-14.3) circle (3);
+\draw (31,-14.3) node {$cc$};
+\draw [black] (31,-25.3) circle (3);
+\draw (31,-25.3) node {$cm$};
+\draw [black] (31,-35.7) circle (3);
+\draw (31,-35.7) node {$mm$};
+\draw [black] (40.7,-35.7) circle (3);
+\draw (40.7,-35.7) node {$mmm$};
+\draw [black] (40.7,-25.3) circle (3);
+\draw (40.7,-25.3) node {$cmm$};
+\draw [black] (40.7,-14.3) circle (3);
+\draw (40.7,-14.3) node {$ccc$};
+\draw [black] (50.5,-25.3) circle (3);
+\draw (50.5,-25.3) node {$cmmc$};
+\draw [black] (14.24,-24.75) -- (18.26,-21.85);
+\fill [black] (18.26,-21.85) -- (17.32,-21.91) -- (17.91,-22.72);
+\draw [black] (14.44,-27.92) -- (18.06,-29.88);
+\fill [black] (18.06,-29.88) -- (17.59,-29.06) -- (17.12,-29.94);
+\draw [black] (20.7,-28.3) -- (20.7,-23.1);
+\fill [black] (20.7,-23.1) -- (20.2,-23.9) -- (21.2,-23.9);
+\draw [black] (23.46,-32.48) -- (28.24,-34.52);
+\fill [black] (28.24,-34.52) -- (27.7,-33.75) -- (27.31,-34.67);
+\draw [black] (34,-35.7) -- (37.7,-35.7);
+\fill [black] (37.7,-35.7) -- (36.9,-35.2) -- (36.9,-36.2);
+\draw [black] (29.35,-33.2) -- (22.35,-22.6);
+\fill [black] (22.35,-22.6) -- (22.38,-23.55) -- (23.21,-23);
+\draw [black] (23.38,-21.45) -- (28.32,-23.95);
+\fill [black] (28.32,-23.95) -- (27.83,-23.14) -- (27.38,-24.03);
+\draw [black] (28.32,-23.95) -- (23.38,-21.45);
+\fill [black] (23.38,-21.45) -- (23.87,-22.26) -- (24.32,-21.37);
+\draw [black] (23.31,-18.63) -- (28.39,-15.77);
+\fill [black] (28.39,-15.77) -- (27.44,-15.73) -- (27.93,-16.6);
+\draw [black] (31,-17.3) -- (31,-22.3);
+\fill [black] (31,-22.3) -- (31.5,-21.5) -- (30.5,-21.5);
+\draw [black] (34,-25.3) -- (37.7,-25.3);
+\fill [black] (37.7,-25.3) -- (36.9,-24.8) -- (36.9,-25.8);
+\draw [black] (40.7,-28.3) -- (40.7,-32.7);
+\fill [black] (40.7,-32.7) -- (41.2,-31.9) -- (40.2,-31.9);
+\draw [black] (43.7,-25.3) -- (47.5,-25.3);
+\fill [black] (47.5,-25.3) -- (46.7,-24.8) -- (46.7,-25.8);
+\draw [black] (34,-14.3) -- (37.7,-14.3);
+\fill [black] (37.7,-14.3) -- (36.9,-13.8) -- (36.9,-14.8);
+\end{tikzpicture}
+\end{center}
+
+Identifying $C$ as the probability that Bob wins given that we are in state $C$ and that $CCC = MMM = 0$ and $CMMC = 1$, we have the system of equations
+\begin{gather}
+CMM = \frac12 \\
+CM = \frac12 CMM + \frac12 C \\
+MM = \frac12 C \\
+CC = \frac12 CM \\
+M = \frac12 C + \frac12 MM \\
+C = \frac12 CC + \frac12 CM.
+\end{gather}
+Substituting these equations from the top down yields $C = \tfrac3{10}$ and $M = \tfrac34 C = \tfrac9{40}$, and so the chance that Bob wins is
+\[\frac12 C + \frac12 M = \boxed{\frac{21}{80}}.\]
+
+\item Circles $\omega_1$ and $\omega_2$ are externally tangent to each other.  Circle $\Omega$ is placed such that $\omega_1$ is internally tangent to $\Omega$ at $X$ while $\omega_2$ is internally tangent to $\Omega$ at $Y$.  Line $\ell$ is tangent to $\omega_1$ at $P$ and $\omega_2$ at $Q$ and furthermore intersects $\Omega$ at points $A$ and $B$ with $AP<AQ$.  Suppose that $AP=2$, $PQ=4$, and $QB=3$.  Compute the length of line segment $\overline{XY}$.
+
+\proposed{David Altizio}
+
+\solution First, recall by homothety that $M=XP\cap YQ$ is the midpoint of minor arc $\widehat{AB}$.  This means that \[\angle XPA = \dfrac{\widehat{AX}+\widehat{MB}}2 = \dfrac{\widehat{AX}+\widehat{MA}}2 = \angle XYQ,\] whence $XPQY$ is a cyclic quadrilateral.  Now $M$ is the radical center of $\omega_1$, $\omega_2$, and $\odot(XPQY)$, so in particular if $T=\omega_1\cap\omega_2$, then $MT$ is the common internal tangent of the two circles.
+
+\begin{figure}[ht]
+\centering
+\begin{asy}
+import olympiad;
+size(270);
+defaultpen(linewidth(0.8)+fontsize(11pt));
+real r1 = 2.42, r2 = 4.56, d = sqrt(r1*r2);
+pair O1 = (-1*d,r1), O2 = (d,r2), P = (-d,0), Q = (d,0);
+path circ1 = circle(O1,r1), circ2 = circle(O2,r2);
+draw(circ1^^circ2);
+pair M = (1.34, -4.16), pt1 = 3*P - 2*M, pt2 = 3*Q - 2*M;
+pair[] X = intersectionpoints(P--pt1, circ1), Y = intersectionpoints(Q--pt2, circ2);
+path omega = circumcircle(M,X[1], Y[1]);
+pair O = circumcenter(M,X[1],Y[1]);
+draw(omega);
+pair Pext = 2*P-Q, Qext = 2*Q-P;
+pair[] end = intersectionpoints(Pext--Qext, omega);
+pair A = end[0], B = end[1];
+draw(Y[1]--X[1]^^A--B);
+draw(X[1]--M--Y[1]^^O1--O2, linetype("3 3"));
+pair Os = circumcenter(P,Q,X[1]);
+real r = circumradius(P,Q,X[1]);
+draw(circle(Os,r), linetype("4 4"));
+pair T = foot(M,O1,O2);
+dot(O1^^O2^^P^^Q^^M^^T^^X[1]^^Y[1]);
+draw(M--T, linetype("3 3"));
+label("$A$",A,1.2*dir(235));
+label("$B$",B,1.2*dir(305));
+label("$X$",X[1],2*dir(165));
+label("$Y$",Y[1],1.5*dir(35));
+label("$P$",P,1.5*dir(250));
+label("$Q$",Q,1.5*dir(290));
+label("$T$",T,2*dir(330));
+label("$M$",M,1.5*S);
+\end{asy}
+\end{figure}
+
+\par Set $r = MA = MB$, and define $D = \overline{MT}\cap\overline{AB}$.  Note that a bit of angle chasing yields $\triangle MAP\sim\triangle MXA$, so \[MA^2 = MP\cdot MX = MT^2\quad\implies\quad MT = r.\] Thus $DP = DQ = DT = 2$ and $MD = r-2$.
+Now Stewart's Theorem on $\triangle MAB$ with cevian $\overline{MD}$
+gives us the value of $r$ directly, by
+\[
+	4 \cdot 5 \cdot 9 + 9(r-2)^2 = 4r^2 + 5r^2
+	\implies r = 6.
+\]
+Finally, if we let $x = MP$ and $y = MQ$ now, we have $PX=\tfrac{AP\cdot PB}{PM}=\tfrac{14}x$, and similarly $QY=\tfrac{AQ\cdot QB}{MQ}=\tfrac{18}y$.  Thus \[ x\left(x+\dfrac{14}x\right) = y\left(y+\dfrac{18}y\right) = r^2 = 36, \]
+so $x = \sqrt{22}$ and $y = \sqrt{18}$ and $XY = \frac4x MY = \boxed{\tfrac{24}{\sqrt{11}}}$. 
+
+\textbf{Remark.} An alternate way to prove the geometric results listed above is through inversion.  As before, let $r = MA = MB$.
+The inversion at $M$ with radius $r$
+swaps line $AB$ and $\Omega$, hence fixing
+$\omega_1$ and $\omega_2$ and thus swapping $X\mapsto P$ and $Y\mapsto Q$.
+This means that $MXP$, $MYQ$ collinear with $r^2 = MP \cdot MX = MQ \cdot MY$, 
+and so $XPQY$ is a cyclic quadrilateral.
+In particular $M$ is the radical center of $\omega_1$, $\omega_2$, and $\odot(XPQY)$,
+so if $T = \omega_1 \cap \omega_2$, then $MT = r$.
+
+\item The polynomial $P(x) = x^3 - 6x - 2$ has three real roots, $\alpha$, $\beta$, and $\gamma$.  Depending on the assignment of the roots, there exist two different quadratics $Q$ such that the graph of $y=Q(x)$ pass through the points $(\alpha,\beta)$, $(\beta,\gamma)$, and $(\gamma,\alpha)$.  What is the larger of the two values of $Q(1)$?
+
+\proposed{David Altizio}
+
+\solution Let $Q(x)=ax^2+bx+c$ for some real numbers $a$, $b$, and $c$, so that \[\begin{cases}a\alpha^2+b\alpha+c&=\beta,\\a\beta^2+b\beta+c&=\gamma,\\a\gamma^2+b\gamma+c&=\alpha.\end{cases}\] The main idea is to manipulate the equations in such a way that various instances of Vieta's Formulas can be used to give a system of equations.
+
+\par As a preliminary, compute $\alpha+\beta+\gamma = 0$, $\alpha\beta+\beta\gamma+\gamma\alpha = -6$, $\alpha\beta\gamma = 2$, $\alpha^2+\beta^2+\gamma^2 = 12$, and $\alpha^3+\beta^3+\gamma^3 = 3\alpha\beta\gamma = 6$.  Note that adding the three equations together yields \[a(\alpha^2+\beta^2+\gamma^2) + b(\alpha+\beta+\gamma) + 3c = \alpha+\beta+\gamma\quad\implies\quad c = -4a.\] Multiplying the first equation by $\alpha$, the second equation by $\beta$, and the third equation by $\gamma$ and adding yields \[a(\alpha^3+\beta^3+\gamma^3) + b(\alpha^2+\beta^2+\gamma^2)+c(\alpha+\beta+\gamma) = \alpha\beta+\beta\gamma+\gamma\alpha\quad\implies\quad a+2b = -1.\] Getting the third equation is a bit tougher.  Note that multiplying the first equation by $\beta$, the second equation by $\gamma$, and the third by $\alpha$ and adding yields \[a(\alpha^2\beta+\beta^2\gamma+\gamma^2\alpha) + b(\alpha\beta+\beta\gamma+\gamma\alpha) + c(\beta+\gamma+\alpha) = \beta^2+\gamma^2+\alpha^2\quad\implies\quad a(\alpha^2\beta+\beta^2\gamma+\gamma^2\alpha) - 6b = 12.\] Similarly, multiplying the first equation by $\beta\gamma$, the second by $\gamma\alpha$, and the third by $\alpha\beta$ and adding gives \[a(\alpha^2\beta\gamma+\alpha\beta^2\gamma+\alpha\beta\gamma^2) + 3b\alpha\beta\gamma + c(\beta\gamma+\gamma\alpha+\alpha\beta) = \beta^2\gamma+\gamma^2\alpha+\alpha^2\beta\quad\implies\quad 6b - 6c = \alpha^2\beta+\beta^2\gamma+\gamma^2\alpha.\] Hence substitution yields \[a(6b-6c) - 6b = 12,\] or $a(b-c)-b=2$.
+
+\par As a result, the manipulations above lead to the system of equations \[\begin{cases}c&=-4a,\\a+2b&=-1,\\a(b-c)-b&=2.\end{cases}\] Multiplying the third equation by $2$ and substituting for $a$ from the first and second equations yields \[2a(b-c)-2b = a(-1-a+8a)-(-1-a) = 7a^2+1=4,\] so $a = \pm\sqrt{\tfrac37}=\pm\tfrac{\sqrt{21}}7$.  Finally, remark that \[2(a+b+c) = a + (a+2b) + 2c = a - 1 - 8a = -7a - 1 = \mp\sqrt{21}-1,\] so the requested answer is $\boxed{\tfrac{\sqrt{21}-1}2}$.
+
+\end{enumerate}
+
+\end{document}

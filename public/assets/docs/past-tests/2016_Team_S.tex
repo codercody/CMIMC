@@ -1,0 +1,388 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[top=2cm, left = 2cm, right = 2cm, bottom = 3cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{asymptote}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rhead{}
+\chead{\includegraphics[scale=0.2]{CMIMC-header.png}}
+\lhead{}
+\setlength{\headheight}{43pt}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+\newcommand{\proposed}[1]
+{
+\vspace{5pt}
+\noindent\textit{Proposed by #1}
+}
+\newcommand{\solution}
+{
+\vspace{5pt}
+\noindent\textit{Solution.}\qquad
+}
+\begin{document}
+
+\begin{center}
+\huge\textbf{Team Solutions}\normalsize
+
+\vspace{3pt}
+\end{center}
+
+\begin{enumerate}
+
+\item Construction Mayhem University has been on a mission to expand and improve its campus!  The university has recently adopted a new construction schedule where a new project begins every two days.  CMU officials \textit{claim} that each project will take exactly three days to complete, but in reality each project will take exactly one more day than the previous one to complete (so the first project takes 3, the second takes 4, and so on.)
+
+\par Suppose the new schedule starts on Day 1.  On which day will there first be at least $10$ projects in place at the same time?
+
+\proposed{David Altizio}
+
+\solution Let $N$ be the number of the project which begins on the day requested
+in the problem statement. Since a new project begins exactly two days after the
+previous project began, the difference between the starting days of the
+$N^{\text{th}}$ and $(N-9)^{\text{th}}$ projects is exactly $2\cdot 9  = 18$
+days.  Since we want the $(N-9)^{\text{th}}$ project to still be ongoing on the
+day the $N^{\text{th}}$ one begins, the $(N-9)^{\text{th}}$ project must last at
+least $19$ days.  This means that the $N^{\text{th}}$ project must be the one
+which lasts exactly $28$ days.
+
+\par To finish, remark that the project which lasts $3$ days starts on Day 1,
+the project which lasts $4$ days starts on Day 3, and in general, the project
+which lasts $N$ days starts on day $(2N-5)$.  Substituting $N=27$ gives us our
+answer of $2\cdot 28 - 5 = \boxed{51}$.  
+
+\item Right isosceles triangle $T$ is placed in the first quadrant of the coordinate plane.  Suppose that the projection of $T$ onto the $x$-axis has length $6$, while the projection of $T$ onto the $y$-axis has length $8$.  What is the sum of all possible areas of the triangle $T$?
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	import olympiad;
+	size(120);
+	defaultpen(linewidth(0.8));
+	pair A = (0.9,0.6), B = (1.7, 0.8), C = rotate(270, B)*A;
+	pair PAx = (A.x,0), PBx = (B.x,0), PAy = (0, A.y), PCy = (0, C.y);
+	draw(PAx--A--PAy^^PCy--C^^PBx--B, linetype("4 4"));
+	draw(rightanglemark(A,B,C,3));
+	draw(A--B--C--cycle);
+	draw((0,2)--(0,0)--(2,0),Arrows(size=8));
+	label("$6$",(PAx+PBx)/2,S);
+	label("$8$",(PAy+PCy)/2,W);
+\end{asy}
+\end{figure}
+
+\proposed{David Altizio}
+
+\solution Note that ignoring the lengths $6$ and $8$ of the projections to the axes, there are six possible general configurations for the isosceles right triangle.  These six configurations are shown on the next page.
+
+\newpage
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	import olympiad;
+	size(350);
+	defaultpen(linewidth(0.8));
+	real space = 2.5;
+	pair minX(pair A, pair B, pair C)
+	{
+		if(A.x < B.x && A.x < C.x)
+			return A;
+		else if (B.x < C.x)
+			return B;
+		else
+			return C;
+	} 
+	pair minY(pair A, pair B, pair C)
+	{
+		if(A.y < B.y && A.y < C.y)
+			return A;
+		else if (B.y < C.y)
+			return B;
+		else
+			return C;
+	}
+	pair maxX(pair A, pair B, pair C)
+	{
+		if(A.x > B.x && A.x > C.x)
+			return A;
+		else if (B.x > C.x)
+			return B;
+		else
+			return C;
+	} 
+	pair maxY(pair A, pair B, pair C)
+	{
+		if(A.y > B.y && A.y > C.y)
+			return A;
+		else if (B.y > C.y)
+			return B;
+		else
+			return C;
+	}
+	void diagram(pair start, pair Ap, pair Bp)
+	{
+		pair A = start+Ap, B = start+Bp, C = rotate(270, B)*A;
+		pair leftX = minX(A,B,C), rightX = maxX(A,B,C), downY=minY(A,B,C), upY = maxY(A,B,C);
+		pair PAx = (leftX.x,start.y), PBx = (rightX.x,start.y), PAy = (start.x, downY.y), PCy = (start.x, upY.y);
+		draw(PAx--leftX^^downY--PAy^^PCy--upY^^PBx--rightX, linetype("4 4"));
+		draw(rightanglemark(A,B,C,3));
+		draw(A--B--C--cycle);
+		draw((start.x,start.y+2)--start--(start.x+2,start.y),Arrows(size=8));
+	}
+	diagram((0,space),(0.9,0.6),(1.7,0.8));
+	diagram((space,space),(1.4,0.7),(1.6,1.5));
+	diagram((2*space,space),(1.6,0.7),(1.4,1.5));
+	diagram(origin,(1.7,1.4),(0.9,1.6));
+	diagram((space,0),(0.8,1.6),(0.6,0.8));
+	diagram((2*space,0),(0.6,0.9),(1.4,0.7));
+\end{asy}
+\end{figure}
+
+We will solve for the first configuration only.
+
+Enclose a box around triangle $T$ whose sides are parallel to the coordinate axes, and label various points as shown below.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	import olympiad;
+	size(120);
+	defaultpen(linewidth(0.8));
+	pair A = (0.6,0), B = (0.8, 0.8), C = (0,1);
+	draw(origin--(0.8,0)--(0.8,1)--(0,1)--cycle);
+	draw(rightanglemark(A,B,C,3));
+	draw(A--B--C--cycle);
+	label("$6$",(0.4,1),N);
+	label("$8$",(0,0.5),W);
+	label("$A$",A,S);
+	label("$B$",B,E);
+	label("$C$",C,NW);
+	label("$P$",origin,SW);
+	label("$Q$",(0.8,0),SE);
+	label("$R$",(0.8,1),NE);
+\end{asy}
+\end{figure}
+
+Note that since $\triangle ABC$ is an isosceles right triangle, $AB=BC$.  In
+addition, we know that \[\angle ABQ = 90^\circ-\angle CBR = \angle BCR,\] and so
+$\triangle ABQ\cong\triangle BCR$.  From this, we may deduce that $BQ=CR=6$, and so $BR = QR-BQ = 2$.  Hence \[BC^2=BR^2+CR^2=6^2+2^2=40\] and the area of $\triangle ABC$ in this case is $\tfrac12\cdot BC^2=20$.
+
+\par By examining the other five cases, it is not hard to see that two others also give $20$ as the answer, while the other three give impossible configurations.  Hence the answer to the problem is $\boxed{20}$.
+
+\item We have 7 buckets labelled 0-6. Initially bucket 0 is empty, while bucket
+	$n$ (for each $1 \leq n \leq 6$) contains the list $[1,2, \ldots, n]$.
+	Consider the following program: choose a subset $S$ of $[1,2,\ldots, 6]$
+	uniformly at random, and replace the contents of bucket $|S|$ with $S$.
+	Let $\frac{m}{n}$ be the probability that bucket 5 still contains $[1,2,
+	\ldots, 5]$ after two executions of this program, where $p,q$ are positive coprime integers. Find $m$. %ans: 305
+
+\proposed{Cody Johnson}
+
+\solution We split into three cases.
+\begin{itemize}
+	\item The second execution chose a subset of size 5. This happens with
+		probability $\frac{\binom{6}{5}}{2^{6}} = \frac{3}{32}.$
+		It succeeds with probability
+		$\frac{1}{\binom{6}{5}},$ so here it is
+		$\frac{1}{6} \cdot \frac{3}{32} = \frac{1}{64}$.
+	\item The first execution chose a subset of size 5 but not the second.
+		This is the same but with $\left(1 -
+		\frac{3}{32}\right) \cdot\frac{1}{64} = \frac{29}{2048}$.
+	\item Neither execution chose a subset of size 5. This happens with
+		probability $\left(1-
+		\frac{3}{32}\right)^{2} = \frac{29^{2}}{1024}$.
+\end{itemize}
+The answer is thus 
+\[
+	\frac{1}{64} + \frac{29}{2048} + \frac{29^{2}}{1024} =
+	\frac{\boxed{1743}}{2048}.
+\]
+
+\item For some integer $n > 0$, a square paper of side length $2^{n}$ is repeatedly folded in half, right-to-left then bottom-to-top, until a square of side length 1 is formed. A hole is then drilled into the square at a point $\tfrac{3}{16}$ from the top and left edges, and then the paper is completely unfolded. The holes in the unfolded paper form a rectangular array of unevenly spaced points; when connected with horizontal and vertical line segments, these points form a grid of squares and rectangles. Let $P$ be a point chosen randomly from \textit{inside} this grid. Then there exists a maximum rational number $L = \tfrac{p}{q}$ such that, for all $n$, the probability that the four segments $P$ is bounded by form a square is at least $L$. Find $p+q$.
+
+\proposed{Patrick Lin, solution by Victor Xu}
+
+\solution Decompose the square into 2x2 sub-squares. Note that the area bounded by square-forming segments in each of the sub-squares in the center is the center square of length $\tfrac{13}{8}$ and four corner squares of length $\tfrac{3}{16}$. The sub-squares on the edge or corner of the entire piece of paper have fewer of these corner squares. However, note that as $n$ approaches infinity, the number of center squares grows as the square of $n$ while the number of squares on the edge or corner grows proportionally to $n$, hence to calculate the limit we need only consider one of these center sub-squares.
+
+\par The probability is thus $\frac{(\tfrac{13}{8})^2 + 4(\tfrac{3}{16})^2}{4} = \frac{178}{256} = \frac{89}{128}$, and hence the answer is $\boxed{217}$.
+
+\item Recall that in any row of Pascal's Triangle, the first and last elements of the row are $1$ and each other element in the row is the sum of the two elements above it from the previous row.  With this in mind, define the \textit{Pascal Squared Triangle} as follows:
+
+\begin{itemize}
+
+\item In the $n^{\text{th}}$ row, where $n\geq 1$, the first and last elements of the row equal $n^2$;
+
+\item Each other element is the sum of the two elements directly above it.
+
+\end{itemize}
+
+The first few rows of the Pascal Squared Triangle are shown below.
+
+\[\begin{array}{c@{\hspace{7em}}
+c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{4pt}}c@{\hspace{2pt}}
+c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{3pt}}c@{\hspace{2pt}}
+c@{\hspace{2pt}}c} \vspace{4pt}
+\text{Row 1: } & & & & & & 1 & & & & & \\\vspace{4pt}
+\text{Row 2: } & & & & & 4 & & 4 & & & & \\\vspace{4pt}
+\text{Row 3: } & & & & 9 & & 8 & & 9 & & & \\\vspace{4pt}
+\text{Row 4: } & & &16& &17& &17& & 16& & \\\vspace{4pt}
+\text{Row 5: } & &25 & &33& &34 & &33 & &25 &
+\end{array}\]
+Let $S_n$ denote the sum of the entries in the $n^{\text{th}}$ row.  For how many integers $1\leq n\leq 10^6$ is $S_n$ divisible by $13$? %David Altizio
+
+\proposed{David Altizio}
+
+\solution First, it suffices to find a closed form expression for $S_n$.  Note that each term in the $(n+1)^{\text{st}}$ row not on the ends of the row is written as the sum of two terms in the previous row.  Hence, the sum of all these entries is equal to twice the sum of the entries in the previous row minus $2n^2$ to account for the fact that each end term is only used once.  Adding in the two $(n+1)^2$ terms at the ends of row $n+1$, we get the recurrence relation \[S_{n+1}=2S_n+2[(n+1)^2-n^2] = 2S_n+4n+2.\] Rewriting this as \[S_{n+1}+4(n+1)+6=2(S_n+4n+6),\] we see that $\{S_n+4n+6\}_{n=1}^\infty$ is a geometric sequence with first term $11$ and common ratio $2$, meaning that $S_n=11\cdot 2^{n-1}-4n-6$ for all $n\geq 1$.
+
+\par Now we must compute the number of entries for which $S_n$ is divisible by $13$.  This is equivalent to \[11\cdot 2^{n-1}\equiv 4n+6\pmod{13}.\] Remark that $2$ is a generator modulo $13$, and furthermore note that $11$ and $4$ are relatively prime to $13$.  Hence, instead of computing all the solutions to this by hand, remark that the value of $n$ modulo $12$ uniquely determines $11\cdot 2^{n-1}$ modulo $13$, meaning that $n$ is uniquely determined mod 13 as well.  Hence every residue in $\{0,1,\ldots, 11\}$ uniquely corresponds to a solution to the congruence in $\{0,1,\ldots, 155\}$.  As a result, we may conclude that there are $12$ solutions in every interval of $156$ integers.
+
+\par The rest is a matter of arithmetic and bookkeeping.  Note that \[\dfrac{10^5}{12\cdot 13}=\dfrac{25000}{39}=641+\frac{1}{39}.\] As a result, we know $100000\equiv 4\pmod{156}$.  Hence the only integers we have to check by hand are $n=0,1,2,3,4$, and we can clearly see that out of those only $n=3$ yields an extra solution to the congruence.  This means that the final answer to the problem is $12\cdot 641+1=\boxed{7693}$.
+
+\item Suppose integers $a < b < c$ satisfy \[ a + b + c = 95\qquad\text{and}\qquad a^2 + b^2 + c^2 = 3083.\] Find $c$.
+
+\proposed{David Altizio}
+
+\solution In an effort to make the numbers more manageable to work with, we scale everything down.  Specifically, note that \begin{align*}(a-30)^2+(b-30)^2+(c-30)^2&=(a^2+b^2+c^2)-60(a+b+c)+3\cdot 30^2\\&=3083 - 60\cdot 95 + 3\cdot 30^2\\&=3083 - 30 (2\cdot 95 - 90) = 83.\end{align*} Hence a solution $(a,b,c)$ to the original system bijects to a solution $(a_0,b_0,c_0)$ to the system \[a_0+b_0+c_0=5\qquad\text{and}\qquad a_0^2+b_0^2+c_0^2=83.\] This is much easier to handle.  Indeed, testing triples eventually gives $(a_0,b_0,c_0)=(-5,3,7)$ as the only valid solution, and so $c=c_0+30=\boxed{37}$.
+
+\item In $\triangle ABC$, $AB=17$, $AC=25$, and $BC=28$.  Points $M$ and $N$ are the midpoints of $\overline{AB}$ and $\overline{AC}$ respectively, and $P$ is a point on $\overline{BC}$.  Let $Q$ be the second intersection point of the circumcircles of $\triangle BMP$ and $\triangle CNP$.  It is known that as $P$ moves along $\overline{BC}$, line $PQ$ passes through some fixed point $X$.  Compute the sum of the squares of the distances from $X$ to each of $A$, $B$, and $C$. %David Altizio
+
+\proposed{David Altizio}
+
+\solution Let $D$ be the point such that $ABCD$ is an isosceles trapezoid with bases $AD$ and $BC$, and denote by $R$ the midpoint of $\overline{AD}$.  I claim that $R$ is the point $X$ which we seek.  To prove this, note that by Miquel's Theorem (or simple angle chasing) quadrilateral $AMQN$ is cyclic.  Furthermore, note that $ABCD$ is trivially cyclic.  Since a homothety centered at $A$ with scale factor $\tfrac12$ sends $ABCD$ to $AMNR$, quadrilateral $AMNR$ is cyclic as well, so $A$, $M$, $Q$, $N$, and $R$ lie on the same circle.  Finally, angle chasing yields \[\angle MQP=\pi-\angle ABC =\angle MAR = \pi - \angle MQR,\] so $P$, $Q$, and $R$ are collinear as desired.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	import olympiad;
+	size(220);
+	defaultpen(linewidth(0.8)+fontsize(11pt));
+	pair B = origin, A = (7,18), C = (28,0), D = C + (-1*A.x,A.y), R = (A+D)/2, M = (A+B)/2, N = (A+C)/2;
+	draw(A--B--C--A);
+	draw(C--D--A^^circumcircle(A,M,N),linetype("4 4"));
+	pair P = (10.5,0);
+	path circ1 = circumcircle(B,M,P), circ2 = circumcircle(C,N,P);
+	pair[] Q = intersectionpoints(circ1, circ2);
+	dot(Q[0]);
+	pair out1 = 14/13 * R - 1/13 * P;
+	pair out2 = 8/7 * R - 1/7 * P;
+	dot(R^^M^^N);
+	draw(circ1^^circ2^^P--out1);
+	draw(out1--out2,linetype("2 2"));
+	label("$A$",A,NW);
+	label("$B$",B,SW);
+	label("$C$",C,SE);
+	label("$D$",D,NE);
+	label("$M$",M,1.5*dir(150));
+	label("$N$",N,1.5*dir(40));
+	label("$R$",R,2*dir(110));
+	label("$P$",P,3*dir(255));
+	label("$Q$",Q[0],1.5*dir(140));
+\end{asy}
+\end{figure}
+
+\par Let $T$ be the foot of the altitude from $A$ to $BC$, and let $M$ be the midpoint of $\overline{BC}$.  Note that from calculation or observation we find $AT=15$, $BT=8$, and $CT=20$.  This in turn means $AR=TM=6$.  Furthermore, by Pythagorean Theorem $BR=CR=\sqrt{15^2+14^2}$.  All in all, the requested answer is \[6^2+2(14^2+15^2)=\boxed{878}.\] 
+
+\item Let $N$ be the number of triples of positive integers $(a,b,c)$ with $a\leq b\leq c\leq 100$ such that the polynomial \[P(x)=x^2+(a^2+4b^2+c^2+1)x+(4ab+4bc-2ca)\] has integer roots in $x$.  Find the last three digits of $N$.
+
+\proposed{Andrew Kwon}
+
+\solution I claim that $P$ has integer roots if and only if $a+c = 2b$.
+	Indeed, if $a+c = 2b$ then $x=-1$ is obviously a root, while Vieta's
+	relations guarantee that the other root of $P$ will also be an integer.
+	Now, suppose $r_{1}, r_{2}$ are the two integer roots of $P$. Then,
+	$r_{1} r_{2} = 4ab + 4bc - 2ca$, $r_{1} + r_{2} = -(a^{2} + 4b^{2} +
+	c^{2} + 1)$. Note that the product is positive and the sum is negative,
+	and therefore $r_{1}, r_{2} \leq -1$. Then,
+	\begin{align*}
+		(r_{1} + 1)(r_{2}+1) &= r_{1}r_{2} + r_{1} + r_{2} + 1\\
+		&= 4ab + 4bc - 2ca -a^{2} - 4b^{2} - c^{2}.
+	\end{align*}
+	The last expression factors as $-(a-2b+c)^{2} \leq 0$, with equality if
+	and only if $a +c = 2b$. On the other
+	hand, $r_{1} +1, r_{2} +1 \leq 0$, and so $(r_{1}+1)(r_{2}+1) \geq 0$.
+	Therefore, equality must hold, and $r_{1},r_{2}$ integer roots $\implies
+	a+c = 2b$. \\
+	Now, we count the number of such solutions $a \leq b \leq c \leq 100$
+	satisfying $a+c = 2b$. Note that if $a,c$ are of the same parity, then
+	$b$ is uniquely determined, and otherwise no such $b$ exists. For $a,c$
+	even there are $\dbinom{50}{2} + 50 = 25 \cdot 51$ possibilities, with
+	$\dbinom{50}{2}$ counting solutions with $a \neq c$ and the additional
+	$50$ counting solutions with $a = c$. For $a,c$ odd the number of
+	solutions is identical. In total there are $50 \cdot 51 \equiv 50 \cdot
+	11 \equiv \boxed{550} \pmod{1000}$ solutions.
+
+\item For how many permutations $\pi$ of $\{1,2,\ldots,9\}$ does there exist an integer $N$ such that \[N\equiv \pi(i)\pmod{i}\text{ for all integers }1\leq i\leq 9?\] %David Altizio
+
+\proposed{David Altizio}
+
+\solution Before trudging onward, it helps to deduce a few properties of any system of congruences which is valid.
+
+\par First, remark that the values of $\pi(1)$, $\pi(5)$, and $\pi(7)$ are independent of values of other congruences.  In other words, when building a valid permutation it suffices to compute the other six values and then randomly assign these three at the end.
+
+\par Now remark that $\pi(km)\equiv\pi(k)\pmod k$ for all $k$ and $m$ for which the previous congruence is valid.  This is because the modulus of $N$ modulo $km$ determines the modulus of $N$ mod $k$, and so the results must be consistent.  The following consequences are direct colloraries of this fact:
+
+\begin{itemize}
+
+\item All even indexes, i.e. all $\pi(2k)$ for $k\in\mathbb{N}\setminus\{0\}$, must have the same parity.  For example, $\pi(2)\equiv\pi(8)\pmod 2$.  (The same is not necessarily true of the odds, however; in particular, when $\pi(2)$ is odd, one of $\pi(1)$, $\pi(3)$, $\ldots$, $\pi(9)$ must also be odd.  This is a result of the fact that $9$ is itself odd.)
+
+\item As an extension, $\pi(8)-\pi(4)$ must be an integral multiple of $4$.  Since $9-1=8$, we need either $|\pi(8)-\pi(4)|=4$ or $|\pi(8)-\pi(4)|=8.$
+
+\item Note that $\pi(3)\equiv\pi(6)\equiv\pi(9)\pmod 3$.  This in particular means that \[\{\pi(3),\pi(6),\pi(9)\}\in\{\{1,4,7\},\{2,5,8\},\{3,6,9\}\}.\]
+
+\item Subject to all these conditions, a solution exists by the Chinese Remainder Theorem on the moduli $5$, $7$, $8$, and $9$.
+
+\end{itemize}
+
+We now have enough information to start counting.  We split the calculation into two cases.
+
+\begin{itemize}
+
+\item\textbf{CASE 1: }$\pi(2k)\equiv 0\pmod 2$ $\forall k$.
+
+In this case, remark that $\{\pi(4),\pi(8)\}$ can only be one of $\{2,6\}$ or $\{4,8\}$.  Noting the third bullet point above, we see that in the former case we must have $\pi(6)=4$; in the latter case we must have $\pi(6)=6$ (why?).  From these, $\pi(2)$ is uniquely determined, and there are two ways to choose the ordered pair $(\pi(3),\pi(9))$.  Thus in total there are $2\times 2\times 2=8$ possibilities in this case.
+
+\item\textbf{CASE 2: }$\pi(2k)\equiv 1\pmod 2$ $\forall k$.
+
+In this case, there are more choices for the set $\{\pi(4),\pi(8)\}$.  In fact, there are four: $\{1,5\}$, $\{3,7\}$, $\{5,9\}$, and $\{1,9\}$.  Because of this, we need to be more careful about how we enumerate the possible permutations which work.  We again split into two cases:
+
+\begin{itemize}
+
+\item\textbf{SUBCASE 1: }$\{\pi(4),\pi(8)\} = \{1,5\}$ or $\{5,9\}$.
+
+Note that in these cases, there are two possible values of $\pi(6)$; in the first one, $\pi(6)\in\{3,9\}$, while in the second, $\pi(6)\in\{1,7\}$.  Regardless of which member of which set is chosen, the other element in the set must also appear as some other element in $\{\pi(3),\pi(9)\}$.  For example,  if $\pi(6)=1$, then either $\pi(3)=7$ or $\pi(9)=7$.  Combining this with the fact that all $\pi(2k)$ have the same parity, we see that $\pi(2)$ is actually fixed in these situations.  Thus, for each of the four possibilities for $(\pi(4),\pi(8))$, there are two possible values of $\pi(6)$ and two possibilities for $(\pi(3),\pi(9))$, for $16$ different permutations which work.
+
+\item\textbf{SUBCASE 2: }$\{\pi(4),\pi(8)\} = \{3,7\}$ or $\{1,9\}$.
+
+In contrast with the above, note that in these two cases, $\pi(6)$ is fixed, which means there the value of $\pi(2)$ can vary.  More specifically, for each of the four possibilities for $(\pi(4),\pi(8))$, there are two possible values for $\pi(2)$ and two possibilities for $(\pi(3),\pi(9))$, for $16$ different permutations which work.
+
+\end{itemize}
+
+Thus, in this total case, $32$ systems are possible.
+
+\end{itemize}
+
+Finally, there are three numbers left, and they can be assigned to $\pi(1)$, $\pi(5)$, and $\pi(7)$ in $3!=6$ ways.  Thus, the total number of consistent systems is $6(8+32)=\boxed{240}$.
+
+\item Let $\mathcal{P}$ be the unique parabola in the $xy$-plane which is tangent to the $x$-axis at $(5,0)$ and to the $y$-axis at $(0,12)$.  We say a line $\ell$ is $\mathcal{P}$-friendly if the $x$-axis, $y$-axis, and $\mathcal{P}$ divide $\ell$ into three segments, each of which has equal length.  If the sum of the slopes of all $\mathcal{P}$-friendly lines can be written in the form $-\tfrac mn$ for $m$ and $n$ positive relatively prime integers, find $m+n$. %David Altizio
+
+\proposed{David Altizio}
+
+\solution We first make use of a lemma.
+
+\par\textbf{LEMMA: }Let $F(v)$ be a linear transformation in $\mathbb{R}^2$, and define \[F(\mathcal{P})=\{F(v)\,|\, v\in\mathcal{P}\}.\] Then $F(\mathcal{P})$ is also a parabola.
+
+\begin{proof}Ommitted.  Use the fact that a conic of the form \[ax^2+bxy+cy^2+dx+ey+f=0\] is a parabola if and only if $b^2-4ac=0$.
+\end{proof}
+
+With this in mind, scale the $y$-axis by $\tfrac5{12}$.  This scaling preserves the trisection property of lines and furthermore preserves the tangency of $\mathcal{P}$ to the $x$ and $y$ axes, and so the answer to the original question will be $\tfrac{12}5$ the answer to this new problem.  Furthermore, rotate the entire diagram $45^\circ$ counterclockwise about the origin.  By the arctangent formula, a line with slope $m$ in this frame has a slope of $\tfrac{1-m}{1+m}$ in the original frame, so it's not hard to transform back and forth.
+
+\par Let $\mathcal{P}'$ be the parabola which results from these transformations; then $\mathcal{P'}$ is tangent to the lines $y=x$ and $y=-x$ and the directrix of $\mathcal{P'}$ is a line parallel to the line $y=0$.  This in turn means that $y=cx^2+d$ for some constants $c$ and $d$.  To deal with the fact that $\mathcal{P'}$ is tangent to the lines $y=\pm x$, note that this means the equations $y=cx^2-x+d$ and $y=cx^2+x+d$ each have exactly one root.  This means their discriminants are zero, so $1^2-4cd = 0\implies d=\tfrac{1}{4c}$.  In fact, we can make $c$ arbitrary due to scaling, so take $c=1$.  This gives $d=\tfrac14$, so the equation of $\mathcal{P}'$ is now $y=x^2+\tfrac14$.
+
+\par Consider any $\mathcal{P}'$-friendly segment with endpoints $(-3a,3a)$ and $(3b,3b)$.  We want $(-a+2b,a+2b)$ and $(-2a+b,2a+b)$ to both be points on $\mathcal{P}'$.  This gives the system of equations \[\begin{cases}a+2b&=(-a+2b)^2+\frac14,\\2a+b&=(-2a+b)^2+\frac14.\end{cases}\] Subtracting the first equation from the second yields \[a-b=(-2a+b)^2-(-a+2b)^2=(2a-b)^2-(a-2b)^2=3(a+b)(a-b).\] Hence either $a=b$ or $a+b=\tfrac13$.  In the former case, this segment is horizontal.  It's clear by the Intermediate Value Theorem (or an analogous argument) that there are precisely two such $\mathcal{P}'$-friendly segments, contributing $2\cdot\tfrac{0-1}{0+1}=-2$ to the sum of the slopes of the lines.
+
+\par On the other hand, if $a+b=\tfrac13$, then let $m=\tfrac{b-a}{b+a}=3(b-a)=6b-1$ be the slope of the line in question.  We wish to find the sum of the values of \[\dfrac{m-1}{m+1}=\dfrac{6b-2}{6b}=1-\frac1{3b},\] i.e. the slopes of all lines after they have been rotated $45$ degrees.  Note that by plugging $a+b=\tfrac13$ into the first equation of the system we get the quadratic \[\frac13+b=\left(-\frac13+3b\right)^2+\frac14.\] Expanding and simplifying yields that this quadratic is equivalent to \[9b^2-3b+\frac1{36}=0,\] so by Vieta's formulas if $b_1$ and $b_2$ are the two roots of the above quadratic then \[\left(1-\frac1{3b_1}\right)+\left(1-\frac1{3b_2}\right) = 2-\frac13\left(\dfrac{b_1+b_2}{b_1b_2}\right)=2-\frac13\left(\frac{3}{1/36}\right) = 2-\frac1{36}.\] Therefore the sum of all the slopes of the lines for the original parabola $\mathcal{P}$ is \[\dfrac{12}5\left[-2+\left(2-\frac1{36}\right)\right]=-\frac{432}5\] and the requested answer is $432+5=\boxed{437}$.
+
+\end{enumerate}
+
+\end{document}

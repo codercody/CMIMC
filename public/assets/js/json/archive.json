@@ -1,0 +1,624 @@
+{
+  "problems" : [
+    {
+      "year" : "2017",
+      "individuals" : [
+        {
+          "name" : "Algebra",
+          "problems" : "2017_Algebra.pdf",
+          "solutions" : "2017_Algebra_S.pdf"
+        },
+        {
+          "name" : "Combinatorics",
+          "problems" : "2017_Combinatorics.pdf",
+          "solutions" : "2017_Combinatorics_S.pdf"
+        },
+        {
+          "name" : "Computer Science",
+          "problems" : "2017_ComputerScience.pdf",
+          "solutions" : "2017_ComputerScience_S.pdf"
+        },
+        {
+          "name" : "Geometry",
+          "problems" : "2017_Geometry.pdf",
+          "solutions" : "2017_Geometry_S.pdf"
+        },
+        {
+          "name" : "Number Theory",
+          "problems" : "2017_NumberTheory.pdf",
+          "solutions" : "2017_NumberTheory_S.pdf"
+        }
+      ],
+      "others" : [
+        {
+          "name" : "Individual Finals",
+          "problems" : "2017_Finals.pdf",
+          "solutions" : "2017_Finals_S.pdf"
+        },
+        {
+          "name" : "Team Round",
+          "problems" : "2017_Team.pdf",
+          "solutions" : "2017_Team_S.pdf"
+        },
+        {
+          "name" : "Power Round",
+          "problems" : "2017_Power.pdf",
+          "solutions" : "2017_Power_S.pdf"
+        }
+      ]
+    },
+    {
+      "year" : "2016",
+      "individuals" : [
+        {
+          "name" : "Algebra",
+          "problems" : "2016_Algebra.pdf",
+          "solutions" : "2016_Algebra_S.pdf"
+        },
+        {
+          "name" : "Combinatorics",
+          "problems" : "2016_Combinatorics.pdf",
+          "solutions" : "2016_Combinatorics_S.pdf"
+        },
+        {
+          "name" : "Computer Science",
+          "problems" : "2016_ComputerScience.pdf",
+          "solutions" : "2016_ComputerScience_S.pdf"
+        },
+        {
+          "name" : "Geometry",
+          "problems" : "2016_Geometry.pdf",
+          "solutions" : "2016_Geometry_S.pdf"
+        },
+        {
+          "name" : "Number Theory",
+          "problems" : "2016_NumberTheory.pdf",
+          "solutions" : "2016_NumberTheory_S.pdf"
+        }
+      ],
+      "others" : [
+        {
+          "name" : "Individual Finals",
+          "problems" : "2016_Finals.pdf",
+          "solutions" : "2016_Finals_S.pdf"
+        },
+        {
+          "name" : "Team Round",
+          "problems" : "2016_Team.pdf",
+          "solutions" : "2016_Team_S.pdf"
+        },
+        {
+          "name" : "Power Round",
+          "problems" : "2016_Power.pdf",
+          "solutions" : "2016_Power_S.pdf"
+        }
+      ]
+    }
+  ],
+  "results" : [
+    {
+      "year" : "2017",
+      "individuals" : [
+        {
+          "name" : "Algebra",
+          "results" : {
+            "1" : [
+              "Swapnil Garg (PEARL)"
+            ],
+            "2" : [
+              "Daniel Zhu (MoCoSwaggaSquad)"
+            ],
+            "3" : [
+              "Alex Chung (TJ Emerald)"
+            ],
+            "4" : [
+              "Saaketh Vendantam (Florida A2)"
+            ],
+            "5" : [
+              "Adam Ardeishar (TJ Ruby)"
+            ],
+            "6" : [
+              "Frank Lu (Minnesota Math)"
+            ],
+            "7" : [
+              "Jason Chen (Florida A2)"
+            ],
+            "8" : [
+              "Samuel Li (Florida A3)"
+            ],
+            "9" : [
+              "Andrew Gu (Allderdice)"
+            ],
+            "10" : [
+              "Jackson Blitz (Florida A1)"
+            ],
+            "HM" : [
+              "Alex Pan",
+              "Dilhan Salgado",
+              "Gunmay Handa",
+              "Haydn Gwyn",
+              "Jacob Stavrianos",
+              "Jeffery Yu",
+              "Jeremy Dy",
+              "Josh Kennedy",
+              "Justin Park",
+              "Kevin Qian",
+              "Neeyanth Kopparapu",
+              "Siang Tseng",
+              "Vijay Srinivasan",
+              "William Xi",
+              "William Xu"
+            ]
+          }
+        },
+        {
+          "name" : "Combinatorics",
+          "results" : {
+            "1" : [
+              "Brian Reinhart (Florida A1)"
+            ],
+            "2" : [
+              "Swapnil Garg (PEARL)"
+            ],
+            "3" : [
+              "Guangqi Cui (MoCoSwaggaSquad)"
+            ],
+            "4" : [
+              "Joshua Kennedy (Florida A2)"
+            ],
+            "5" : [
+              "George Bentley (Florida A1)"
+            ],
+            "6" : [
+              "Graham O'Donnell (Florida A1)"
+            ],
+            "7" : [
+              "Jason Lee (PHS Alpha)"
+            ],
+            "8" : [
+              "Jason Chen (Florida A2)"
+            ],
+            "9" : [
+              "Joshua Lee (TJ Ruby)"
+            ],
+            "10" : [
+              "Alex Pan (Minnesota Math)"
+            ],
+            "HM" : [
+              "Akshaj Kadaveru",
+              "Dilhan Salgado",
+              "Jacob Stavrianos",
+              "Jeremy Dy",
+              "John Mistele",
+              "Sam Mathers"
+            ]
+          }
+        },
+        {
+          "name" : "Computer Science",
+          "results" : {
+            "1" : [
+              "Guangqi Cui (MoCoSwaggaSquad)"
+            ],
+            "2" : [
+              "Brian Reinhart (Florida A1)"
+            ],
+            "3" : [
+              "Justin Park (PHS Alpha)"
+            ],
+            "4" : [
+              "Richard Liu (Florida A1)"
+            ],
+            "5" : [
+              "Steven Qu (sorry_TJ)"
+            ],
+            "6" : [
+              "Jason Lee (PHS Alpha)"
+            ],
+            "7" : [
+              "Vincent Bian (PHS Alpha)"
+            ],
+            "8" : [
+              "Zan Xu (Shadyside)"
+            ],
+            "9" : [
+              "Alex Wang (TJ Amethyst)"
+            ],
+            "10" : [
+              "Anson Berns (sorry_TJ)"
+            ],
+            "HM" : [
+              "Aaditya Singh",
+              "Aaron Li",
+              "Andrew Komo",
+              "Bennett Liu",
+              "Grace Cai",
+              "Matthew Feng",
+              "Haydn Gwyn",
+              "Jason Maa",
+              "Kim Nguyen"
+            ]
+          }
+        },
+        {
+          "name" : "Geometry",
+          "results" : {
+            "1" : [
+              "Joshua Lee (TJ Ruby)"
+            ],
+            "2" : [
+              "Vlad Oleksenko (Florida A2)"
+            ],
+            "3" : [
+              "Aaditya Singh (TJ Ruby)"
+            ],
+            "4" : [
+              "Ben Kang (TJ Emerald)"
+            ],
+            "5" : [
+              "Siang Tseng (Chesapeake A1)"
+            ],
+            "6" : [
+              "Nathan Weckwerth (Minnesota Math)"
+            ],
+            "7" : [
+              "Christopher Lee (NA Team 1)"
+            ],
+            "8" : [
+              "Graham O'Donnell (Florida A1)"
+            ],
+            "9" : [
+              "Michael Tang (Minnesota Math)"
+            ],
+            "10" : [
+              "Kevin Qian (sorry_TJ)"
+            ],
+            "HM" : [
+              "Ajit Kadaveru",
+              "Alan Yan",
+              "Alex Chung",
+              "David Chen",
+              "David Wu",
+              "John Mistele",
+              "Kim Nguyen",
+              "Ryan Kim",
+              "Sam Delatore"
+            ]
+          }
+        },
+        {
+          "name" : "Number Theory",
+          "results" : {
+            "1" : [
+              "Andrew Gu (Allderdice)"
+            ],
+            "2" : [
+              "Vincent Bian (PHS Alpha)"
+            ],
+            "3" : [
+              "Saaketh Vendantam (Florida A2)"
+            ],
+            "4" : [
+              "Nathan Weckwerth (Minnesota Math)"
+            ],
+            "5" : [
+              "Sean Elliott (PEARL)"
+            ],
+            "6" : [
+              "Ben Kang (TJ Emerald)"
+            ],
+            "7" : [
+              "Daniel Zhu (MoCoSwaggaSquad)"
+            ],
+            "8" : [
+              "Alan Yan (William is Mom)"
+            ],
+            "9" : [
+              "Michael Tang (Minnesota Math)"
+            ],
+            "10" : [
+              "Pratik Rathore (MoCoSwaggaSquad)"
+            ],
+            "HM" : [
+              "Cole Bright",
+              "Cory Hixson"
+            ]
+          }
+        }
+      ],
+      "teams" : [
+        {
+          "name" : "Overall",
+          "results" : {
+            "1" : [
+              "PEARL"
+            ],
+            "2" : [
+              "TJ Ruby"
+            ],
+            "3" : [
+              "Florida A1"
+            ],
+            "4" : [
+              "MoCoSwaggaSquad"
+            ],
+            "5" : [
+              "PHS Alpha"
+            ]
+          }
+        },
+        {
+          "name" : "Power",
+          "results" : {
+            "1" : [
+              "PEARL"
+            ],
+            "2" : [
+              "MoCoSwaggaSquad"
+            ],
+            "3" : [
+              "TJ Ruby"
+            ],
+            "4" : [
+              "sorry_TJ"
+            ],
+            "5" : [
+              "Minnesota Math"
+            ]
+          }
+        },
+        {
+          "name" : "Team",
+          "results" : {
+            "1" : [
+                "Florida A1",
+                "MoCoSwaggaSquad",
+                "TJ Ruby",
+                "PHS Alpha",
+                "PEARL"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "year" : "2016",
+      "individuals" : [
+        {
+          "name" : "Algebra",
+          "results" : {
+            "1" : [
+              "Saaketh Vendantam (Florida A)"
+            ],
+            "2" : [
+              "Steven Qu (Montgomery Blair Team 1)"
+            ],
+            "3" : [
+              "Jacob Stavrianos (Montgomery Blair Team 2)"
+            ],
+            "4" : [
+              "Alex Chung (Fairfax Math Wizards)"
+            ],
+            "5" : [
+              "Jackson Blitz (Florida A)"
+            ]
+          }
+        },
+        {
+          "name" : "Combinatorics",
+          "results" : {
+            "1" : [
+              "Erik Metz (Nicolas Bourbaki)"
+            ],
+            "2" : [
+              "Joshua Lee (pangzi)"
+            ],
+            "3" : [
+              "Eric Lu (Montgomery Blair Team 1)"
+            ],
+            "4" : [
+              "Guang Cui (Montgomery Blair Team 2)"
+            ],
+            "5" : [
+              "Brian Reinhart (Florida A)"
+            ]
+          }
+        },
+        {
+          "name" : "Computer Science",
+          "results" : {
+            "1" : [
+              "Eric Lu (Montgomery Blair Team 1)"
+            ],
+            "2" : [
+              "Erik Metz (Nicolas Bourbaki)"
+            ],
+            "3" : [
+              "Samuel Hsiang (pangzi)"
+            ],
+            "4" : [
+              "Brian Reinhart (Florida A)"
+            ],
+            "5" : [
+              "Guang Cui (Montgomery Blair Team 2)"
+            ],
+            "HM" : [
+              "James McGaa",
+              "Richard Liu"
+            ]
+          }
+        },
+        {
+          "name" : "Geometry",
+          "results" : {
+            "1" : [
+              "Joshua Lee (pangzi)"
+            ],
+            "2" : [
+              "Aaditya Singh (The First Order)"
+            ],
+            "3" : [
+              "Robin Park (pangzi)"
+            ],
+            "4" : [
+              "Graham O'Donnell"
+            ],
+            "5" : [
+              "David Chen (Fairfax Math Wizards)"
+            ],
+            "HM" : [
+              "Steven Qu",
+              "Rithvik Pasumarty"
+            ]
+          }
+        },
+        {
+          "name" : "Number Theory",
+          "results" : {
+            "1" : [
+              "Franklyn Wang (pangzi)"
+            ],
+            "2" : [
+              "Jeffery Yu (The First Order)"
+            ],
+            "3" : [
+              "Andrew Gu (Team Talonflame)"
+            ],
+            "4" : [
+              "Akshaj Kadaveru (pangzi)"
+            ],
+            "5" : [
+              "Ryan Broder (Florida A)"
+            ],
+            "HM" : [
+              "Thomas Luo",
+              "William Xu",
+              "David Wu",
+              "Jackson Blitz"
+            ]
+          }
+        }
+      ],
+      "teams" : [
+        {
+          "name" : "Overall",
+          "results" : {
+            "1" : [
+              "Florida A"
+            ],
+            "2" : [
+              "Montgomery Blair Team 2"
+            ],
+            "3" : [
+              "pangzi"
+            ],
+            "4" : [
+              "Montgomery Blair Team 1"
+            ],
+            "5" : [
+              "Nicolas Bourbaki"
+            ],
+            "6" : [
+              "The First Order"
+            ],
+            "7" : [
+              "Fairfax Math Wizards"
+            ],
+            "8" : [
+              "Florida B"
+            ],
+            "9" : [
+              "Tom & Jerry Store Leak C- Water"
+            ],
+            "10" : [
+              "The Sexy Primes"
+            ]
+          }
+        },
+        {
+          "name" : "Power",
+          "results" : {
+            "1" : [
+              "Montgomery Blair Team 2"
+            ],
+            "2" : [
+              "Nicolas Bourbaki"
+            ],
+            "3" : [
+              "Florida A"
+            ],
+            "4" : [
+              "pangzi"
+            ],
+            "5" : [
+              "Florida B"
+            ],
+            "6" : [
+              "Montgomery Blair Team 1",
+              "The Sexy Primes"
+            ],
+            "8" : [
+              "The First Order"
+            ],
+            "9" : [
+              "Team Talonflame"
+            ],
+            "10" : [
+              "The Schuyler Sisters (and Brothers)"
+            ]
+          }
+        },
+        {
+          "name" : "Team",
+          "results" : {
+            "1" : [
+              "Florida A"
+            ],
+            "2" : [
+              "Montgomery Blair Team 1",
+              "Tom & Jerry Store Leak C- Water"
+            ],
+            "4" : [
+              "Fairfax Math Wizards",
+              "The First Order",
+              "pangzi",
+              "Montgomery Blair Team 2",
+              "Nicolas Bourbaki",
+              "Florida C"
+            ],
+            "10" : [
+              "Wootton",
+              "The Schuyler Sisters (and Brothers)",
+              "Sinosaurus",
+              "Cosinosaurus",
+              "Chesapeake A",
+              "Chesapeake B",
+              "Star League A-Star",
+              "The Sexy Primes",
+              "Team Talonflame",
+              "Florida B"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "photos" : [
+    {
+      "year" : "2017",
+      "photos" : [
+        "cody-johnson.jpg",
+        "taisuke-yasuda.jpg",
+        "ethan-gruman.jpg"
+      ]
+    },
+    {
+      "year" : "2016",
+      "photos" : [
+        "cody-johnson.jpg",
+        "taisuke-yasuda.jpg",
+        "ethan-gruman.jpg"
+      ]
+    }
+  ]
+}
