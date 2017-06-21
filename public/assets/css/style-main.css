@@ -136,10 +136,9 @@ footer .footer-copyright ul li  {
   margin: 15px 25px;
 }
 
-.photos-list li  {
-  float: left;
-  margin-right: 10px;
-  margin-bottom: 10px;
+.gallery-thumbnail img  {
+  width: 200px;
+  height: 200px;
 }
 
 .clear-float  {

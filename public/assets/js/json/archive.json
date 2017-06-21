@@ -606,19 +606,13 @@
   "photos" : [
     {
       "year" : "2017",
-      "photos" : [
-        "cody-johnson.jpg",
-        "taisuke-yasuda.jpg",
-        "ethan-gruman.jpg"
-      ]
+      "thumbnail" : "assets/img/gallery/2017-thumbnail.png",
+      "link" : "https://flic.kr/s/aHskXqv9HA"
     },
     {
       "year" : "2016",
-      "photos" : [
-        "cody-johnson.jpg",
-        "taisuke-yasuda.jpg",
-        "ethan-gruman.jpg"
-      ]
+      "thumbnail" : "assets/img/gallery/2016-thumbnail.png",
+      "link" : "https://www.flickr.com/gp/cmimc/h0hit3"
     }
   ]
 }

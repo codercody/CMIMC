@@ -1,20 +1,8 @@
 {
   "news" : [
     {
-      "date" : "today",
+      "date" : "??",
       "message" : "We released our new website!"
-    },
-    {
-      "date" : "today",
-      "message" : "We released our new website!..."
-    },
-    {
-      "date" : "today",
-      "message" : "We released our new website!.."
-    },
-    {
-      "date" : "today",
-      "message" : "We released our new website!."
     }
   ]
 }
