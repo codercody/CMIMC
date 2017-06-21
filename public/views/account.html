@@ -1,9 +1,3 @@
-<script>
-$( document ).ready(function() {
-  $('.modal').modal()
-})
-</script>
-
 <div class="section white">
   <div class="container">
     <h4>Account<a class="waves-effect waves-light btn right red darken-2" data-target="add-team">Add Team</a></h4>
@@ -30,31 +24,33 @@ $( document ).ready(function() {
                 <label for="chaperone_number">Chaperone Phone Number</label>
               </div>
             </div>
-            <div class="row" ng-repeat="member in new_team.members">
-              <div class="col s12">
-                <h6>Student {{$index+1}}<a href class="grey-text text-darken-2" ng-click="removeMember(-1, $index)"><i class="fa fa-times right" aria-hidden="true"></i></a></h6>
-              </div>
-              <div class="input-field col s6">
-                <input id="student_name_{{$index}}" type="text" class="validate" ng-model="member.name">
-                <label for="student_name_{{$index}}">Student {{$index+1}} Name</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="student_email_{{$index}}" type="email" class="validate" ng-model="member.email">
-                <label for="student_email_{{$index}}">Student {{$index+1}} Email</label>
-              </div>
-              <div class="input-field col s6">
-                <select ng-model="member.subjects">
-                  <option ng-repeat="subject in subjects" value="{{subject}}">{{subject}}</option>
-                </select>
-              </div>
-              <div class="input-field col s3">
-                <input id="student_email_{{$index}}" type="number" class="validate" ng-model="member.age">
-                <label for="student_email_{{$index}}">Student {{$index+1}} Age</label>
-              </div>
-              <div class="input-field col s3">
-                <select ng-model="member.tshirt">
-                  <option ng-repeat="tshirt in tshirts" value="{{tshirt}}">{{tshirt}}</option>
-                </select>
+            <div ng-model="new_team.members" form-update>
+              <div class="row" ng-repeat="member in new_team.members" update-team="refreshMaterialize">
+                <div class="col s12">
+                  <h6>Student {{$index+1}}<a href class="grey-text text-darken-2" ng-click="removeMember(-1, $index)"><i class="fa fa-times right" aria-hidden="true"></i></a></h6>
+                </div>
+                <div class="input-field col s6">
+                  <input id="student_name_{{$index}}" type="text" class="validate" ng-model="member.name">
+                  <label for="student_name_{{$index}}">Student {{$index+1}} Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="student_email_{{$index}}" type="email" class="validate" ng-model="member.email">
+                  <label for="student_email_{{$index}}">Student {{$index+1}} Email</label>
+                </div>
+                <div class="input-field col s6">
+                  <select ng-model="member.subjects">
+                    <option ng-repeat="subject in subjects" value="{{subject}}">{{subject}}</option>
+                  </select>
+                </div>
+                <div class="input-field col s3">
+                  <input id="student_email_{{$index}}" type="number" class="validate" ng-model="member.age">
+                  <label for="student_email_{{$index}}">Student {{$index+1}} Age</label>
+                </div>
+                <div class="input-field col s3">
+                  <select ng-model="member.tshirt">
+                    <option ng-repeat="tshirt in tshirts" value="{{tshirt}}">{{tshirt}}</option>
+                  </select>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -84,6 +80,7 @@ $( document ).ready(function() {
         <thead>
           <tr>
             <th>Student</th>
+            <th>Email</th>
             <th>Age</th>
             <th>Topics</th>
             <th>T-Shirt</th>
@@ -92,6 +89,7 @@ $( document ).ready(function() {
         <tbody>
           <tr ng-repeat="member in team.members">
             <td>{{member.name}}</td>
+            <td>{{member.email}}</td>
             <td>{{member.age}}</td>
             <td>{{member.subjects}}</td>
             <td>{{member.tshirt}}</td>
@@ -122,7 +120,7 @@ $( document ).ready(function() {
                   <label for="chaperone_number_{{$index}}">Chaperone Phone Number</label>
                 </div>
               </div>
-              <div class="row" ng-repeat="member in team.members">
+              <div class="row" ng-repeat="member in team.members" update-team="refreshMaterialize">
                 <div class="col s12">
                   <h6>Student {{$index+1}}<a href class="grey-text text-darken-2" ng-click="removeMember($parent.$index, $index)"><i class="fa fa-times right" aria-hidden="true"></i></a></h6>
                 </div>

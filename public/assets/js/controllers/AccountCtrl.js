@@ -2,8 +2,12 @@ app.controller('AccountCtrl', [
   '$scope',
   '$state',
   '$http',
+  '$timeout',
   function($scope, $state, $http) {
-    $scope.new_team = {"members" : [{}]}
+    $scope.new_team = {"members" : [{
+      "subjects" : $scope.subjects[0],
+      "tshirt" : "M"
+    }]}
     $scope.teams_original = [
       {
         "id" : 1,
@@ -99,9 +103,15 @@ app.controller('AccountCtrl', [
     $scope.teams = JSON.parse(JSON.stringify($scope.teams_original))
     $scope.addMember = function(i) {
       if (i == -1)
-        $scope.new_team.members.push({})
+        $scope.new_team.members.push({
+          "subjects" : $scope.subjects[0],
+          "tshirt" : "M"
+        })
       else
-        $scope.teams[i].members.push({})
+        $scope.teams[i].members.push({
+          "subjects" : $scope.subjects[0],
+          "tshirt" : "M"
+        })
     }
     $scope.removeMember = function(i, j) {
       if (i == -1) {
@@ -115,7 +125,7 @@ app.controller('AccountCtrl', [
       }
     }
 
-    $(document).ready(function() {
+    $scope.$on('refreshMaterialize', function() {
       $('select').material_select()
       Materialize.updateTextFields()
       $('.modal').modal({
