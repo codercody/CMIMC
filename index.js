@@ -54,7 +54,7 @@ function login(req, res) {
             var token = jwt.sign({
                 email: user.email,
                 account_id: user.account_id
-              }, process.env.JWT_KEY)
+              }, process.env.JWT_SECRET_KEY)
               res.json({
                 success: true,
                 message: 'Enjoy your token!',
@@ -126,10 +126,24 @@ app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
           if (err) {
             throw err
           }
-          console.log(results)
           res.json(results)
         })
       })
+  }
+})
+
+app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
+  if (req.user.account_id !== parseInt(req.params.account_id)) {
+    res.status(401).json({
+      success: false,
+      message: 'Post to unauthorized account.'
+    })
+  } else {
+    console.log(req.body)
+    connection.query()
+    res.status(200).json({
+      success: true
+    })
   }
 })
 

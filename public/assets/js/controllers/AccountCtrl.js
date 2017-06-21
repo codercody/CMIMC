@@ -2,8 +2,9 @@ app.controller('AccountCtrl', [
   '$scope',
   '$state',
   '$http',
-  '$timeout',
-  function($scope, $state, $http) {
+  'auth',
+  'account',
+  function($scope, $state, $http, auth, account) {
     $scope.new_team = {"members" : [{
       "subjects" : $scope.subjects[0],
       "tshirt" : "M"
@@ -135,4 +136,8 @@ app.controller('AccountCtrl', [
         }
       )
     })
+
+    $scope.addTeam = function() {
+      account.addTeam($scope.new_team)
+    }
 }])
