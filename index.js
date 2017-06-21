@@ -44,7 +44,7 @@ function login(req, res) {
           if (hash != user.password) {
             // incorrect password
             console.log('Incorrect password.')
-            res.json({
+            res.status(422).json({
               success: false,
               message: 'Incorrect password.'
             })
@@ -55,7 +55,7 @@ function login(req, res) {
                 email: user.email,
                 account_id: user.account_id
               }, process.env.JWT_SECRET_KEY)
-              res.json({
+              res.status(200).json({
                 success: true,
                 message: 'Enjoy your token!',
                 token: token
@@ -80,7 +80,7 @@ app.post('/register', function(req, res) {
         throw err
       }
       if (results.length > 0) {
-        res.json({
+        res.status(422).json({
           success: false,
           message: 'Email taken already.'
         })
@@ -126,7 +126,7 @@ app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
           if (err) {
             throw err
           }
-          res.json(results)
+          res.status(200).json(results)
         })
       })
   }
@@ -139,11 +139,34 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
       message: 'Post to unauthorized account.'
     })
   } else {
-    console.log(req.body)
-    connection.query()
-    res.status(200).json({
-      success: true
-    })
+    team = req.body
+    connection.query('insert into teams (account_id, chaperone_name, chaperone_email, chaperone_number) values (?,?,?,?)',
+      [req.user.account_id, team.chaperone_name, team.chaperone_email, team.chaperone_number],
+      function(err, results, fields) {
+        if (err) {
+          throw err
+        }
+        var team_id = results.insertId,
+            tasks = team.members.map(member => {
+              return function(callback) {
+                connection.query('insert into students (team_id, name, email, subject1, subject2, age, tshirt) values (?,?,?,?,?,?,?)',
+                  [team_id, member.name, member.email, member.subject1, member.subject2, member.age, member.tshirt],
+                  function(err, results, fields) {
+                    if (err) {
+                      callback(err, null)
+                    } else {
+                      callback(null, results)
+                    }
+                  })
+              }
+            })
+        async.parallel(tasks, function(err, results) {
+          if (err) {
+            throw err
+          }
+          res.status(200).json(req.body)
+        })
+      })
   }
 })
 
