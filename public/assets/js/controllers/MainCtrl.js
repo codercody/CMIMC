@@ -18,10 +18,7 @@ app.controller('MainCtrl', [
       $scope.payment_deadline = res.data.payment_deadline
       $scope.contest_date = res.data.contest_date
       $scope.registration_price = res.data.registration_price
-      $scope.subjects = []
-      for(i = 0; i < res.data.subjects.length - 1; i++)
-        for(j = i+1; j < res.data.subjects.length; j++)
-          $scope.subjects.push(res.data.subjects[i] + ", " + res.data.subjects[j])
+      $scope.subjects = res.data.subjects
       $scope.tshirts = res.data.tshirts
     })
 

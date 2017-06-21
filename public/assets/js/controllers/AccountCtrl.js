@@ -6,7 +6,7 @@ app.controller('AccountCtrl', [
   'account',
   function($scope, $state, $http, auth, account) {
     $scope.new_team = {"members" : [{
-      "subjects" : $scope.subjects[0],
+      "subjects" : {},
       "tshirt" : "M"
     }]}
     $scope.teams_original = [
@@ -21,35 +21,35 @@ app.controller('AccountCtrl', [
           {
             "name" : "Elizabeth Cao",
             "age" : 17,
-            "subjects" : "Combinatorics, Computer Science",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "M",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Rithvik Pasumarty",
             "age" : 17,
-            "subjects" : "Computer Science, Geometry",
+            "subjects" : ["Computer Science", "Combinatorics"],
             "tshirt" : "XXL",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Weihua Zhu (Aiden)",
             "age" : 17,
-            "subjects" : "Algebra, Geometry",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "S",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Xuyang Li (Irio)",
             "age" : 17,
-            "subjects" : "Algebra, Number Theory",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "S",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Zihao Li (Chris)",
             "age" : 18,
-            "subjects" : "Computer Science, Number Theory",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "L",
             "email" : "idk@idk.com"
           }
@@ -66,35 +66,35 @@ app.controller('AccountCtrl', [
           {
             "name" : "Elizabeth Cao",
             "age" : 17,
-            "subjects" : "Combinatorics, Computer Science",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "M",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Rithvik Pasumarty",
             "age" : 17,
-            "subjects" : "Computer Science, Geometry",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "XXL",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Weihua Zhu (Aiden)",
             "age" : 17,
-            "subjects" : "Algebra, Geometry",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "S",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Xuyang Li (Irio)",
             "age" : 17,
-            "subjects" : "Algebra, Number Theory",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "S",
             "email" : "idk@idk.com"
           },
           {
             "name" : "Zihao Li (Chris)",
             "age" : 18,
-            "subjects" : "Computer Science, Number Theory",
+            "subjects" : ["Algebra", "Combinatorics"],
             "tshirt" : "L",
             "email" : "idk@idk.com"
           }
@@ -105,12 +105,12 @@ app.controller('AccountCtrl', [
     $scope.addMember = function(i) {
       if (i == -1)
         $scope.new_team.members.push({
-          "subjects" : $scope.subjects[0],
+          "subjects" : {},
           "tshirt" : "M"
         })
       else
         $scope.teams[i].members.push({
-          "subjects" : $scope.subjects[0],
+          "subjects" : {},
           "tshirt" : "M"
         })
     }

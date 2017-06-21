@@ -38,7 +38,7 @@
                   <label for="student_email_{{$index}}">Student {{$index+1}} Email</label>
                 </div>
                 <div class="input-field col s6">
-                  <select ng-model="member.subjects">
+                  <select ng-model="member.subjects" multiple>
                     <option ng-repeat="subject in subjects" value="{{subject}}">{{subject}}</option>
                   </select>
                 </div>
@@ -72,7 +72,7 @@
 
 
 
-    <div class="account-team" ng-repeat="team in teams">
+    <div class="account-team" ng-repeat="team in teams_original">
       <h5>{{team.name}}<a class="waves-effect waves-light btn right red darken-2" data-target="edit-team-{{$index}}">Edit Team</a></h5>
       <p>Chaperone: <b>{{team.chaperone_name}}</b> - {{team.chaperone_email}} / {{team.chaperone_number}}</p>
       <p>Registration Fee: ${{registration_price * team.members.length}} - <span class="red-text text-darken-2">{{team.paid}}</span></p>
@@ -91,12 +91,14 @@
             <td>{{member.name}}</td>
             <td>{{member.email}}</td>
             <td>{{member.age}}</td>
-            <td>{{member.subjects}}</td>
+            <td>{{member.subjects[0]}}, {{member.subjects[1]}}</td>
             <td>{{member.tshirt}}</td>
           </tr>
         </tbody>
       </table>
+    </div>
 
+    <div ng-repeat="team in teams">
       <div id="edit-team-{{$index}}" class="modal">
         <div class="modal-content">
           <h5>Edit Team</h5>
@@ -133,7 +135,7 @@
                   <label for="student_email_{{$parent.$index}}_{{$index}}">Student {{$index+1}} Email</label>
                 </div>
                 <div class="input-field col s6">
-                  <select ng-model="member.subjects">
+                  <select ng-model="member.subjects" multiple>
                     <option ng-repeat="subject in subjects" value="{{subject}}">{{subject}}</option>
                   </select>
                 </div>
