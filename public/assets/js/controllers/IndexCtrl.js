@@ -6,4 +6,7 @@ app.controller('IndexCtrl', [
     $http.get('/assets/js/json/news.json').then(function(res){
       $scope.news = res.data.news
     })
+    $(document).ready(function() {
+      $('.parallax').parallax()
+    })
 }])

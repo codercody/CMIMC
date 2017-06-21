@@ -1,10 +1,12 @@
 const express = require('express'),
       app = express(),
+      async = require('async'),
       // parameter parsing
       bodyParser = require('body-parser'),
       // security
       crypto = require('crypto'),
       jwt = require('jsonwebtoken'),
+      auth = require('express-jwt-token'),
       // mysql database
       mysql = require('mysql'),
       connection = mysql.createConnection({
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
-app.post('/login', function(req, res) {
+function login(req, res) {
   var email = req.body.email,
       password = req.body.password
   connection.query('select * from accounts where email = ?',
@@ -31,11 +33,11 @@ app.post('/login', function(req, res) {
           // user email not found
           console.log('Email not found.')
           res.json({
-            success: false, 
+            success: false,
             message: 'Email not found.'
           })
         } else {
-          // user email found 
+          // user email found
           var user = results[0],
               hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64)
                            .toString('hex')
@@ -51,7 +53,7 @@ app.post('/login', function(req, res) {
             console.log('User logged in.')
             var token = jwt.sign({
                 email: user.email,
-                password: user.password
+                account_id: user.account_id
               }, process.env.JWT_KEY)
               res.json({
                 success: true,
@@ -61,7 +63,9 @@ app.post('/login', function(req, res) {
           }
         }
       })
-})
+}
+
+app.post('/login', login)
 
 app.post('/register', function(req, res) {
   var email = req.body.email,
@@ -69,8 +73,8 @@ app.post('/register', function(req, res) {
       password = crypto.pbkdf2Sync(req.body.password, salt, 1000, 64)
                        .toString('hex')
   // check if email is taken already
-  connection.query('select * from accounts where email = ?', 
-    [email], 
+  connection.query('select * from accounts where email = ?',
+    [email],
     function(err, results, fields) {
       if (err) {
         throw err
@@ -82,20 +86,51 @@ app.post('/register', function(req, res) {
         })
       } else {
         // register user
-        connection.query('insert into accounts (email, password, salt) values (?, ?, ?)', 
-          [email, password, salt], 
+        connection.query('insert into accounts (email, password, salt) values (?, ?, ?)',
+          [email, password, salt],
           function(err, results, fields) {
             if (err) {
               throw err
             }
-            console.log('User saved successfully.')
-            res.json({
-              success: true,
-              message: 'User saved successfully.'
-            })
+
+            login(req, res)
           })
       }
     })
+})
+
+app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
+  if (req.params.account_id !== req.user.account_id) {
+    res.status(401)
+  } else {
+    connection.query('select * from teams where account_id = ?',
+      [req.user.account_id],
+      function(err, results, fields) {
+        if (err) {
+          throw err
+        }
+        var tasks = results.map(team => {
+          return function(callback) {
+            connection.query('select * from students where team_id = ?',
+              [team.team_id],
+              function(err, results, fields) {
+                if (err) {
+                  callback(err, null)
+                }
+                team.members = results
+                callback(null, team)
+              })
+          }
+        })
+        async.parallel(tasks, function(err, results) {
+          if (err) {
+            throw err
+          }
+          console.log(results)
+          res.json(results)
+        })
+      })
+  }
 })
 
 app.listen(8000, function() {

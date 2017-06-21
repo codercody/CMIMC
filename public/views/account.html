@@ -14,60 +14,52 @@ $( document ).ready(function() {
           <form class="col s12">
             <div class="row">
               <div class="input-field col s6">
-                <input id="team_name" type="text" class="validate">
+                <input id="team_name" type="text" class="validate" ng-model="new_team.name">
                 <label for="team_name">Team Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="chaperone_name" type="text" class="validate">
+                <input id="chaperone_name" type="text" class="validate" ng-model="new_team.chaperone_name">
                 <label for="chaperone_name">Chaperone Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="chaperone_email" type="email" class="validate">
+                <input id="chaperone_email" type="email" class="validate" ng-model="new_team.chaperone_email">
                 <label for="chaperone_email">Chaperone Email</label>
               </div>
               <div class="input-field col s6">
-                <input id="chaperone_phone" type="tel" class="validate">
-                <label for="chaperone_phone">Chaperone Phone</label>
+                <input id="chaperone_number" type="tel" class="validate" ng-model="new_team.chaperone_number">
+                <label for="chaperone_number">Chaperone Phone Number</label>
               </div>
             </div>
-            <p>Students</p>
+            <div class="row" ng-repeat="member in new_team.members">
+              <div class="col s12">
+                <h6>Student {{$index+1}}<a href class="grey-text text-darken-2" ng-click="removeMember(-1, $index)"><i class="fa fa-times right" aria-hidden="true"></i></a></h6>
+              </div>
+              <div class="input-field col s6">
+                <input id="student_name_{{$index}}" type="text" class="validate" ng-model="member.name">
+                <label for="student_name_{{$index}}">Student {{$index+1}} Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="student_email_{{$index}}" type="email" class="validate" ng-model="member.email">
+                <label for="student_email_{{$index}}">Student {{$index+1}} Email</label>
+              </div>
+              <div class="input-field col s6">
+                <select ng-model="member.subjects">
+                  <option ng-repeat="subject in subjects" value="{{subject}}">{{subject}}</option>
+                </select>
+              </div>
+              <div class="input-field col s3">
+                <input id="student_email_{{$index}}" type="number" class="validate" ng-model="member.age">
+                <label for="student_email_{{$index}}">Student {{$index+1}} Age</label>
+              </div>
+              <div class="input-field col s3">
+                <select ng-model="member.tshirt">
+                  <option ng-repeat="tshirt in tshirts" value="{{tshirt}}">{{tshirt}}</option>
+                </select>
+              </div>
+            </div>
             <div class="row">
-              <div class="input-field col s6">
-                <input id="student_name_1" type="text" class="validate">
-                <label for="student_name_1">Student 1 Name</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="student_age_1" type="number" class="validate">
-                <label for="student_age_1">Student 1 Age</label>
-              </div>
-              <div class="input-field col s6">
-                <select id="student_topics_1">
-                  <option>Algebra, Combinatorics</option>
-                  <option>Algebra, Computer Science</option>
-                  <option>Algebra, Geometry</option>
-                  <option>Algebra, Number Theory</option>
-                  <option>Combinatorics, Computer Science</option>
-                  <option>Combinatorics, Geometry</option>
-                  <option>Combinatorics, Number Theory</option>
-                  <option>Computer Science, Geometry</option>
-                  <option>Computer Science, Number Theory</option>
-                  <option>Geometry, Number Theory</option>
-                </select>
-                <label>Student 1 Topics</label>
-              </div>
-              <div class="input-field col s6">
-                <select id="student_tshirt_1">
-                  <option>XS</option>
-                  <option>S</option>
-                  <option selected>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                  <option>XXL</option>
-                </select>
-                <label>Student 1 T-Shirt</label>
-              </div>
               <div class="col s6">
-                <a class="waves-effect waves-light btn red darken-2">Add Student</a>
+                <a class="waves-effect waves-light btn red darken-2" ng-disabled="new_team.members.length >= 6" ng-click="addMember(-1)">Add Student</a>
               </div>
               <div class="col s6">
                 <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Add Team</button>
@@ -76,68 +68,103 @@ $( document ).ready(function() {
           </form>
         </div>
       </div>
+
       <div class="modal-footer">
-        <a href="#" class="modal-action modal-close waves-effect btn-flat">Cancel</a>
+        <a class="modal-action modal-close waves-effect btn-flat">Cancel</a>
       </div>
     </div>
 
 
 
+    <div class="account-team" ng-repeat="team in teams">
+      <h5>{{team.name}}<a class="waves-effect waves-light btn right red darken-2" data-target="edit-team-{{$index}}">Edit Team</a></h5>
+      <p>Chaperone: <b>{{team.chaperone_name}}</b> - {{team.chaperone_email}} / {{team.chaperone_number}}</p>
+      <p>Registration Fee: ${{registration_price * team.members.length}} - <span class="red-text text-darken-2">{{team.paid}}</span></p>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Age</th>
+            <th>Topics</th>
+            <th>T-Shirt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="member in team.members">
+            <td>{{member.name}}</td>
+            <td>{{member.age}}</td>
+            <td>{{member.subjects}}</td>
+            <td>{{member.tshirt}}</td>
+          </tr>
+        </tbody>
+      </table>
 
+      <div id="edit-team-{{$index}}" class="modal">
+        <div class="modal-content">
+          <h5>Edit Team</h5>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="team_name_{{$index}}" type="text" class="validate" ng-model="team.name">
+                  <label for="team_name_{{$index}}">Team Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="chaperone_name_{{$index}}" type="text" class="validate" ng-model="team.chaperone_name">
+                  <label for="chaperone_name_{{$index}}">Chaperone Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="chaperone_email_{{$index}}" type="email" class="validate" ng-model="team.chaperone_email">
+                  <label for="chaperone_email_{{$index}}">Chaperone Email</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="chaperone_number_{{$index}}" type="tel" class="validate" ng-model="team.chaperone_number">
+                  <label for="chaperone_number_{{$index}}">Chaperone Phone Number</label>
+                </div>
+              </div>
+              <div class="row" ng-repeat="member in team.members">
+                <div class="col s12">
+                  <h6>Student {{$index+1}}<a href class="grey-text text-darken-2" ng-click="removeMember($parent.$index, $index)"><i class="fa fa-times right" aria-hidden="true"></i></a></h6>
+                </div>
+                <div class="input-field col s6">
+                  <input id="student_name_{{$parent.$index}}_{{$index}}" type="text" class="validate" ng-model="member.name">
+                  <label for="student_name_{{$parent.$index}}_{{$index}}">Student {{$index+1}} Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="student_email_{{$parent.$index}}_{{$index}}" type="email" class="validate" ng-model="member.email">
+                  <label for="student_email_{{$parent.$index}}_{{$index}}">Student {{$index+1}} Email</label>
+                </div>
+                <div class="input-field col s6">
+                  <select ng-model="member.subjects">
+                    <option ng-repeat="subject in subjects" value="{{subject}}">{{subject}}</option>
+                  </select>
+                </div>
+                <div class="input-field col s3">
+                  <input id="student_email_{{$parent.$index}}_{{$index}}" type="number" class="validate" ng-model="member.age">
+                  <label for="student_email_{{$parent.$index}}_{{$index}}">Student {{$index+1}} Age</label>
+                </div>
+                <div class="input-field col s3">
+                  <select ng-model="member.tshirt">
+                    <option ng-repeat="tshirt in tshirts" value="{{tshirt}}">{{tshirt}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s6">
+                  <a class="waves-effect waves-light btn red darken-2" ng-disabled="team.members.length >= 6" ng-click="addMember($index)">Add Student</a>
+                </div>
+                <div class="col s6">
+                  <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Add Team</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
 
-    <h5>The Sexy Primes<a class="waves-effect waves-light btn right red darken-2" data-target="edit-team123">Edit Team</a></h5>
-    <div id="edit-team123" class="modal">
-      <div class="modal-content">
-        <h5>Edit Team</h5>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="modal-action modal-close waves-effect btn-flat">Cancel</a>
+        <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect btn-flat">Cancel</a>
+        </div>
       </div>
     </div>
-    <p>Chaperone: <b>Cody Johnson</b> - ctj@math.cmu.edu / (561) 676-5696</p>
-    <p>Registration Fee: $75 - <span class="red-text text-darken-2">Paid</span></p>
-    <table class="striped">
-      <thead>
-        <tr>
-          <th>Student</th>
-          <th>Age</th>
-          <th>Topics</th>
-          <th>T-Shirt</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>Elizabeth Cao</td>
-          <td>17</td>
-          <td>Combinatorics, Computer Science</td>
-          <td>M</td>
-        </tr>
-        <tr>
-          <td>Rithvik Pasumarty</td>
-          <td>17</td>
-          <td>Computer Science, Geometry</td>
-          <td>L</td>
-        </tr>
-        <tr>
-          <td>Weihua Zhu (Aiden)</td>
-          <td>17</td>
-          <td>Algebra, Geometry</td>
-          <td>S</td>
-        </tr>
-        <tr>
-          <td>Xuyang Li (Irio)</td>
-          <td>17</td>
-          <td>Algebra, Number Theory</td>
-          <td>S</td>
-        </tr>
-        <tr>
-          <td>Zihao Li</td>
-          <td>18</td>
-          <td>Computer Science, Number Theory</td>
-          <td>L</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

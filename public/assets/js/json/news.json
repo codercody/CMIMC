@@ -3,6 +3,18 @@
     {
       "date" : "today",
       "message" : "We released our new website!"
+    },
+    {
+      "date" : "today",
+      "message" : "We released our new website!..."
+    },
+    {
+      "date" : "today",
+      "message" : "We released our new website!.."
+    },
+    {
+      "date" : "today",
+      "message" : "We released our new website!."
     }
   ]
 }

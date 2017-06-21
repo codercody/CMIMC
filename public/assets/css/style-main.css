@@ -26,6 +26,14 @@ nav .brand-logo img {
   display: inline-block;
 }
 
+.login-modal  {
+  max-width: 40% !important;
+}
+
+.signup-card.row div  {
+  height: 50px;
+}
+
 footer .footer-copyright ul li  {
   display: inline;
   margin-right: 18px;
@@ -48,12 +56,17 @@ footer .footer-copyright ul li  {
 }
 
 .news-feed  {
-  height: 360px;
+  height: 240px;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .news-feed:hover  {
   overflow-y: scroll;
+}
+
+.news-feed li p {
+  margin-bottom: 0;
 }
 
 .section  {
@@ -136,4 +149,8 @@ footer .footer-copyright ul li  {
 .staff-row .card-content  {
   height: 240px;
   overflow-y: hidden;
+}
+
+.account-team {
+  margin-top: 36px;
 }

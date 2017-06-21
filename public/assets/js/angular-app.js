@@ -27,7 +27,8 @@ app.config([
       })
       .state('account', {
         url: '/account',
-        templateUrl: '/views/account.html'
+        templateUrl: '/views/account.html',
+        controller: 'AccountCtrl'
       })
       .state('privacy', {
         url: '/privacy',

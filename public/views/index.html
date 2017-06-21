@@ -1,20 +1,67 @@
-<script>
-$( document ).ready(function() {
-  $('.parallax').parallax()
-})
-</script>
-
 <div class="section white">
   <div class="row container">
     <div class="col l6 s12">
       <h4 class="header">Welcome, mathletes!</h4>
-      <p>The Carnegie Mellon Informatics and Mathematics Competition (CMIMC) is an annual math and computer science competition held at <a href="http://www.cmu.edu/" target="_blank" class="red-text text-darken-2">Carnegie Mellon University</a> by CMU students. The CMIMC {{year}} will be held on {{contest_date}}.</p>
+      <p style="margin-bottom: 36px">The Carnegie Mellon Informatics and Mathematics Competition (CMIMC) is an annual math and computer science competition held at <a href="http://www.cmu.edu/" target="_blank" class="red-text text-darken-2">Carnegie Mellon University</a> by CMU students. The CMIMC {{year}} will be held on {{contest_date}}.</p>
+      <div ng-hide="isLoggedIn()">
+        <h4><i class="fa fa-newspaper-o" aria-hidden="true"></i> News</h4>
+        <ul class="news-feed">
+          <li ng-repeat="post in news">
+            <div class="row">
+              <div class="col s1">
+                <i class="fa fa-rss" aria-hidden="true"></i>
+              </div>
+              <div class="col s11">
+                <b>{{post.date}}</b><p>{{post.message}}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="col l5 offset-l1 s12">
-      <ul class="collection with-header news-feed">
-        <li class="collection-header red darken-2 grey-text text-lighten-4"><h5>News</h5></li>
-        <li class="collection-item" ng-repeat="post in news"><b>{{post.date}}</b><p>{{post.message}}</p></li>
-      </ul>
+      <div ng-show="isLoggedIn()">
+        <h4><i class="fa fa-newspaper-o" aria-hidden="true"></i> News</h4>
+        <ul class="news-feed">
+          <li ng-repeat="post in news">
+            <div class="row">
+              <div class="col s1">
+                <i class="fa fa-rss" aria-hidden="true"></i>
+              </div>
+              <div class="col s11">
+                <b>{{post.date}}</b><p>{{post.message}}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card" ng-hide="isLoggedIn()">
+        <div class="card-content signup-card">
+          <form ng-submit="signup()">
+            <h4>Sign Up</h4>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="account_signup_email" type="email" class="validate" ng-model="signup.email">
+                <label for="account_signup_email">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="account_signup_password" type="password" class="validate" ng-model="signup.password">
+                <label for="account_signup_password">Password</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="account_signup_password_confirm" type="password" class="validate" ng-model="signup.password_confirm">
+                <label for="account_signup_password_confirm">Password (confirm)</label>
+              </div>
+              <div class="col s12 red-text text-darken-2" ng-if="signup.fail">
+                <p>{{signup.message}}<p>
+              </div>
+              <div class="input-field col s12">
+                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Sign Up</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -36,7 +83,7 @@ $( document ).ready(function() {
     <div class="col l4 s12">
       <img src="assets/img/computer.png" height="150px">
       <h5>Register Online</h5>
-      <p>Register your team by <a href="#" class="red-text text-darken-2">logging in</a>. Be sure to keep track of all important deadlines and dates.</p>
+      <p>Register your team by logging in. Be sure to keep track of all important deadlines and dates.</p>
     </div>
     <div class="col l4 s12">
       <img src="assets/img/plane.png" height="150px">

@@ -13,5 +13,11 @@ app.controller('ArchiveCtrl', [
           s += ", " + x[i];
         return s
       }
+      $(document).ready(function(){
+        $('ul.tabs').tabs()
+        $('.materialboxed').materialbox()
+        $('.collapsible').collapsible({expandable: true})
+        $('.materialboxed').materialbox()
+      })
     })
 }])

@@ -19,10 +19,12 @@
   <link rel="icon" href="assets/img/favicon.ico">
   <!-- Angular -->
   <script src="assets/js/angular-app.js"></script>
+  <script src="assets/js/services/auth.js"></script>
   <script src="assets/js/controllers/MainCtrl.js"></script>
   <script src="assets/js/controllers/IndexCtrl.js"></script>
   <script src="assets/js/controllers/ArchiveCtrl.js"></script>
   <script src="assets/js/controllers/StaffCtrl.js"></script>
+  <script src="assets/js/controllers/AccountCtrl.js"></script>
 </head>
 
 <body ng-app="mainApp" ng-controller="MainCtrl">
@@ -36,25 +38,30 @@
             <li><a href="#!/information" class="grey-text text-darken-3">Information</a></li>
             <li><a href="#!/archive" class="grey-text text-darken-3">Archive</a></li>
             <li><a href="#!/staff" class="grey-text text-darken-3">Staff</a></li>
-            <li><a class="waves-effect waves-light btn red darken-2" data-target="login">Log In</a></li>
+            <li ng-show="isLoggedIn()"><a href="#!/account" class="grey-text text-darken-3">Account</a></li>
+            <li ng-hide="isLoggedIn()"><a class="waves-effect waves-light btn red darken-2" data-target="login">Log In</a></li>
+            <li ng-show="isLoggedIn()"><a class="waves-effect waves-light btn red darken-2" ng-click="logout()">Log Out</a></li>
           </ul>
         </div>
       </nav>
     </div>
-    <div id="login" class="modal">
+    <div id="login" class="modal login-modal">
       <div class="modal-content">
         <div class="row">
           <div class="col s12">
-            <form>
+            <form ng-submit="login()">
               <h4>Log In</h4>
               <div class="row">
-                <div class="input-field col s6">
-                  <input id="account_login_email" type="email" class="validate">
+                <div class="input-field col s12">
+                  <input id="account_login_email" type="email" class="validate" ng-model="login.email">
                   <label for="account_login_email">Email</label>
                 </div>
-                <div class="input-field col s6">
-                  <input id="account_login_password" type="password" class="validate">
+                <div class="input-field col s12">
+                  <input id="account_login_password" type="password" class="validate" ng-model="login.password">
                   <label for="account_login_password">Password</label>
+                </div>
+                <div class="col s12 red-text text-darken-2" ng-if="login.fail">
+                  <p>{{login.message}}<p>
                 </div>
                 <div class="input-field col s12">
                   <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Log In</button>
@@ -62,45 +69,10 @@
               </div>
             </form>
           </div>
-          <div class="col s12">
-            <form>
-              <h4>Sign Up</h4>
-              <div class="row">
-                <div class="input-field col s4">
-                  <input id="account_signup_email" type="email" class="validate">
-                  <label for="account_signup_email">Email</label>
-                </div>
-                <div class="input-field col s4">
-                  <input id="account_signup_password" type="password" class="validate">
-                  <label for="account_signup_password">Password</label>
-                </div>
-                <div class="input-field col s4">
-                  <input id="account_signup_password_confirm" type="password" class="validate">
-                  <label for="account_signup_password_confirm">Password (confirm)</label>
-                </div>
-                <div class="input-field col s12">
-                  <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Sign Up</button>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="modal-action modal-close waves-effect btn-flat">Close</a>
       </div>
     </div>
   </header>
-
-  <div>
-    <form ng-submit="login()">
-      <label>Email</label>
-      <input type="email" ng-model="user.email">
-      <label>Password</label>
-      <input type="password" ng-model="user.password">
-      <input type="submit">
-    </form>
-  </div>
 
   <main>
     <ui-view></ui-view>

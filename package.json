@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "async": "^2.4.1",
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.5.2",
     "body-parser": "^1.17.2",
     "crypto": "0.0.3",
     "express": "^4.15.3",
+    "express-jwt-token": "^0.1.5",
     "https": "^1.0.0",
     "jsonwebtoken": "^7.4.1",
     "mysql": "^2.13.0"
