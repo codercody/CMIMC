@@ -34,6 +34,12 @@ app.controller('AccountCtrl', [
       }
     }
 
+    $scope.addTeam = function() {
+      account.addTeam($scope.new_team).then(function() {
+        $scope.teams = account.teams
+      })
+    }
+
     $scope.$on('refreshMaterialize', function() {
       $('select').material_select()
       Materialize.updateTextFields()
@@ -44,10 +50,4 @@ app.controller('AccountCtrl', [
         }
       )
     })
-
-    $scope.addTeam = function() {
-      account.addTeam($scope.new_team).then(function() {
-        $scope.teams = account.teams
-      })
-    }
 }])

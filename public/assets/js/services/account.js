@@ -19,6 +19,7 @@ app.factory('account', [
       })
     }
 
+    // add a whole team to the account
     account.addTeam = function(team) {
       return $http.post('/teams/' + account.account_id, team, {
         headers: {
