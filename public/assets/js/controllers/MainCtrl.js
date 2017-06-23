@@ -48,22 +48,12 @@ app.controller('MainCtrl', [
           $scope.login.message = response.message
           return
         }
-        $scope.signup = {
+        $scope.login = {
           fail: false
         }
         $('#login').modal('close')
         auth.saveToken(response.token)
-        // pass account_id to account factory
-        account.account_id = auth.accountId()
-        // get account data and go to account page
-        $http.get("/account/" + account.account_id, {
-          headers: {
-            Authorization: 'JWT ' + auth.getToken()
-          }
-        }).then(function(result) {
-          account.teams = result.data
-          $state.go('account')
-        })
+        $state.go('account')
       })
     }
 

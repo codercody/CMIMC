@@ -28,7 +28,12 @@ app.config([
       .state('account', {
         url: '/account',
         templateUrl: '/views/account.html',
-        controller: 'AccountCtrl'
+        controller: 'AccountCtrl',
+        resolve: {
+          teamsPromise: ['account', function(account){
+            return account.getAll()
+          }]
+        },
       })
       .state('privacy', {
         url: '/privacy',

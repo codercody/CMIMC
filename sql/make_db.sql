@@ -21,6 +21,7 @@ create table students (
 create table teams (
     team_id int not null auto_increment,
     account_id int,
+    name varchar(255),
     chaperone_name varchar(255),
     chaperone_email varchar(255),
     chaperone_number varchar(31),

@@ -140,46 +140,8 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
     })
   } else {
     team = req.body
-    connection.query('insert into teams (account_id, chaperone_name, chaperone_email, chaperone_number) values (?,?,?,?)',
-      [req.user.account_id, team.chaperone_name, team.chaperone_email, team.chaperone_number],
-      function(err, results, fields) {
-        if (err) {
-          throw err
-        }
-        var team_id = results.insertId,
-            tasks = team.members.map(member => {
-              return function(callback) {
-                connection.query('insert into students (team_id, name, email, subject1, subject2, age, tshirt) values (?,?,?,?,?,?,?)',
-                  [team_id, member.name, member.email, member.subject1, member.subject2, member.age, member.tshirt],
-                  function(err, results, fields) {
-                    if (err) {
-                      callback(err, null)
-                    } else {
-                      callback(null, results)
-                    }
-                  })
-              }
-            })
-        async.parallel(tasks, function(err, results) {
-          if (err) {
-            throw err
-          }
-          res.status(200).json(req.body)
-        })
-      })
-  }
-})
-
-app.put('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
-  if (parseInt(req.user.account_id) !== parseInt(req.params.account_id)) {
-    res.status(401).json({
-      success: false,
-      message: 'Post to unauthorized account.'
-    })
-  } else {
-    team = req.body
-    connection.query('insert into teams (account_id, chaperone_name, chaperone_email, chaperone_number) values (?,?,?,?)',
-      [req.user.account_id, team.chaperone_name, team.chaperone_email, team.chaperone_number],
+    connection.query('insert into teams (account_id, name, chaperone_name, chaperone_email, chaperone_number) values (?,?,?,?,?)',
+      [req.user.account_id, team.name, team.chaperone_name, team.chaperone_email, team.chaperone_number],
       function(err, results, fields) {
         if (err) {
           throw err

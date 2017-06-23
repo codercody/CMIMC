@@ -70,9 +70,7 @@
       </div>
     </div>
 
-
-
-    <div class="account-team" ng-repeat="team in teams_original">
+    <div class="account-team" ng-repeat="team in teams">
       <h5>{{team.name}}<a class="waves-effect waves-light btn right red darken-2" data-target="edit-team-{{$index}}">Edit Team</a></h5>
       <p>Chaperone: <b>{{team.chaperone_name}}</b> - {{team.chaperone_email}} / {{team.chaperone_number}}</p>
       <p>Registration Fee: ${{registration_price * team.members.length}} - <span class="red-text text-darken-2">{{team.paid}}</span></p>
