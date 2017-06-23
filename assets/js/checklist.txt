@@ -3,6 +3,8 @@ summer time
 * decide contest date
 * update contest pdf
 * renew sponsorship
+* upgrade problem database
+* possibly start creating an internal "how to run cmimc" document for future leaders?
 
 
 
