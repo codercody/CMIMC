@@ -3,8 +3,8 @@ app.controller('MainCtrl', [
   '$state',
   '$http',
   'auth',
-  '$rootScope',
-  function($scope, $state, $http, auth) {
+  'account',
+  function($scope, $state, $http, auth, account) {
     $scope.year = "N/A"
     $scope.registration_open = "N/A"
     $scope.registration_close = "N/A"
@@ -53,7 +53,17 @@ app.controller('MainCtrl', [
         }
         $('#login').modal('close')
         auth.saveToken(response.token)
-        $state.go('account')
+        // pass account_id to account factory
+        account.account_id = auth.accountId()
+        // get account data and go to account page
+        $http.get("/account/" + account.account_id, {
+          headers: {
+            Authorization: 'JWT ' + auth.getToken()
+          }
+        }).then(function(result) {
+          account.teams = result.data
+          $state.go('account')
+        })
       })
     }
 
@@ -97,14 +107,6 @@ app.controller('MainCtrl', [
     $scope.logout = function() {
       auth.removeToken()
       $state.go('main')
-    }
-
-    $scope.fuckMyself = function() {
-      $http.get("/account/" + auth.accountId(), {
-        headers: {
-          Authorization: 'JWT ' + auth.getToken()
-        }
-      })
     }
 
     $( document ).ready(function() {
