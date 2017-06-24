@@ -9,11 +9,23 @@ app.controller('AccountCtrl', [
       "subjects" : {},
       "tshirt" : "M"
     }]}
-    $scope.new_team = $scope.empty_team
+    $scope.team_modify = $scope.empty_team
+    $scope.adding = true
     $scope.teams = account.teams
+
+    $scope.showAdd = function() {
+      $scope.adding = true
+      $scope.team_modify = $scope.empty_team
+    }
+
+    $scope.showEdit = function(team) {
+      $scope.adding = false
+      $scope.team_modify = team
+    }
+
     $scope.addMember = function(i) {
       if (i == -1)
-        $scope.new_team.members.push({
+        $scope.team_modify.members.push({
           "subjects" : {},
           "tshirt" : "M"
         })
@@ -25,8 +37,8 @@ app.controller('AccountCtrl', [
     }
     $scope.removeMember = function(i, j) {
       if (i == -1) {
-        $scope.new_team.members.splice(j, 1)
-        if ($scope.new_team.members.length == 0)
+        $scope.team_modify.members.splice(j, 1)
+        if ($scope.team_modify.members.length == 0)
           $scope.addMember(-1)
       } else {
         $scope.teams[i].members.splice(j, 1)
@@ -36,16 +48,16 @@ app.controller('AccountCtrl', [
     }
 
     $scope.addTeam = function() {
-      account.addTeam($scope.new_team).then(function() {
+      account.addTeam($scope.team_modify).then(function() {
         $scope.teams = account.teams
-        $scope.new_team = $scope.empty_team
+        $scope.team_modify = $scope.empty_team
       })
     }
 
     $scope.updateTeam = function() {
-      account.updateTeam($scope.new_team).then(function() {
+      account.updateTeam($scope.team_modify).then(function() {
         $scope.teams = account.teams
-        $scope.new_team = $scope.empty_team
+        $scope.team_modify = $scope.empty_team
       })
     }
 

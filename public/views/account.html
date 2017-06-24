@@ -1,32 +1,33 @@
 <div class="section white">
   <div class="container">
-    <h4>Account<a class="waves-effect waves-light btn right red darken-2" data-target="add-team">Add Team</a></h4>
+    <h4>Account<a class="waves-effect waves-light btn right red darken-2" data-target="team-modal" ng-click="showAdd()">Add Team</a></h4>
     <p ng-if="teams.length == 0">No teams found.</p>
-    <div id="add-team" class="modal">
+    <div id="team-modal" class="modal">
       <div class="modal-content">
-        <h5>Add Team</h5>
+        <h5 ng-show="adding">Add Team</h5>
+        <h5 ng-hide="adding">Edit Team</h5>
         <div class="row">
           <form class="col s12" ng-submit="addTeam()">
             <div class="row">
               <div class="input-field col s6">
-                <input id="team_name" type="text" class="validate" ng-model="new_team.name">
+                <input id="team_name" type="text" class="validate" ng-model="team_modify.name">
                 <label for="team_name">Team Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="chaperone_name" type="text" class="validate" ng-model="new_team.chaperone_name">
+                <input id="chaperone_name" type="text" class="validate" ng-model="team_modify.chaperone_name">
                 <label for="chaperone_name">Chaperone Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="chaperone_email" type="email" class="validate" ng-model="new_team.chaperone_email">
+                <input id="chaperone_email" type="email" class="validate" ng-model="team_modify.chaperone_email">
                 <label for="chaperone_email">Chaperone Email</label>
               </div>
               <div class="input-field col s6">
-                <input id="chaperone_number" type="tel" class="validate" ng-model="new_team.chaperone_number">
+                <input id="chaperone_number" type="tel" class="validate" ng-model="team_modify.chaperone_number">
                 <label for="chaperone_number">Chaperone Phone Number</label>
               </div>
             </div>
-            <div ng-model="new_team.members" form-update>
-              <div class="row" ng-repeat="member in new_team.members" update-team="refreshMaterialize">
+            <div ng-model="team_modify.members" form-update>
+              <div class="row" ng-repeat="member in team_modify.members" update-team="refreshMaterialize">
                 <div class="col s12">
                   <h6>Student {{$index+1}}<a href class="grey-text text-darken-2" ng-click="removeMember(-1, $index)"><i class="fa fa-times right" aria-hidden="true"></i></a></h6>
                 </div>
@@ -56,10 +57,11 @@
             </div>
             <div class="row">
               <div class="col s6">
-                <a class="waves-effect waves-light btn red darken-2" ng-disabled="new_team.members.length >= 6" ng-click="addMember(-1)">Add Student</a>
+                <a class="waves-effect waves-light btn red darken-2" ng-disabled="team_modify.members.length >= 6" ng-click="addMember(-1)">Add Student</a>
               </div>
               <div class="col s6">
-                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Submit</button>
+                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action" ng-show="adding">Submit</button>
+                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action" ng-hide="adding">Save</button>
               </div>
             </div>
           </form>
@@ -74,7 +76,7 @@
     <div class="account-team card" ng-repeat="team in teams">
       <div class="card-content">
         <h5>{{team.name}} <ul class="team-btns right">
-        <li><a class="waves-effect waves-light btn red darken-2" data-target="edit-team-{{$index}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></li>
+        <li><a class="waves-effect waves-light btn red darken-2" data-target="team-modal" ng-click="showEdit(team)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></li>
           <li><a class="waves-effect waves-light btn red darken-2" ng-click="deleteTeam($index)"><i class="fa fa-times" aria-hidden="true"></i> Delete</a></li>
         </ul></h5>
         <p>Chaperone: <b>{{team.chaperone_name}}</b> - {{team.chaperone_email}} / {{team.chaperone_number}}</p>
@@ -99,75 +101,6 @@
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <div ng-repeat="team in teams">
-      <div id="edit-team-{{$index}}" class="modal">
-        <div class="modal-content">
-          <h5>Edit Team</h5>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="team_name_{{$index}}" type="text" class="validate" ng-model="team.name">
-                  <label for="team_name_{{$index}}">Team Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="chaperone_name_{{$index}}" type="text" class="validate" ng-model="team.chaperone_name">
-                  <label for="chaperone_name_{{$index}}">Chaperone Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="chaperone_email_{{$index}}" type="email" class="validate" ng-model="team.chaperone_email">
-                  <label for="chaperone_email_{{$index}}">Chaperone Email</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="chaperone_number_{{$index}}" type="tel" class="validate" ng-model="team.chaperone_number">
-                  <label for="chaperone_number_{{$index}}">Chaperone Phone Number</label>
-                </div>
-              </div>
-              <div class="row" ng-repeat="member in team.members" update-team="refreshMaterialize">
-                <div class="col s12">
-                  <h6>Student {{$index+1}}<a href class="grey-text text-darken-2" ng-click="removeMember($parent.$index, $index)"><i class="fa fa-times right" aria-hidden="true"></i></a></h6>
-                </div>
-                <div class="input-field col s6">
-                  <input id="student_name_{{$parent.$index}}_{{$index}}" type="text" class="validate" ng-model="member.name">
-                  <label for="student_name_{{$parent.$index}}_{{$index}}">Student {{$index+1}} Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="student_email_{{$parent.$index}}_{{$index}}" type="email" class="validate" ng-model="member.email">
-                  <label for="student_email_{{$parent.$index}}_{{$index}}">Student {{$index+1}} Email</label>
-                </div>
-                <div class="input-field col s6">
-                  <select ng-model="member.subjects" multiple>
-                    <option ng-repeat="subject in subjects" value="{{subject}}">{{subject}}</option>
-                  </select>
-                </div>
-                <div class="input-field col s3">
-                  <input id="student_email_{{$parent.$index}}_{{$index}}" type="number" class="validate" ng-model="member.age">
-                  <label for="student_email_{{$parent.$index}}_{{$index}}">Student {{$index+1}} Age</label>
-                </div>
-                <div class="input-field col s3">
-                  <select ng-model="member.tshirt">
-                    <option ng-repeat="tshirt in tshirts" value="{{tshirt}}">{{tshirt}}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col s6">
-                  <a class="waves-effect waves-light btn red darken-2" ng-disabled="team.members.length >= 6" ng-click="addMember($index)">Add Student</a>
-                </div>
-                <div class="col s6">
-                  <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Save</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <a class="modal-action modal-close waves-effect btn-flat">Cancel</a>
-        </div>
       </div>
     </div>
   </div>
