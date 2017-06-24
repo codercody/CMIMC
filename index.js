@@ -37,7 +37,6 @@ function login(req, res) {
     if (err) throw err
     if (results.length === 0) {
       // user email not found
-      console.log('Email not found.')
       res.json({ success: false, message: 'Email not found.' })
     } else {
       // user email found
@@ -46,11 +45,9 @@ function login(req, res) {
                        .toString('hex')
       if (hash !== user.password) {
         // incorrect password
-        console.log('Incorrect password.')
         res.status(422).json({ success: false, message: 'Incorrect password.' })
       } else {
         // correct password
-        console.log('User logged in.')
         var token = jwt.sign({
             email: user.email,
             account_id: user.account_id
@@ -142,10 +139,50 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
           })
       async.parallel(tasks, function(err, results) {
         if (err) throw err
-        res.status(200).json(req.body)
+        res.status(200).json({
+          success: true,
+          message: 'Team added successfully.'
+        })
       })
     })
   }
+})
+
+app.put('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
+  if (parseInt(req.user.account_id) !== parseInt(req.body.team_id))
+    res.status(401).json({
+      success: false,
+      message: 'Unauthorized team update.'
+    })
+  else
+    var team = req.body,
+        members = team.members
+    delete team.members
+    team.account_id = parseInt(req.user.account_id)
+    teamsTable.update(team, function(err, results, fields) {
+      if (err) throw err
+      var tasks = members.map(student => {
+            return function(callback) {
+              if (student.student_id)
+                studentsTable.update(student, function(err, results, fields) {
+                  if (err) callback(err, null)
+                  else callback(null, results)
+                })
+              else
+                studentsTable.add(student, function(err, results, fields) {
+                  if (err) callback(err, null)
+                  else callback(null, results)
+                })
+            }
+          })
+      async.parallel(tasks, function(err, results) {
+        if (err) throw err
+        res.status(200).json({
+          success: true,
+          message: 'Team updated successfully.'
+        })
+      })
+    })
 })
 
 app.delete('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
@@ -159,7 +196,6 @@ app.delete('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
       var team = results[0]
       if (parseInt(team.account_id) !== parseInt(req.user.account_id)) {
         // unauthorized delete
-        console.log('Unauthorized team delete.')
         res.status(401).json({ success: false, message: 'Unauthorized team delete.' })
       } else {
         teamsTable.delete(team, function(err, results, fields) {

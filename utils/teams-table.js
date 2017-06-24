@@ -18,6 +18,18 @@ class TeamsTable {
     this.connection.query(team_sql.sql, team_sql.values, callback)
   }
   /**
+   * Update team with specified fields.
+   */
+  update(team, callback) {
+    // build sql string and values array
+    var team_id = team.team_id
+    delete team.team_id
+    var team_sql = sqlHelp.jsonToSQL(team)
+    team_sql.sql = 'update teams set ' + team_sql.sql + ' where team_id=?'
+    team_sql.values.push(team_id)
+    this.connection.query(team_sql.sql, team_sql.values, callback)
+  }
+  /**
    * Get a team by team_id.
    */
   getById(team_id, callback) {

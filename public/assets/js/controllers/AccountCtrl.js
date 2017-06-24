@@ -5,10 +5,11 @@ app.controller('AccountCtrl', [
   'auth',
   'account',
   function($scope, $state, $http, auth, account) {
-    $scope.new_team = {"members" : [{
+    $scope.empty_team = {"members" : [{
       "subjects" : {},
       "tshirt" : "M"
     }]}
+    $scope.new_team = $scope.empty_team
     $scope.teams = account.teams
     $scope.addMember = function(i) {
       if (i == -1)
@@ -37,6 +38,14 @@ app.controller('AccountCtrl', [
     $scope.addTeam = function() {
       account.addTeam($scope.new_team).then(function() {
         $scope.teams = account.teams
+        $scope.new_team = $scope.empty_team
+      })
+    }
+
+    $scope.updateTeam = function() {
+      account.updateTeam($scope.new_team).then(function() {
+        $scope.teams = account.teams
+        $scope.new_team = $scope.empty_team
       })
     }
 
