@@ -19,10 +19,12 @@ const express = require('express'),
       }),
       sqlHelp = require('./utils/sql-help.js'),
       StudentsTable = require('./utils/students-table'),
-      AccountsTable = require('./utils/accounts-table')
+      AccountsTable = require('./utils/accounts-table'),
+      TeamsTable = require('./utils/teams-table')
 
 var studentsTable = new StudentsTable(connection),
-    accountsTable = new AccountsTable(connection)
+    accountsTable = new AccountsTable(connection),
+    teamsTable = new TeamsTable(connection)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -33,7 +35,7 @@ function login(req, res) {
       password = req.body.password
   accountsTable.getByEmail(email, function(err, results, fields) {
     if (err) throw err
-    if (results.length == 0) {
+    if (results.length === 0) {
       // user email not found
       console.log('Email not found.')
       res.json({ success: false, message: 'Email not found.' })
@@ -42,7 +44,7 @@ function login(req, res) {
       var user = results[0],
           hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64)
                        .toString('hex')
-      if (hash != user.password) {
+      if (hash !== user.password) {
         // incorrect password
         console.log('Incorrect password.')
         res.status(422).json({ success: false, message: 'Incorrect password.' })
@@ -99,9 +101,7 @@ app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
     connection.query('select * from teams where account_id = ?',
       [req.user.account_id],
       function(err, results, fields) {
-        if (err) {
-          throw err
-        }
+        if (err) throw err
         var tasks = results.map(team => {
           return function(callback) {
             connection.query('select * from students where team_id = ?',
@@ -114,9 +114,7 @@ app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
           }
         })
         async.parallel(tasks, function(err, results) {
-          if (err) {
-            throw err
-          }
+          if (err) throw err
           res.status(200).json(results)
         })
       })
@@ -150,6 +148,28 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
         })
       })
   }
+})
+
+app.delete('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
+  teamsTable.getById(req.params.team_id, function(err, results, fields) {
+    if (err) throw err
+    if (results.length === 0) {
+      // team not found
+      res.status(200).json({ success: false, message: 'Team not found.' })
+    } else {
+      // team found
+      var team = results[0]
+      if (parseInt(team.account_id) !== parseInt(req.user.account_id)) {
+        // unauthorized delete
+        res.status(401).json({ success: false, message: 'Unauthorized team delete.' })
+      } else {
+        teamsTable.delete(team, function(err, results, fields) {
+          if (err) throw err
+          res.status(200).json({ success: true, message: 'Team deleted.' })
+        })
+      }
+    }
+  })
 })
 
 app.listen(8000, function() {

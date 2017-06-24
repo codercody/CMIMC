@@ -75,7 +75,7 @@
       <div class="card-content">
         <h5>{{team.name}} <ul class="team-btns right">
         <li><a class="waves-effect waves-light btn red darken-2" data-target="edit-team-{{$index}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></li>
-          <li><a class="waves-effect waves-light btn red darken-2"><i class="fa fa-times" aria-hidden="true"></i> Delete</a></li>
+          <li><a class="waves-effect waves-light btn red darken-2" ng-click="deleteTeam($index)"><i class="fa fa-times" aria-hidden="true"></i> Delete</a></li>
         </ul></h5>
         <p>Chaperone: <b>{{team.chaperone_name}}</b> - {{team.chaperone_email}} / {{team.chaperone_number}}</p>
         <p>Registration Fee: ${{registration_price * team.members.length}} - <span class="green-text text-accent-3" ng-show="team.paid">Paid</span><span class="red-text text-accent-3" ng-show="!team.paid">Unpaid</span></p>

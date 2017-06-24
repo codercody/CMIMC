@@ -22,8 +22,7 @@ class AccountsTable {
    * Find an account by email.
    */
   getByEmail(email, callback) {
-    this.connection.query('select * from accounts where email=?',
-                          [email], callback)
+    this.connection.query('select * from accounts where email=?', [email], callback)
   }
 }
 

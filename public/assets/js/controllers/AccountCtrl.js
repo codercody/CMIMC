@@ -40,6 +40,12 @@ app.controller('AccountCtrl', [
       })
     }
 
+    $scope.deleteTeam = function(i) {
+      account.deleteTeam($scope.teams[i]).then(function() {
+        $scope.teams = account.teams
+      })
+    }
+
     $scope.$on('refreshMaterialize', function() {
       $('select').material_select()
       Materialize.updateTextFields()
