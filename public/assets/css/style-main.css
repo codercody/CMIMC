@@ -153,3 +153,13 @@ footer .footer-copyright ul li  {
 .account-team {
   margin-top: 36px;
 }
+
+.team-btns  {
+  list-style-type: none;
+  margin: 0;
+}
+
+.team-btns li {
+  display: inline;
+  margin-left: 12px;
+}
