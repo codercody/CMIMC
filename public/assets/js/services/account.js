@@ -19,20 +19,36 @@ app.factory('account', [
       })
     }
 
+    account.parseStudent = function(student) {
+      var subjects = student.subjects.sort()
+      return {
+        team_id: student.team_id,
+        name: student.name,
+        email: student.email,
+        subject1: subjects[0],
+        subject2: subjects[1],
+        age: parseInt(student.age),
+        tshirt: student.tshirt
+      }
+    }
+
     // add a whole team to the account
     account.addTeam = function(team) {
-      return $http.post('/teams/' + account.account_id, team, {
+      // change subjects array into two separate fields
+      var teamCopy = JSON.parse(JSON.stringify(team))
+      teamCopy.members = teamCopy.members.map(account.parseStudent)
+      return $http.post('/teams/' + account.account_id, teamCopy, {
         headers: {
           Authorization: 'JWT ' + auth.getToken()
         }
       }).then(function(result) {
-        account.teams.push(result.data)
+        account.teams.push(team)
       }, function(result) {
         alert('error!')
       })
     }
 
-    // add a whole team to the account
+    // delete a whole team from the account
     account.deleteTeam = function(team) {
       return $http.delete('/teams/' + team.team_id, {
         headers: {

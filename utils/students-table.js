@@ -8,6 +8,13 @@ class StudentsTable {
   }
 
   /**
+   * Get students by team_id.
+   */
+  getByTeamId(team_id, callback) {
+    team_id = parseInt(team_id)
+    this.connection.query('select * from students where team_id=?', [team_id], callback)
+  }
+  /**
    * Add student with specified fields.
    */
   add(student, callback) {

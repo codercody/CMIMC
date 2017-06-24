@@ -98,26 +98,22 @@ app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
   if (parseInt(req.user.account_id) !== parseInt(req.params.account_id)) {
     res.status(401)
   } else {
-    connection.query('select * from teams where account_id = ?',
-      [req.user.account_id],
-      function(err, results, fields) {
-        if (err) throw err
-        var tasks = results.map(team => {
-          return function(callback) {
-            connection.query('select * from students where team_id = ?',
-              [team.team_id],
-              function(err, results, fields) {
-                if (err) callback(err, null)
-                team.members = results
-                callback(null, team)
-              })
-          }
-        })
-        async.parallel(tasks, function(err, results) {
-          if (err) throw err
-          res.status(200).json(results)
-        })
+    teamsTable.getByAccountId(req.user.account_id, function(err, results, fields) {
+      if (err) throw err
+      var tasks = results.map(team => {
+        return function(callback) {
+          studentsTable.getByTeamId(team.team_id, function(err, results, fields) {
+            if (err) callback(err, null)
+            team.members = results
+            callback(null, team)
+          })
+        }
       })
+      async.parallel(tasks, function(err, results) {
+        if (err) throw err
+        res.status(200).json(results)
+      })
+    })
   }
 })
 
@@ -128,25 +124,27 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
       message: 'Post to unauthorized account.'
     })
   } else {
-    var team = req.body
-    connection.query('insert into teams (account_id, name, chaperone_name, chaperone_email, chaperone_number) values (?,?,?,?,?)',
-      [req.user.account_id, team.name, team.chaperone_name, team.chaperone_email, team.chaperone_number],
-      function(err, results, fields) {
+    var team = req.body,
+        members = team.members
+    delete team.members
+    team.account_id = parseInt(req.user.account_id)
+    teamsTable.add(team, function(err, results, fields) {
+      if (err) throw err
+      var team_id = results.insertId,
+          tasks = members.map(student => {
+            return function(callback) {
+              student.team_id = team_id
+              studentsTable.add(student, function(err, results, fields) {
+                if (err) callback(err, null)
+                else callback(null, results)
+              })
+            }
+          })
+      async.parallel(tasks, function(err, results) {
         if (err) throw err
-        var team_id = results.insertId,
-            tasks = team.members.map(student => {
-              return function(callback) {
-                studentsTable.add(student, function(err, results, fields) {
-                  if (err) callback(err, null)
-                  else callback(null, results)
-                })
-              }
-            })
-        async.parallel(tasks, function(err, results) {
-          if (err) throw err
-          res.status(200).json(req.body)
-        })
+        res.status(200).json(req.body)
       })
+    })
   }
 })
 
@@ -161,6 +159,7 @@ app.delete('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
       var team = results[0]
       if (parseInt(team.account_id) !== parseInt(req.user.account_id)) {
         // unauthorized delete
+        console.log('Unauthorized team delete.')
         res.status(401).json({ success: false, message: 'Unauthorized team delete.' })
       } else {
         teamsTable.delete(team, function(err, results, fields) {
