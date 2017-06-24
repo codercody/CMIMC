@@ -17,9 +17,12 @@ const express = require('express'),
         password: process.env.MYSQL_PASSWORD,
         database: 'cmimc'
       }),
-      StudentsTable = require('./utils/students-table')
+      sqlHelp = require('./utils/sql-help.js'),
+      StudentsTable = require('./utils/students-table'),
+      AccountsTable = require('./utils/accounts-table')
 
-var students_table = new StudentsTable(connection)
+var studentsTable = new StudentsTable(connection),
+    accountsTable = new AccountsTable(connection)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -28,80 +31,65 @@ app.use(express.static('public'))
 function login(req, res) {
   var email = req.body.email,
       password = req.body.password
-  connection.query('select * from accounts where email = ?',
-      [email],
-      function(err, results, fields) {
-        if (err) {
-          throw err
-        }
-        if (results.length == 0) {
-          // user email not found
-          console.log('Email not found.')
-          res.json({
-            success: false,
-            message: 'Email not found.'
+  accountsTable.getByEmail(email, function(err, results, fields) {
+    if (err) throw err
+    if (results.length == 0) {
+      // user email not found
+      console.log('Email not found.')
+      res.json({ success: false, message: 'Email not found.' })
+    } else {
+      // user email found
+      var user = results[0],
+          hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64)
+                       .toString('hex')
+      if (hash != user.password) {
+        // incorrect password
+        console.log('Incorrect password.')
+        res.status(422).json({ success: false, message: 'Incorrect password.' })
+      } else {
+        // correct password
+        console.log('User logged in.')
+        var token = jwt.sign({
+            email: user.email,
+            account_id: user.account_id
+          }, process.env.JWT_SECRET_KEY)
+          res.status(200).json({
+            success: true,
+            message: 'Enjoy your token!',
+            token: token
           })
-        } else {
-          // user email found
-          var user = results[0],
-              hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64)
-                           .toString('hex')
-          if (hash != user.password) {
-            // incorrect password
-            console.log('Incorrect password.')
-            res.status(422).json({
-              success: false,
-              message: 'Incorrect password.'
-            })
-          } else {
-            // correct password
-            console.log('User logged in.')
-            var token = jwt.sign({
-                email: user.email,
-                account_id: user.account_id
-              }, process.env.JWT_SECRET_KEY)
-              res.status(200).json({
-                success: true,
-                message: 'Enjoy your token!',
-                token: token
-              })
-          }
-        }
-      })
+      }
+    }
+  })
 }
 
 app.post('/login', login)
 
 app.post('/register', function(req, res) {
-  var email = req.body.email,
-      salt = crypto.randomBytes(16).toString('hex'),
-      password = crypto.pbkdf2Sync(req.body.password, salt, 1000, 64)
-                       .toString('hex')
+  var email = req.body.email
   // check if email is taken already
-  connection.query('select * from accounts where email = ?',
-    [email],
-    function(err, results, fields) {
-      if (err) {
-        throw err
-      }
-      if (results.length > 0) {
-        res.status(422).json({
-          success: false,
-          message: 'Email taken already.'
-        })
-      } else {
-        // register user
-        connection.query('insert into accounts (email, password, salt) values (?, ?, ?)',
-          [email, password, salt],
-          function(err, results, fields) {
-            if (err) {
-              throw err
-            }
-
-            login(req, res)
-          })
-      }
-    })
+  accountsTable.getByEmail(email, function(err, results, fields) {
+    if (err) throw err
+    if (results.length > 0) {
+      res.status(422).json({
+        success: false,
+        message: 'Email taken already.'
+      })
+    } else {
+      // register account
+      var salt = crypto.randomBytes(16).toString('hex'),
+          account = {
+            email: email,
+            password: crypto.pbkdf2Sync(req.body.password, salt, 1000, 64)
+                             .toString('hex'),
+            salt: salt
+          }
+      accountsTable.add(account, function(err, results, fields) {
+        if (err) throw err
+        login(req, res)
+      })
+    }
+  })
 })
 
 app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
@@ -119,9 +107,7 @@ app.get('/account/:account_id', auth.jwtAuthProtected, function(req, res) {
             connection.query('select * from students where team_id = ?',
               [team.team_id],
               function(err, results, fields) {
-                if (err) {
-                  callback(err, null)
-                }
+                if (err) callback(err, null)
                 team.members = results
                 callback(null, team)
               })
@@ -152,7 +138,7 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
         var team_id = results.insertId,
             tasks = team.members.map(student => {
               return function(callback) {
-                students_table.add(student, function(err, results, fields) {
+                studentsTable.add(student, function(err, results, fields) {
                   if (err) callback(err, null)
                   else callback(null, results)
                 })
