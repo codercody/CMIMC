@@ -5,22 +5,26 @@ app.controller('AccountCtrl', [
   'auth',
   'account',
   function($scope, $state, $http, auth, account) {
-    $scope.empty_team = {"members" : [{
-      "subjects" : {},
-      "tshirt" : "M"
-    }]}
-    $scope.team_modify = $scope.empty_team
-    $scope.adding = true
-    $scope.teams = account.teams
+    $scope.team_empty = {
+      "members" : [
+        {
+          "subjects" : [],
+          "tshirt" : "M"
+        }
+      ]
+    }
+    $scope.team_modify = $scope.team_empty
+    $scope.team_modal_mode = ""
+    $scope.teams = account.teams.map(account.unparseTeam)
 
     $scope.showAdd = function() {
-      $scope.adding = true
-      $scope.team_modify = $scope.empty_team
+      $scope.team_modal_mode = "add"
+      $scope.team_modify = $scope.team_empty
     }
 
     $scope.showEdit = function(team) {
-      $scope.adding = false
-      $scope.team_modify = team
+      $scope.team_modal_mode = "edit"
+      $scope.team_modify = JSON.parse(JSON.stringify(team))
     }
 
     $scope.addMember = function(i) {
@@ -47,34 +51,31 @@ app.controller('AccountCtrl', [
       }
     }
 
-    $scope.addTeam = function() {
-      account.addTeam($scope.team_modify).then(function() {
-        $scope.teams = account.teams
-        $scope.team_modify = $scope.empty_team
-      })
-    }
-
-    $scope.updateTeam = function() {
-      account.updateTeam($scope.team_modify).then(function() {
-        $scope.teams = account.teams
-        $scope.team_modify = $scope.empty_team
-      })
+    $scope.teamModalSubmit = function(mode) {
+      if (mode === "add") {
+        account.addTeam($scope.team_modify).then(function() {
+          $('#team-modal').modal('close')
+          $scope.teams = account.teams.map(account.unparseTeam)
+          $scope.team_modify = $scope.team_empty
+        })
+      } else if (mode === "edit") {
+        account.updateTeam($scope.team_modify).then(function() {
+          $('#team-modal').modal('close')
+          $scope.teams = account.teams.map(account.unparseTeam)
+          $scope.team_modify = $scope.team_empty
+        })
+      }
     }
 
     $scope.deleteTeam = function(i) {
       account.deleteTeam($scope.teams[i]).then(function() {
-        $scope.teams = account.teams
+        $scope.teams = account.teams.map(account.unparseTeam)
       })
     }
 
     $scope.$on('refreshMaterialize', function() {
       $('select').material_select()
       Materialize.updateTextFields()
-      $('.modal').modal({
-          complete: function() {
-            $state.reload()
-          }
-        }
-      )
+      $('.modal').modal()
     })
 }])

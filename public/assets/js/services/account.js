@@ -19,26 +19,53 @@ app.factory('account', [
       })
     }
 
+    // convert from scope student to account student
     account.parseStudent = function(student) {
-      var subjects = student.subjects.sort(),
-          request = {
-            student_id: student.student_id,
-            team_id: student.team_id,
-            name: student.name,
-            email: student.email,
-            subject1: subjects[0],
-            subject2: subjects[1],
-            age: parseInt(student.age),
-            tshirt: student.tshirt
-          }
-      return request
+      var subjects = student.subjects.sort()
+      return {
+        student_id: student.student_id,
+        team_id: student.team_id,
+        name: student.name,
+        email: student.email,
+        subject1: subjects[0],
+        subject2: subjects[1],
+        age: parseInt(student.age),
+        tshirt: student.tshirt
+      }
+    }
+
+    account.parseTeam = function(team) {
+      team.members = team.members.map(account.parseStudent)
+      return {
+        team_id: team.team_id,
+        account_id: team.account_id,
+        name: team.name,
+        chaperone_name: team.chaperone_name,
+        chaperone_email: team.chaperone_email,
+        chaperone_number: team.chaperone_number,
+        paid: team.paid,
+        members: team.members
+      }
+    }
+
+    // convert from account student to scope student
+    account.unparseStudent = function(student) {
+      student.subjects = [student.subject1, student.subject2].sort()
+      delete student.subject1
+      delete student.subject2
+      return student
+    }
+
+    // convert from account team to scope team
+    account.unparseTeam = function(team) {
+      team.members = team.members.map(account.unparseStudent)
+      return team
     }
 
     // add a team to the account
     account.addTeam = function(team) {
-      var teamCopy = JSON.parse(JSON.stringify(team))
-      teamCopy.members = teamCopy.members.map(account.parseStudent)
-      return $http.post('/teams/' + account.account_id, teamCopy, {
+      team = account.parseTeam(team)
+      return $http.post('/teams/' + account.account_id, team, {
         headers: {
           Authorization: 'JWT ' + auth.getToken()
         }
@@ -51,22 +78,23 @@ app.factory('account', [
 
     // update a team
     account.updateTeam = function(team) {
-      var teamCopy = JSON.parse(JSON.stringify(team)),
-          team_id = teamCopy.team_id
-      teamCopy.members = teamCopy.members.map(account.parseStudent)
-      return $http.put('/teams/' + account.account_id, teamCopy, {
+      team = account.parseTeam(team)
+      return $http.put('/teams/' + team.team_id, team, {
         headers: {
-          Authorization: 'JWT ' + auth.getToken()
+          'Authorization': 'JWT ' + auth.getToken(),
+          'Content-Type': 'application/json'
         }
       }).then(function(result) {
-        var response = result.data
-        if (respose.success)
-          for (i in account.teams.length) {
+        response = result.data
+        if (response.success) {
+          for (var i = 0; i < account.teams.length; i++) {
             var team = account.teams[i]
-            if (team.team_id === team_id)
-              account.teams[i] = team
-              break
+            if (parseInt(team.team_id) === parseInt(response.team.team_id))
+              account.teams[i] = response.team
           }
+        } else {
+          alert(response.message)
+        }
       }, function(result) {
         alert('error!')
       })
@@ -74,6 +102,7 @@ app.factory('account', [
 
     // delete a team from the account
     account.deleteTeam = function(team) {
+      team = account.parseTeam(team)
       return $http.delete('/teams/' + team.team_id, {
         headers: {
           Authorization: 'JWT ' + auth.getToken()

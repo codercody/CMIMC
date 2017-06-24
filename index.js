@@ -149,13 +149,13 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
 })
 
 app.put('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
-  if (parseInt(req.user.account_id) !== parseInt(req.body.team_id))
+  if (parseInt(req.user.account_id) !== parseInt(req.body.account_id)) {
     res.status(401).json({
       success: false,
       message: 'Unauthorized team update.'
     })
-  else
-    var team = req.body,
+  } else {
+    var team = JSON.parse(JSON.stringify(req.body)),
         members = team.members
     delete team.members
     team.account_id = parseInt(req.user.account_id)
@@ -163,26 +163,30 @@ app.put('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
       if (err) throw err
       var tasks = members.map(student => {
             return function(callback) {
-              if (student.student_id)
+              if (student.student_id) {
                 studentsTable.update(student, function(err, results, fields) {
                   if (err) callback(err, null)
                   else callback(null, results)
                 })
-              else
+              } else {
+                student.team_id = req.body.team_id
                 studentsTable.add(student, function(err, results, fields) {
                   if (err) callback(err, null)
                   else callback(null, results)
                 })
+              }
             }
           })
       async.parallel(tasks, function(err, results) {
         if (err) throw err
         res.status(200).json({
           success: true,
-          message: 'Team updated successfully.'
+          message: 'Team updated successfully.',
+          team: req.body
         })
       })
     })
+  }
 })
 
 app.delete('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
@@ -198,9 +202,12 @@ app.delete('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
         // unauthorized delete
         res.status(401).json({ success: false, message: 'Unauthorized team delete.' })
       } else {
-        teamsTable.delete(team, function(err, results, fields) {
+        studentsTable.deleteByTeamId(team.team_id, function(err, results, fields) {
           if (err) throw err
-          res.status(200).json({ success: true, message: 'Team deleted.' })
+          teamsTable.delete(team, function(err, results, fields) {
+            if (err) throw err
+            res.status(200).json({ success: true, message: 'Team deleted.' })
+          })
         })
       }
     }

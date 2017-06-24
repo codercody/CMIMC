@@ -1,13 +1,13 @@
 <div class="section white">
   <div class="container">
     <h4>Account<a class="waves-effect waves-light btn right red darken-2" data-target="team-modal" ng-click="showAdd()">Add Team</a></h4>
-    <p ng-if="teams.length == 0">No teams found.</p>
+    <p ng-if="teams.length === 0">No teams on this account.</p>
     <div id="team-modal" class="modal">
       <div class="modal-content">
-        <h5 ng-show="adding">Add Team</h5>
-        <h5 ng-hide="adding">Edit Team</h5>
+        <h5 ng-show="team_modal_mode === 'add'">Add Team</h5>
+        <h5 ng-show="team_modal_mode === 'edit'">Edit Team</h5>
         <div class="row">
-          <form class="col s12" ng-submit="addTeam()">
+          <form class="col s12" ng-submit="teamModalSubmit(team_modal_mode)">
             <div class="row">
               <div class="input-field col s6">
                 <input id="team_name" type="text" class="validate" ng-model="team_modify.name">
@@ -60,8 +60,8 @@
                 <a class="waves-effect waves-light btn red darken-2" ng-disabled="team_modify.members.length >= 6" ng-click="addMember(-1)">Add Student</a>
               </div>
               <div class="col s6">
-                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action" ng-show="adding">Submit</button>
-                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action" ng-hide="adding">Save</button>
+                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action" ng-show="team_modal_mode === 'add'">Submit</button>
+                <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action" ng-show="team_modal_mode === 'edit'">Save</button>
               </div>
             </div>
           </form>
@@ -96,7 +96,7 @@
               <td>{{member.name}}</td>
               <td>{{member.email}}</td>
               <td>{{member.age}}</td>
-              <td>{{member.subject1}}, {{member.subject2}}</td>
+              <td>{{member.subjects[0]}}, {{member.subjects[1]}}</td>
               <td>{{member.tshirt}}</td>
             </tr>
           </tbody>

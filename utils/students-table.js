@@ -40,8 +40,14 @@ class StudentsTable {
    * Delete a student with specified student_id.
    */
   delete(student, callback) {
-    this.connection.query('delete from students where student_id=?',
-                     [student.student_id], callback)
+    this.connection.query('delete from students where student_id=?', [student.student_id], callback)
+  }
+  /**
+   * Delete students with specified team_id.
+   */
+  deleteByTeamId(team_id, callback) {
+    team_id = parseInt(team_id)
+    this.connection.query('delete from students where team_id=?', [team_id], callback)
   }
 }
 
