@@ -159,16 +159,42 @@ app.put('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
         members = team.members
     delete team.members
     team.account_id = parseInt(req.user.account_id)
+    // update team info
     teamsTable.update(team, function(err, results, fields) {
       if (err) throw err
-      var tasks = members.map(student => {
+      // delete students not in the new team
+      var new_team_students = req.body.members.map(student => {
+        return student.student_id
+      }).filter(student => {
+        student !== undefined
+      })
+      studentsTable.getByTeamId(req.body.team_id, function(err, results, fields) {
+        if (err) throw err
+        var tasks = results.map(student => {
+          return function(callback) {
+            if (!(student.student_id in new_team_students)) {
+              studentsTable.delete(student, function(err, results, fields) {
+                if (err) callback(err, null)
+                else callback(err, results)
+              })
+            } else {
+              callback(null, null)
+            }
+          }
+        })
+        async.parallel(tasks, function(err, results) {
+          if (err) throw err
+          // update registered students and add new students
+          var tasks = members.map(student => {
             return function(callback) {
               if (student.student_id) {
+                // student is already registered
                 studentsTable.update(student, function(err, results, fields) {
                   if (err) callback(err, null)
                   else callback(null, results)
                 })
               } else {
+                // add student
                 student.team_id = req.body.team_id
                 studentsTable.add(student, function(err, results, fields) {
                   if (err) callback(err, null)
@@ -177,12 +203,16 @@ app.put('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
               }
             }
           })
-      async.parallel(tasks, function(err, results) {
-        if (err) throw err
-        res.status(200).json({
-          success: true,
-          message: 'Team updated successfully.',
-          team: req.body
+          async.parallel(tasks, function(err, results) {
+            if (err) throw err
+            else {
+              res.status(200).json({
+                success: true,
+                message: 'Team updated successfully.',
+                team: req.body
+              })
+            }
+          })
         })
       })
     })

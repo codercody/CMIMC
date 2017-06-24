@@ -21,6 +21,10 @@ app.factory('account', [
 
     // convert from scope student to account student
     account.parseStudent = function(student) {
+      if (!student.name || !student.email || !student.subjects || !student.age ||
+          !student.tshirt || student.subjects.length !== 2) {
+        return null
+      }
       var subjects = student.subjects.sort()
       return {
         student_id: student.student_id,
@@ -35,7 +39,9 @@ app.factory('account', [
     }
 
     account.parseTeam = function(team) {
-      team.members = team.members.map(account.parseStudent)
+      team.members = team.members.map(account.parseStudent).filter(student => {
+        return !!student // student is defined
+      })
       return {
         team_id: team.team_id,
         account_id: team.account_id,
