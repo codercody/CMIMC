@@ -94,7 +94,7 @@
               <td>{{member.name}}</td>
               <td>{{member.email}}</td>
               <td>{{member.age}}</td>
-              <td>{{member.subjects[0]}}, {{member.subjects[1]}}</td>
+              <td>{{member.subject1}}, {{member.subject2}}</td>
               <td>{{member.tshirt}}</td>
             </tr>
           </tbody>
@@ -158,7 +158,7 @@
                   <a class="waves-effect waves-light btn red darken-2" ng-disabled="team.members.length >= 6" ng-click="addMember($index)">Add Student</a>
                 </div>
                 <div class="col s6">
-                  <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Submit</button>
+                  <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Save</button>
                 </div>
               </div>
             </form>
