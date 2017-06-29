@@ -36,11 +36,11 @@
         <div class="nav-wrapper container">
           <a href="index.html" class="brand-logo"><img src="assets/img/cmimc-logo-huge.png" height="28px"></a>
           <ul class="right hide-on-med-and-down">
-            <li><a href="#" class="grey-text text-darken-3">Home</a></li>
-            <li><a href="#!/information" class="grey-text text-darken-3">Information</a></li>
-            <li><a href="#!/archive" class="grey-text text-darken-3">Archive</a></li>
-            <li><a href="#!/staff" class="grey-text text-darken-3">Staff</a></li>
-            <li ng-show="isLoggedIn()"><a href="#!/account" class="grey-text text-darken-3">Account</a></li>
+            <li><a href="/" class="grey-text text-darken-3">Home</a></li>
+            <li><a href="/information" class="grey-text text-darken-3">Information</a></li>
+            <li><a href="/archive" class="grey-text text-darken-3">Archive</a></li>
+            <li><a href="/staff" class="grey-text text-darken-3">Staff</a></li>
+            <li ng-show="isLoggedIn()"><a href="/account" class="grey-text text-darken-3">Account</a></li>
             <li ng-hide="isLoggedIn()"><a class="waves-effect waves-light btn red darken-2" data-target="login">Log In</a></li>
             <li ng-show="isLoggedIn()"><a class="waves-effect waves-light btn red darken-2" ng-click="logout()">Log Out</a></li>
           </ul>
@@ -90,7 +90,7 @@
           <h5 class="grey-text text-lighten-4">Information</h5>
           <ul>
             <li><a href="#" class="grey-text text-lighten-3">Rules</a></li>
-            <li><a href="#!/faq" class="grey-text text-lighten-3">FAQ</a></li>
+            <li><a href="/faq" class="grey-text text-lighten-3">FAQ</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
@@ -106,8 +106,8 @@
       <div class="container">
         <ul class="grey-text text-lighten-3">
           <li>&copy; 2017 CMIMC</li>
-          <li><a href="#!/terms" class="grey-text text-lighten-3">Terms</a></li>
-          <li><a href="#!/privacy" class="grey-text text-lighten-3">Privacy</a></li>
+          <li><a href="/terms" class="grey-text text-lighten-3">Terms</a></li>
+          <li><a href="/privacy" class="grey-text text-lighten-3">Privacy</a></li>
           <li><a href="#" class="grey-text text-lighten-3">ctj@math.cmu.edu</a></li>
         </ul>
       </div>

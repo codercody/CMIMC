@@ -13,13 +13,13 @@
           <div class="col l6 s12">
             <span class="archive-header">Individuals</span>
             <ul class="collection">
-              <li class="collection-item" ng-repeat="subject in contest.individuals"><div>{{subject.name}} <a ng-href="/assets/docs/past-tests/{{subject.solutions}}" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a ng-href="/assets/docs/past-tests/{{subject.problems}}" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
+              <li class="collection-item" ng-repeat="subject in contest.individuals"><div>{{subject.name}} <a target="_self" ng-href="/archive/{{subject.solutions}}" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a target="_self" ng-href="/archive/{{subject.problems}}" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
             </ul>
           </div>
           <div class="col l6 s12">
             <span class="archive-header">Others</span>
             <ul class="collection">
-              <li class="collection-item" ng-repeat="subject in contest.others"><div>{{subject.name}} <a ng-href="/assets/docs/past-tests/{{subject.solutions}}" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a ng-href="/assets/docs/past-tests/{{subject.problems}}" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
+              <li class="collection-item" ng-repeat="subject in contest.others"><div>{{subject.name}} <a target="_self" ng-href="/archive/{{subject.solutions}}" class="secondary-content red-text text-darken-2 solutions-link">Solutions</a><a target="_self" ng-href="/archive/{{subject.problems}}" class="secondary-content red-text text-darken-2 problems-link">Problems</a></div></li>
             </ul>
           </div>
         </div>

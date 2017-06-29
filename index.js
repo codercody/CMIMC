@@ -30,6 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
+app.use('/archive', express.static('public/assets/docs/past-tests'))
+
 function login(req, res) {
   var email = req.body.email,
       password = req.body.password
@@ -164,15 +166,16 @@ app.put('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
       if (err) throw err
       // delete students not in the new team
       var new_team_students = req.body.members.map(student => {
-        return student.student_id
-      }).filter(student => {
-        student !== undefined
+        return parseInt(student.student_id)
+      }).filter(student_id => {
+        return !!student_id
       })
       studentsTable.getByTeamId(req.body.team_id, function(err, results, fields) {
         if (err) throw err
         var tasks = results.map(student => {
           return function(callback) {
-            if (!(student.student_id in new_team_students)) {
+            var student_id = parseInt(student.student_id)
+            if (new_team_students.indexOf(student_id) < 0) {
               studentsTable.delete(student, function(err, results, fields) {
                 if (err) callback(err, null)
                 else callback(err, results)
@@ -242,6 +245,10 @@ app.delete('/teams/:team_id', auth.jwtAuthProtected, function(req, res) {
       }
     }
   })
+})
+
+app.get('/*', function(req, res){
+  res.sendFile(__dirname + '/public/index.html')
 })
 
 app.listen(8000, function() {

@@ -1,6 +1,15 @@
 var app = angular.module('mainApp', ['ui.router'])
 
 app.config([
+  '$locationProvider',
+  '$urlMatcherFactoryProvider',
+  function($locationProvider, $urlMatcherFactoryProvider) {
+  $locationProvider.hashPrefix('')
+  $locationProvider.html5Mode(true)
+  $urlMatcherFactoryProvider.strictMode(false)
+}])
+
+app.config([
   '$stateProvider',
   '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
@@ -34,6 +43,11 @@ app.config([
             return account.getAll()
           }]
         },
+        onEnter: ['$state', 'auth', function ($state, auth) {
+          if (!auth.isLoggedIn()) {
+            $state.go('access-denied')
+          }
+        }]
       })
       .state('privacy', {
         url: '/privacy',
@@ -47,6 +61,14 @@ app.config([
         url: '/faq',
         templateUrl: '/views/faq.html'
       })
+      .state('access-denied', {
+        url: '/access-denied',
+        templateUrl: '/views/access-denied.html'
+      })
+      .state('404', {
+        url: '/404',
+        templateUrl: '/views/404.html'
+      })
 
-    $urlRouterProvider.otherwise('/')
+    $urlRouterProvider.otherwise('/404')
 }])
