@@ -91,6 +91,10 @@ app.controller('MainCtrl', [
         }
         auth.saveToken(response.token)
         $state.go('account')
+      }, function(result) {
+        var response = result.data
+        $scope.signup.fail = true
+        $scope.signup.message = response.message
       })
     }
 
