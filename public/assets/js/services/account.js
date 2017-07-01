@@ -129,8 +129,10 @@ app.factory('account', [
     }
 
     // initialize
-    account.account_id = auth.accountId()
-    account.getAll()
+    if (auth.isLoggedIn()) {
+      account.account_id = auth.accountId()
+      account.getAll()
+    }
 
     return account
 }])

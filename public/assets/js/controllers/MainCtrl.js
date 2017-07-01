@@ -24,77 +24,84 @@ app.controller('MainCtrl', [
 
     $scope.isLoggedIn = auth.isLoggedIn
 
+    $scope.login_info = {}
+    $scope.signup_info = {}
+
     $scope.login = function() {
-      if (!$scope.login.email) {
-        $scope.login.fail = true
-        $scope.login.message = 'Email cannot be empty.'
+      if (!$scope.login_info.email) {
+        $scope.login_info.fail = true
+        $scope.login_info.message = 'Email cannot be empty.'
         return
       }
-      if (!$scope.login.password) {
-        $scope.login.fail = true
-        $scope.login.message = 'Password cannot be empty.'
+      if (!$scope.login_info.password) {
+        $scope.login_info.fail = true
+        $scope.login_info.message = 'Password cannot be empty.'
         return
       }
-      $scope.login.fail = false
+      $scope.login_info.fail = false
       $http.post("/login", {
-        email: $scope.login.email,
-        password: $scope.login.password
+        email: $scope.login_info.email,
+        password: $scope.login_info.password
       }, {
         "headers": "Content-Type: 'text/json'"
       }).then(function(result) {
         var response = result.data
         if (!response.success) {
-          $scope.login.fail = true
-          $scope.login.message = response.message
+          $scope.login_info.fail = true
+          $scope.login_info.message = response.message
           return
         }
-        $scope.login = {
+        $scope.login_info = {
           fail: false
         }
         $('#login').modal('close')
         auth.saveToken(response.token)
         $state.go('account')
+      }, function(result) {
+        var response = result.data
+        $scope.login_info.fail = true
+        $scope.login_info.message = response.message
       })
     }
 
     $scope.signup = function() {
-      if (!$scope.signup.email) {
-        $scope.signup.fail = true
-        $scope.signup.message = 'Email cannot be empty, dumbass.'
+      if (!$scope.signup_info.email) {
+        $scope.signup_info.fail = true
+        $scope.signup_info.message = 'Email cannot be empty.'
         return
       }
-      if (!$scope.signup.password) {
-        $scope.signup.fail = true
-        $scope.signup.message = 'Password cannot be empty.'
+      if (!$scope.signup_info.password) {
+        $scope.signup_info.fail = true
+        $scope.signup_info.message = 'Password cannot be empty.'
         return
       }
-      if ($scope.signup.password !== $scope.signup.password_confirm) {
-        $scope.signup.fail = true
-        $scope.signup.message = 'Passwords must match.'
+      if ($scope.signup_info.password !== $scope.signup_info.password_confirm) {
+        $scope.signup_info.fail = true
+        $scope.signup_info.message = 'Passwords must match.'
         return
       }
-      $scope.signup.fail = false
+      $scope.signup_info.fail = false
       $http.post('/register', {
-        email: $scope.signup.email,
-        password: $scope.signup.password
+        email: $scope.signup_info.email,
+        password: $scope.signup_info.password
       }, {
         'headers': 'Content-type: "text/json"'
       }).then(function(result) {
         var response = result.data
         if (!response.success) {
-          $scope.signup.fail = true
-          $scope.signup.message = response.message
+          $scope.signup_info.fail = true
+          $scope.signup_info.message = response.message
           return
         }
-        $scope.signup = {
+        $scope.signup_info = {
           fail: false
         }
         auth.saveToken(response.token)
         $state.go('account')
       }, function(result) {
         var response = result.data
-        $scope.signup.fail = true
-        $scope.signup.message = response.message
+        $scope.signup_info.fail = true
+        $scope.signup_info.message = response.message
       })
     }
 

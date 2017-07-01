@@ -41,19 +41,19 @@
             <h4>Sign Up</h4>
             <div class="row">
               <div class="input-field col s12">
-                <input id="account_signup_email" type="email" class="validate" ng-model="signup.email">
+                <input id="account_signup_email" type="email" class="validate" ng-model="signup_info.email">
                 <label for="account_signup_email">Email</label>
               </div>
               <div class="input-field col s12">
-                <input id="account_signup_password" type="password" class="validate" ng-model="signup.password">
+                <input id="account_signup_password" type="password" class="validate" ng-model="signup_info.password">
                 <label for="account_signup_password">Password</label>
               </div>
               <div class="input-field col s12">
-                <input id="account_signup_password_confirm" type="password" class="validate" ng-model="signup.password_confirm">
+                <input id="account_signup_password_confirm" type="password" class="validate" ng-model="signup_info.password_confirm">
                 <label for="account_signup_password_confirm">Password (confirm)</label>
               </div>
-              <div class="col s12 red-text text-darken-2" ng-if="signup.fail">
-                <p>{{signup.message}}<p>
+              <div class="col s12 red-text text-darken-2" ng-if="signup_info.fail">
+                <p>{{signup_info.message}}<p>
               </div>
               <div class="input-field col s12">
                 <button class="btn waves-effect waves-light right red darken-2" type="submit" name="action">Sign Up</button>
