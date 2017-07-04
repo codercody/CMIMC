@@ -45,7 +45,7 @@ app.config([
         },
         onEnter: ['$state', 'auth', function ($state, auth) {
           if (!auth.isLoggedIn()) {
-            $state.go('access-denied')
+            $state.go('401')
           }
         }]
       })
@@ -61,9 +61,9 @@ app.config([
         url: '/faq',
         templateUrl: '/views/faq.html'
       })
-      .state('access-denied', {
-        url: '/access-denied',
-        templateUrl: '/views/access-denied.html'
+      .state('401', {
+        url: '/401',
+        templateUrl: '/views/401.html'
       })
       .state('404', {
         url: '/404',
