@@ -10,6 +10,7 @@ create table accounts (
 create table students (
     student_id int not null auto_increment,
     team_id int,
+    active_year int,
     name varchar(255),
     email varchar(255),
     subject1 varchar(255),
