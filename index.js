@@ -12,10 +12,10 @@ const express = require('express'),
       // mysql database
       mysql = require('mysql'),
       connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: process.env.MYSQL_PASSWORD,
-        database: 'cmimc'
+        host: process.env.DATABASE_HOST || 'localhost',
+        user: process.env.DATABASE_USER || 'root',
+        password: process.env.DATABASE_PASSWORD || process.env.MYSQL_PASSWORD,
+        database: process.env.DATABASE_NAME || 'cmimc'
       }),
       sqlHelp = require('./utils/sql-help.js'),
       StudentsTable = require('./utils/students-table'),
@@ -25,6 +25,8 @@ const express = require('express'),
 var studentsTable = new StudentsTable(connection),
     accountsTable = new AccountsTable(connection),
     teamsTable = new TeamsTable(connection)
+
+app.set('port', (process.env.PORT || 8000));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -56,8 +58,7 @@ function login(req, res) {
           }, process.env.JWT_SECRET_KEY)
           res.status(200).json({
             success: true,
-            message: 'Enjoy your token!',
-            token: token
+            message: 'Enjoy your token!', token: token
           })
       }
     }
@@ -251,6 +252,6 @@ app.get('/*', function(req, res){
   res.sendFile(__dirname + '/public/index.html')
 })
 
-app.listen(8000, function() {
-  console.log('Listening on port 8000')
+app.listen(app.get('port'), function() {
+  console.log('Starting server...')
 })
