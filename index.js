@@ -128,6 +128,7 @@ app.post('/teams/:account_id', auth.jwtAuthProtected, function(req, res) {
         members = team.members
     delete team.members
     team.account_id = parseInt(req.user.account_id)
+    team.active_year = (new Date()).getFullYear()
     teamsTable.add(team, function(err, results, fields) {
       if (err) throw err
       var team_id = results.insertId,
