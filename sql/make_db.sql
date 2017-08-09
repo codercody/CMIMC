@@ -1,5 +1,5 @@
-create database cmimc;
-use cmimc;
+/* create database cmimc; */
+/* use cmimc; */
 create table accounts (
     account_id int not null auto_increment,
     email varchar(255),
