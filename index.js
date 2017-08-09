@@ -58,7 +58,11 @@ function login(req, res) {
   var email = req.body.email,
       password = req.body.password;
   accountsTable.getByEmail(email, function(err, results, fields) {
-    if (err) throw err;
+    if (err)
+      return res.status(503).json({
+        success: false,
+        message: 'Database failed to load account'
+      });
     if (results.length === 0) {
       // user email not found
       res.json({ success: false, message: 'Email not found.' });
@@ -94,7 +98,11 @@ app.post('/register', function(req, res) {
   var email = req.body.email;
   // check if email is taken already
   accountsTable.getByEmail(email, function(err, results, fields) {
-    if (err) throw err;
+    if (err)
+      return res.status(503).json({
+        success: false,
+        message: 'Database failed to load account'
+      });
     if (results.length > 0) {
       res.status(422).json({
         success: false,
@@ -110,7 +118,11 @@ app.post('/register', function(req, res) {
             salt: salt
           };
       accountsTable.add(account, function(err, results, fields) {
-        if (err) throw err;
+        if (err)
+          return res.status(503).json({
+            success: false,
+            message: 'Database failed to add account'
+          });
         login(req, res);
       });
     }
@@ -122,7 +134,11 @@ app.get('/account/:account_id', authorizeJWT, function(req, res) {
     res.status(401);
   } else {
     teamsTable.getByAccountId(req.payload.account_id, function(err, results, fields) {
-      if (err) throw err;
+      if (err)
+        return res.status(503).json({
+          success: false,
+          message: 'Database failed to load account'
+        });
       var tasks = results.map(team => {
         return function(callback) {
           studentsTable.getByTeamId(team.team_id, function(err, results, fields) {
@@ -133,7 +149,11 @@ app.get('/account/:account_id', authorizeJWT, function(req, res) {
         }
       });
       async.parallel(tasks, function(err, results) {
-        if (err) throw err;
+        if (err)
+          return res.status(503).json({
+            success: false,
+            message: 'Database failed to load account'
+          });
         res.status(200).json(results);
       });
     })
@@ -153,7 +173,11 @@ app.post('/teams/:account_id', authorizeJWT, function(req, res) {
     team.account_id = parseInt(req.payload.account_id);
     team.active_year = (new Date()).getFullYear();
     teamsTable.add(team, function(err, results, fields) {
-      if (err) throw err;
+      if (err)
+        return res.status(503).json({
+          success: false,
+          message: 'Database failed to add team.'
+        });
       var team_id = results.insertId,
           tasks = members.map(student => {
             return function(callback) {
@@ -165,7 +189,11 @@ app.post('/teams/:account_id', authorizeJWT, function(req, res) {
             };
           });
       async.parallel(tasks, function(err, results) {
-        if (err) throw err;
+        if (err)
+          return res.status(503).json({
+            success: false,
+            message: 'Database failed to add team.'
+          });
         res.status(200).json({
           success: true,
           message: 'Team added successfully.'
@@ -188,7 +216,11 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
     team.account_id = parseInt(req.payload.account_id);
     // update team info
     teamsTable.update(team, function(err, results, fields) {
-      if (err) throw err;
+      if (err)
+        return res.status(503).json({
+          success: false,
+          message: 'Database failed to update team.'
+        });
       // delete students not in the new team
       var new_team_students = req.body.members.map(student => {
         return parseInt(student.student_id);
@@ -196,7 +228,11 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
         return !!student_id;
       });
       studentsTable.getByTeamId(req.body.team_id, function(err, results, fields) {
-        if (err) throw err;
+        if (err)
+          return res.status(503).json({
+            success: false,
+            message: 'Database failed to load team.'
+          });
         var tasks = results.map(student => {
           return function(callback) {
             var student_id = parseInt(student.student_id);
@@ -211,7 +247,11 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
           }
         });
         async.parallel(tasks, function(err, results) {
-          if (err) throw err;
+          if (err)
+            return res.status(503).json({
+              success: false,
+              message: 'Database failed to update team.'
+            });
           // update registered students and add new students
           var tasks = members.map(student => {
             return function(callback) {
@@ -232,7 +272,11 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
             };
           });
           async.parallel(tasks, function(err, results) {
-            if (err) throw err;
+            if (err)
+              return res.status(503).json({
+                success: false,
+                message: 'Database failed to update team.'
+              });
             else {
               res.status(200).json({
                 success: true,
@@ -249,7 +293,11 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
 
 app.delete('/teams/:team_id', authorizeJWT, function(req, res) {
   teamsTable.getById(req.params.team_id, function(err, results, fields) {
-    if (err) throw err;
+    if (err)
+      return res.status(503).json({
+        success: false,
+        message: 'Database failed to delete team.'
+      });
     if (results.length === 0) {
       // team not found
       res.status(200).json({ success: false, message: 'Team not found.' });
@@ -261,9 +309,17 @@ app.delete('/teams/:team_id', authorizeJWT, function(req, res) {
         res.status(401).json({ success: false, message: 'Unauthorized team delete.' });
       } else {
         studentsTable.deleteByTeamId(team.team_id, function(err, results, fields) {
-          if (err) throw err;
+          if (err)
+            return res.status(503).json({
+              success: false,
+              message: 'Database failed to delete student.'
+            });
           teamsTable.delete(team, function(err, results, fields) {
-            if (err) throw err;
+            if (err)
+              return res.status(503).json({
+                success: false,
+                message: 'Database failed to delete team.'
+              });
             res.status(200).json({ success: true, message: 'Team deleted.' });
           });
         });
