@@ -3,21 +3,21 @@ app.controller('ArchiveCtrl', [
   '$state',
   '$http',
   function($scope, $state, $http) {
-    $http.get('/assets/js/json/archive.json').then(function(res){
-      $scope.contest_problems = res.data.problems
+    $http.get('/assets/js/json/archive.json').then(res => {
+      $scope.contest_problems = res.data.problems;
       $scope.contest_results = res.data.results
-      $scope.contest_photos = res.data.photos
-      $scope.commatize = function (x) {
+      $scope.contest_photos = res.data.photos;
+      $scope.commatize = x => {
         s = x[0]
         for (i = 1; i < x.length; i++)
           s += ", " + x[i];
         return s
-      }
-      $(document).ready(function(){
-        $('ul.tabs').tabs()
-        $('.materialboxed').materialbox()
-        $('.collapsible').collapsible({expandable: true})
-        $('.materialboxed').materialbox()
-      })
+      };
+      $(document).ready(() => {
+        $('ul.tabs').tabs();
+        $('.materialboxed').materialbox();
+        $('.collapsible').collapsible({expandable: true});
+        $('.materialboxed').materialbox();
+      });
     })
 }])

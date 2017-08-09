@@ -6,24 +6,25 @@ app.factory('account', [
     var account = {
       "account_id" : -1,
       "teams" : [] // array of teams
-    }
+    };
 
-    account.getAll = function() {
-      account.account_id = auth.accountId()
-      $http.get("/account/" + account.account_id, {
+    account.getAll = () => {
+      account.account_id = auth.accountId();
+      return $http.get("/account/" + account.account_id.toString(), {
         headers: {
           Authorization: 'JWT ' + auth.getToken()
         }
-      }).then(function(result) {
-        account.teams = result.data
-      })
+      }).then(
+      res => {
+        account.teams = res.data;
+      });
     }
 
     // convert from scope student to account student
-    account.parseStudent = function(student) {
+    account.parseStudent = student => {
       if (!student.name || !student.email || !student.subjects || !student.age ||
           !student.tshirt || student.subjects.length !== 2) {
-        return null
+        return null;
       }
       var subjects = student.subjects.sort()
       return {
@@ -35,13 +36,13 @@ app.factory('account', [
         subject2: subjects[1],
         age: parseInt(student.age),
         tshirt: student.tshirt
-      }
-    }
+      };
+    };
 
-    account.parseTeam = function(team) {
+    account.parseTeam = team => {
       team.members = team.members.map(account.parseStudent).filter(student => {
-        return !!student // student is defined
-      })
+        return !!student; // student is defined
+      });
       return {
         team_id: team.team_id,
         account_id: team.account_id,
@@ -51,88 +52,85 @@ app.factory('account', [
         chaperone_number: team.chaperone_number,
         paid: team.paid,
         members: team.members
-      }
-    }
+      };
+    };
 
     // convert from account student to scope student
-    account.unparseStudent = function(student) {
-      student.subjects = [student.subject1, student.subject2].sort()
-      delete student.subject1
-      delete student.subject2
-      return student
-    }
+    account.unparseStudent = student => {
+      student.subjects = [student.subject1, student.subject2].sort();
+      delete student.subject1;
+      delete student.subject2;
+      return student;
+    };
 
     // convert from account team to scope team
-    account.unparseTeam = function(team) {
-      team.members = team.members.map(account.unparseStudent)
-      return team
-    }
+    account.unparseTeam = team => {
+      team.members = team.members.map(account.unparseStudent);
+      return team;
+    };
 
     // add a team to the account
-    account.addTeam = function(team) {
-      team = account.parseTeam(team)
-      return $http.post('/teams/' + account.account_id, team, {
+    account.addTeam = team => {
+      team = account.parseTeam(team);
+      return $http.post('/teams/' + account.account_id.toString(), team, {
         headers: {
           Authorization: 'JWT ' + auth.getToken()
         }
-      }).then(function(result) {
-        account.teams.push(team)
-      }, function(result) {
-        alert('error!')
-      })
-    }
+      }).then(
+      res => {
+        account.teams.push(team);
+      });
+    };
 
     // update a team
-    account.updateTeam = function(team) {
-      team = account.parseTeam(team)
+    account.updateTeam = team => {
+      team = account.parseTeam(team);
       return $http.put('/teams/' + team.team_id, team, {
         headers: {
           'Authorization': 'JWT ' + auth.getToken(),
           'Content-Type': 'application/json'
         }
-      }).then(function(result) {
-        response = result.data
+      }).then(
+      res => {
+        response = res.data;
         if (response.success) {
           for (var i = 0; i < account.teams.length; i++) {
-            var team = account.teams[i]
+            var team = account.teams[i];
             if (parseInt(team.team_id) === parseInt(response.team.team_id))
-              account.teams[i] = response.team
+              account.teams[i] = response.team;
           }
         } else {
-          alert(response.message)
+          alert(response.message);
         }
-      }, function(result) {
-        alert('error!')
-      })
+      });
     }
 
     // delete a team from the account
-    account.deleteTeam = function(team) {
-      team = account.parseTeam(team)
-      return $http.delete('/teams/' + team.team_id, {
+    account.deleteTeam = team => {
+      team = account.parseTeam(team);
+      return $http.delete('/teams/' + team.team_id.toString(), {
         headers: {
           Authorization: 'JWT ' + auth.getToken()
         }
-      }).then(function(result) {
-        response = result.data
+      }).then(
+      res => {
+        response = res.data;
         if (response.success) {
-          var team_id = team.team_id
+          var team_id = team.team_id;
           account.teams = account.teams.filter(team => {
-            return parseInt(team.team_id) !== parseInt(team_id)
+            return parseInt(team.team_id) !== parseInt(team_id);
           })
         } else {
-          alert(response.message)
+          alert(response.message);
         }
-      }, function(result) {
-        alert('error!')
-      })
+      });
     }
 
     // initialize
     if (auth.isLoggedIn()) {
-      account.account_id = auth.accountId()
-      account.getAll()
+      account.account_id = auth.accountId();
+      account.getAll();
     }
 
-    return account
+    return account;
 }])

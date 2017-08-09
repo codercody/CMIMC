@@ -3,7 +3,7 @@ app.controller('StaffCtrl', [
   '$state',
   '$http',
   function($scope, $state, $http) {
-    $http.get('/assets/js/json/staff.json').then(function(res){
-      $scope.staff_list = res.data.staff
+    $http.get('/assets/js/json/staff.json').then(res => {
+      $scope.staff_list = res.data.staff;
     })
 }])

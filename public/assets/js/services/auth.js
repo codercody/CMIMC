@@ -1,46 +1,34 @@
 app.factory('auth', ['$http', '$window',
   function($http, $window){
-    var auth = {}
+    var auth = {};
 
-    auth.saveToken = function (token) {
-      $window.localStorage['jwt-token'] = token
-    }
+    auth.saveToken = token => {
+      $window.localStorage['jwt-token'] = token;
+    };
 
-    auth.getToken = function () {
-      return $window.localStorage['jwt-token']
-    }
+    auth.getToken = () => $window.localStorage['jwt-token'];
 
-    auth.removeToken = function() {
-      $window.localStorage.removeItem('jwt-token')
-    }
+    auth.removeToken = () => {
+      $window.localStorage.removeItem('jwt-token');
+    };
 
-    auth.isLoggedIn = function () {
-      var token = auth.getToken()
+    auth.isLoggedIn = () => !!(auth.getToken());
 
-      if (token) {
-        return true
-      } else {
-        return false
-      }
-    }
-
-    auth.userEmail = function () {
+    auth.userEmail = () => {
       if (auth.isLoggedIn()) {
-        var token = auth.getToken()
-        var payload = JSON.parse($window.atob(token.split('.')[1]))
-
-        return payload.email
+        var token = auth.getToken(),
+            payload = JSON.parse($window.atob(token.split('.')[1]));
+        return payload.email;
       }
-    }
+    };
 
-    auth.accountId = function () {
+    auth.accountId = () => {
       if (auth.isLoggedIn()) {
-        var token = auth.getToken()
-        var payload = JSON.parse($window.atob(token.split('.')[1]))
-
-        return payload.account_id
+        var token = auth.getToken(),
+            payload = JSON.parse($window.atob(token.split('.')[1]));
+        return payload.account_id;
       }
-    }
+    };
 
-    return auth
-  }])
+    return auth;
+  }]);

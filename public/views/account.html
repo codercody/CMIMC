@@ -3,6 +3,10 @@
 </script>
 
 <div class="section white">
+  <div class="alert alert-danger row" ng-if="error">
+    <span class="form-error-msg">{{ message }}</span>
+  </div>
+
   <div class="container">
     <h4>Account<a class="waves-effect waves-light btn right red darken-2" data-target="team-modal" ng-click="showAdd()">Add Team</a></h4>
     <p ng-if="teams.length === 0">No teams on this account.</p>
@@ -85,7 +89,7 @@
         </ul></h5>
         <p>Chaperone: <b>{{team.chaperone_name}}</b> - {{team.chaperone_email}} / {{team.chaperone_number}}</p>
         <p>Registration Fee: ${{registration_price * team.members.length}} - <span class="green-text text-accent-3" ng-show="team.paid">Paid</span><span class="red-text text-accent-3" ng-show="!team.paid">Unpaid</span></p>
-        <table class="striped">
+        <table class="striped" ng-if="teams.members.length > 0">
           <thead>
             <tr>
               <th>Student</th>
@@ -105,6 +109,10 @@
             </tr>
           </tbody>
         </table>
+        <div ng-if="team.members.length === 0">
+          <br />
+          <p>No students on this team yet.</p>
+        </div>
       </div>
     </div>
   </div>
