@@ -3,6 +3,7 @@
 const express = require('express'),
       app = express(),
       async = require('async'),
+      morgan = require('morgan'),
       // parameter parsing
       bodyParser = require('body-parser'),
       // security
@@ -47,6 +48,8 @@ var studentsTable = new StudentsTable(connection),
     teamsTable = new TeamsTable(connection);
 
 app.set('port', (process.env.PORT || 8000));
+
+app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -192,7 +195,7 @@ app.post('/teams/:account_id', authorizeJWT, function(req, res) {
         if (err)
           return res.status(503).json({
             success: false,
-            message: 'Database failed to add team.'
+            message: 'Database failed to add students in team.'
           });
         res.status(200).json({
           success: true,
@@ -216,11 +219,13 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
     team.account_id = parseInt(req.payload.account_id);
     // update team info
     teamsTable.update(team, function(err, results, fields) {
-      if (err)
+      if (err) {
+        console.log(err);
         return res.status(503).json({
           success: false,
           message: 'Database failed to update team.'
         });
+      }
       // delete students not in the new team
       var new_team_students = req.body.members.map(student => {
         return parseInt(student.student_id);
@@ -228,11 +233,12 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
         return !!student_id;
       });
       studentsTable.getByTeamId(req.body.team_id, function(err, results, fields) {
-        if (err)
+        if (err) {
           return res.status(503).json({
             success: false,
-            message: 'Database failed to load team.'
+            message: 'Database failed to load team students.'
           });
+        }
         var tasks = results.map(student => {
           return function(callback) {
             var student_id = parseInt(student.student_id);
@@ -247,11 +253,12 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
           }
         });
         async.parallel(tasks, function(err, results) {
-          if (err)
+          if (err) {
             return res.status(503).json({
               success: false,
-              message: 'Database failed to update team.'
+              message: 'Database failed to delete students no longer in the team.'
             });
+          }
           // update registered students and add new students
           var tasks = members.map(student => {
             return function(callback) {
@@ -272,11 +279,13 @@ app.put('/teams/:team_id', authorizeJWT, function(req, res) {
             };
           });
           async.parallel(tasks, function(err, results) {
-            if (err)
+            if (err) {
+              console.log(err);
               return res.status(503).json({
                 success: false,
-                message: 'Database failed to update team.'
+                message: 'Database failed to update students.'
               });
+            }
             else {
               res.status(200).json({
                 success: true,
